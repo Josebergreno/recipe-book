@@ -1,8 +1,77 @@
 <div class="recipe-form--container">
   <form class="form" (click)="onSubmit(formRef)" #formRef="ngForm">
-    <div class="label-input--container">
-      <label for=""> Recipe Name </label>
-      <input type="text" />
+    <h1>Add a New Recipe</h1>
+    <div class="section">
+      <label for="recipe-name"> Recipe Name </label>
+      <input id="recipe-name" type="text" />
     </div>
+
+    <div class="section">
+      <label for="description"> brief description </label>
+      <textarea
+        id="description"
+        type="text"
+        rows="10"
+        cols="30"
+        style="resize: horizontal"
+      ></textarea>
+    </div>
+    <!-- add ingredient form group -->
+    <div class="section">
+      <h3>Ingredients</h3>
+      <label for="name">Name</label>
+      <input id="name" type="text" #nameRef />
+      <label for="amount">Amount</label>
+      <div class="measurement">
+        <input class="num-input" type="number" min="0" #numRef1 />-
+        <input id="amount" type="number" min="0" class="num-input" #numRef2 />
+        /
+        <input class="num-input" type="number" min="0" #numRef3 />
+      </div>
+      <label for="measurement">Measurement</label>
+      <select>
+        <option value="">Please Select a measurement</option>
+        <option value="none">No Measurement</option>
+        <option value="pinch">pinch</option>
+        <option value="teaspoon">Teaspoon (Tsp)</option>
+        <option value="tablespoon">Tablespoon (Tbsp)</option>
+
+        <option value="cup">Cup</option>
+        <option value="pint">Pint</option>
+        <option value="quart">Quart</option>
+        <option value="gallon">Gallon</option>
+        <option value="ounce">Ounce</option>
+        <option value="pound">Pound</option>
+      </select>
+      <button
+        class="button"
+        (click)="
+          onAddIngredient(
+            nameRef.value,
+            +numRef1.value,
+            +numRef2.value,
+            +numRef3.value
+          )
+        "
+      >
+        Add Ingredient
+      </button>
+      <ul *ngFor="let ingredient of ingredientsList">
+        <li>{{ ingredient.ingAmount }}{{ ingredient.ingName }}</li>
+      </ul>
+    </div>
+
+    <!--  -->
+
+    <div class="section">
+      <h3>Instructions</h3>
+      <button class="button">Add Step</button>
+    </div>
+    <div class="section">
+      <h3>Conclusion</h3>
+      <textarea name="" id="" cols="30" rows="10"></textarea>
+    </div>
+
+    <button class="button">Publish Recipe</button>
   </form>
 </div>
