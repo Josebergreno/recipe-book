@@ -1,0 +1,69 @@
+<!-- create account -->
+
+<div class="form-container" *ngIf="!accountCreated">
+  <p *ngIf="passwordsAreSame === false">passwords must be the same</p>
+  <form class="form" (ngSubmit)="onSignup(formRef)" #formRef="ngForm">
+    <div class="label-input--container">
+      <label for="email">E-mail</label>
+      <input
+        class="input"
+        id="email"
+        type="email"
+        ngModel
+        name="email"
+        email
+        required
+      />
+    </div>
+
+    <div class="label-input--container">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        class="input"
+        type="password"
+        ngModel
+        name="password"
+        required
+      />
+    </div>
+    <div class="label-input--container">
+      <label for="password2">Re-enter Password</label>
+      <input
+        id="password2"
+        class="input"
+        type="password"
+        ngModel
+        name="password2"
+        required
+      />
+    </div>
+    <div class="label-input--container">
+      <label for="email">Security Question</label>
+      <select class="input" ngModel name="Question">
+        <option value="">--please select a question--</option>
+        <option value="mother-maiden-name">Mother's Maiden Name</option>
+        <option value="first-car">First Car</option>
+        <option value="favorite-food">Favorite Food</option>
+        <option value="first-childhood-animal">First Childhood animal</option>
+        <option value="city-of-birth">City of Birth</option>
+      </select>
+      <br />
+      <input class="input" type="text" ngModel name="security-answer" />
+    </div>
+
+    <button [disabled]="!formRef.valid" role="button" class="button">
+      Create new Account!
+    </button>
+    <p>already a member? <a routerLink="/login">Log in here!</a></p>
+  </form>
+</div>
+
+<!-- account created confirmation -->
+
+<div class="form-container" *ngIf="accountCreated">
+  <p class="confirm-text">
+    Account Created! We've sent an email to: {{ email }}. Please check your
+    email for confirmation
+  </p>
+</div>

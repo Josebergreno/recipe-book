@@ -1,0 +1,16 @@
+<div class="form-container">
+  <form class="form" (ngSubmit)="onLogin(formRef)" #formRef="ngForm">
+    <div class="label-input--container">
+      <label for="email">E-mail</label>
+      <input class="input" id="email" type="email" ngModel name="email" email />
+    </div>
+
+    <div class="label-input--container">
+      <label for="password">Password</label>
+      <input class="input" type="password" ngModel name="password" />
+    </div>
+
+    <button role="button" class="button">Log in</button>
+    <p>not a member? <a routerLink="/signup">Sign up here!</a></p>
+  </form>
+</div>

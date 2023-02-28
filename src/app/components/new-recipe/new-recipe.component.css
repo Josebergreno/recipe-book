@@ -1,0 +1,19 @@
+.recipe-form--container {
+  background-color: blue;
+  width: 100%;
+}
+
+.label-input--container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-width: 450px;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}

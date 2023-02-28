@@ -1,0 +1,36 @@
+<div class="main-container">
+  <form class="form" (ngSubmit)="onPersonalize(formRef)" #formRef="ngForm">
+    <div class="name-container">
+      <input
+        type="text"
+        value="Name"
+        [disabled]="!changeName"
+        ngModel
+        name="name"
+      />
+      <button (click)="onNameChange()" type="button">Change Name</button>
+    </div>
+    <img class="profile-picture" [src]="fileName" alt="profile-picture" />
+    <input
+      class="file-input"
+      type="file"
+      ngModel
+      name="imgFile"
+      #imgRef
+      (change)="onFileSelected($event)"
+    />
+    <button type="button" (click)="imgRef.click()">Attach file</button>
+    <div class="label-input--container">
+      <label>Describe yourself</label>
+      <textarea
+        class="textarea"
+        ngModel
+        name="description"
+        id=""
+        cols="40"
+        rows="10"
+      ></textarea>
+    </div>
+    <button class="button" type="submit">Save</button>
+  </form>
+</div>

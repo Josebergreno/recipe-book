@@ -1,0 +1,52 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  flex-direction: column;
+}
+
+.form {
+  width: 50%;
+  height: 100%;
+  max-width: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.label-input--container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-width: 450px;
+}
+
+.input {
+  height: 25px;
+  border-radius: 3px;
+  border: solid black 1px;
+}
+
+.button {
+  margin-top: 10px;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: solid black 1px;
+}
+
+.button:hover {
+  background-color: blue;
+}
+.button:active {
+  background-color: aquamarine;
+}
+
+.ng-touched.ng-invalid {
+  border-color: red;
+}
+
+.confirm-text {
+  width: 80%;
+}
