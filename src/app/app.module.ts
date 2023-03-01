@@ -11,6 +11,9 @@ import { NewRecipeComponent } from './components/new-recipe/new-recipe.component
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
+import { InstructionsComponent } from './components/new-recipe/instructions/instructions.component';
+import { IngredientsComponent } from './components/new-recipe/ingredients/ingredients.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,8 +24,16 @@ import { HttpClientModule } from '@angular/common/http';
     NewRecipeComponent,
     PageNotFoundComponent,
     SignupComponent,
+    InstructionsComponent,
+    IngredientsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

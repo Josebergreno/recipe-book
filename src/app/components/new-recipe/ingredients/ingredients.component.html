@@ -1,0 +1,109 @@
+<div class="section" [formGroup]="parentForm">
+  <h3>Ingredients</h3>
+  <p
+    *ngIf="
+      !parentForm.controls['ingName'].valid &&
+      parentForm.controls['ingName'].touched
+    "
+  >
+    Please enter Valid Name
+  </p>
+  <p
+    *ngIf="
+      !parentForm.controls['measurement'].valid &&
+      parentForm.controls['measurement'].touched
+    "
+  >
+    Please enter a Measurement
+  </p>
+  <p
+    *ngIf="
+      parentForm.controls['numInput1'].value === null &&
+      parentForm.controls['numInput1'].touched &&
+      parentForm.controls['numInput2'].value === null &&
+      parentForm.controls['numInput2'].touched &&
+      parentForm.controls['numInput3'].value === null &&
+      parentForm.controls['numInput3'].touched
+    "
+  >
+    Please enter a valid amount
+  </p>
+  <label for="name">Name</label>
+  <input
+    formControlName="ingName"
+    class="form-input"
+    id="name"
+    type="text"
+    #nameRef
+  />
+  <label for="amount">Amount</label>
+  <div class="measurement">
+    <input
+      formControlName="numInput1"
+      class="num-input"
+      type="number"
+      min="0"
+      #numRef1
+    />-
+    <input
+      id="amount"
+      type="number"
+      formControlName="numInput2"
+      min="0"
+      class="num-input"
+      #numRef2
+    />
+    /
+    <input
+      class="num-input"
+      type="number"
+      min="0"
+      #numRef3
+      formControlName="numInput3"
+    />
+  </div>
+  <label for="measurement">Measurement</label>
+  <select class="form-input" formControlName="measurement" #selectRef>
+    <option disabled>Please Select a measurement</option>
+    <option value="none">No Measurement</option>
+    <option value="pinch">pinch</option>
+    <option value="teaspoon">Teaspoon (Tsp)</option>
+    <option value="tablespoon">Tablespoon (Tbsp)</option>
+    <option value="cup">Cup</option>
+    <option value="pint">Pint</option>
+    <option value="quart">Quart</option>
+    <option value="gallon">Gallon</option>
+    <option value="ounce">Ounce</option>
+    <option value="pound">Pound</option>
+  </select>
+  <button
+    [disabled]="!parentForm.controls['ingName'].valid"
+    class="button"
+    type="button"
+    (click)="
+      onAddIngredient(
+        nameRef.value,
+        +numRef1.value,
+        +numRef2.value,
+        +numRef3.value
+      )
+    "
+  >
+    Add Ingredient
+  </button>
+  <ul
+    class="li-container"
+    *ngFor="let ingredient of ingredientsList; let i = index"
+  >
+    <li class="list-item" [id]="i">
+      {{ ingredient.ingAmount }} {{ ingredient.ingName }}
+    </li>
+    <button
+      (click)="onItemDelete($event)"
+      class="li-delete--button"
+      type="button"
+    >
+      x
+    </button>
+  </ul>
+</div>

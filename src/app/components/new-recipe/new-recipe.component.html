@@ -2,10 +2,16 @@
   <div class="header">
     <h1>Add a New Recipe</h1>
   </div>
-  <form class="form" (click)="onSubmit(formRef)" #formRef="ngForm">
+  <form class="form" [formGroup]="form" (ngSubmit)="onSubmit(form)">
     <div class="section">
       <label for="recipe-name"> Recipe Name </label>
-      <input class="form-input" id="recipe-name" type="text" />
+      <input
+        class="form-input"
+        id="recipe-name"
+        formControlName="recipeName"
+        type="text"
+        forn
+      />
     </div>
     <div class="section">
       <label for="recipe-picture"> Recipe Picture </label>
@@ -18,101 +24,34 @@
       <input
         class="file-input"
         type="file"
-        ngModel
-        name="imgFile"
+        formControlName="imgFile"
         #imgRef
         (change)="onFileSelected($event)"
       />
-      <button class="button" (click)="imgRef.click()">Choose File</button>
+      <button class="button" type="button" (click)="imgRef.click()">
+        Choose File
+      </button>
     </div>
 
     <div class="section">
       <label for="description"> Brief description </label>
-      <textarea id="description" type="text" class="form-textarea"></textarea>
-    </div>
-    <!-- add ingredient form group -->
-    <div class="section">
-      <h3>Ingredients</h3>
-      <label for="name">Name</label>
-      <input class="form-input" id="name" type="text" #nameRef />
-      <label for="amount">Amount</label>
-      <div class="measurement">
-        <input class="num-input" type="number" min="0" #numRef1 />-
-        <input id="amount" type="number" min="0" class="num-input" #numRef2 />
-        /
-        <input class="num-input" type="number" min="0" #numRef3 />
-      </div>
-      <label for="measurement">Measurement</label>
-      <select class="form-input">
-        <option value="">Please Select a measurement</option>
-        <option value="none">No Measurement</option>
-        <option value="pinch">pinch</option>
-        <option value="teaspoon">Teaspoon (Tsp)</option>
-        <option value="tablespoon">Tablespoon (Tbsp)</option>
-        <option value="cup">Cup</option>
-        <option value="pint">Pint</option>
-        <option value="quart">Quart</option>
-        <option value="gallon">Gallon</option>
-        <option value="ounce">Ounce</option>
-        <option value="pound">Pound</option>
-      </select>
-      <button
-        class="button"
-        (click)="
-          onAddIngredient(
-            nameRef.value,
-            +numRef1.value,
-            +numRef2.value,
-            +numRef3.value
-          )
-        "
-      >
-        Add Ingredient
-      </button>
-      <ul
-        class="li-container"
-        *ngFor="let ingredient of ingredientsList; let i = index"
-      >
-        <li class="list-item" [id]="i">
-          {{ ingredient.ingAmount }} {{ ingredient.ingName }}
-        </li>
-        <button (click)="onItemDelete($event)" class="li-delete--button">
-          x
-        </button>
-      </ul>
+      <textarea
+        id="description"
+        type="text"
+        class="form-textarea"
+        formControlName="briefDesc"
+      ></textarea>
     </div>
 
-    <!--  -->
-
-    <div class="section">
-      <h3>Instructions</h3>
-      <label for="time">Time</label>
-      <input class="num-input" id="time" type="number" />
-      <label for="dropdown">Unit Of Time</label>
-      <select class="form-input" name="" id="dropdown">
-        <option value="second">Second(s)</option>
-        <option value="minute">Minute(s)</option>
-        <option value="hours">Hour(s)</option>
-      </select>
-
-      <label for="description">Step Description</label>
-      <textarea id="description" type="text" class="form-textarea"></textarea>
-      <ul
-        class="li-container"
-        *ngFor="let instruction of instructionsList; let i = index"
-      >
-        <li class="list-item" [id]="i">{{ instruction }} {{ instruction }}</li>
-        <button (click)="onItemDelete($event)" class="li-delete--button">
-          x
-        </button>
-      </ul>
-      <button class="button" (click)="onStepAdd()">Add Step</button>
-    </div>
+    <app-ingredients class="ingredients" [parentForm]="form"></app-ingredients>
+    <app-instructions
+      class="instructions"
+      [parentForm]="form"
+    ></app-instructions>
     <div class="section">
       <h3>Conclusion</h3>
-      <textarea class="form-textarea"></textarea>
+      <textarea class="form-textarea" formControlName="conclusion"></textarea>
     </div>
-
-    <button class="button">Publish Recipe</button>
+    <button class="button" type="submit">Publish Recipe</button>
   </form>
 </div>

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Ingredient } from '../models/ingredient.model';
+import { FormGroup, FormControl } from '@angular/forms';
 import { OnInit } from '@angular/core';
 import { RecipeService } from 'src/app/services/recipe.service';
-import { Instruction } from '../models/instruction.model';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-recipe',
@@ -11,57 +10,16 @@ import { Instruction } from '../models/instruction.model';
   styleUrls: ['./new-recipe.component.css'],
 })
 export class NewRecipeComponent implements OnInit {
-  ingredientsList: Ingredient[] = [];
-  instructionsList: Instruction[] = [];
   changeImg = false;
   fileName = '';
 
+  form!: FormGroup;
+
   constructor(recipeService: RecipeService) {}
 
-  onSubmit(formRef: NgForm) {
-    console.log();
-  }
-  onAddIngredient(
-    ingName: string,
-    ingAmt1: number,
-    ingAmt2: number,
-    ingAmt3: number
-  ) {
-    // if there is a fractional amount
-    if (
-      ingName !== '' &&
-      ingAmt1 > 0 &&
-      ingAmt2 > 0 &&
-      ingAmt3 > 0 &&
-      ingAmt2 < ingAmt3
-    ) {
-      const fraction = ingAmt1 + ' ' + ingAmt2 + '/' + ingAmt3;
-      this.ingredientsList.push(
-        new Ingredient(ingName, fraction, this.ingredientsList.length + 1)
-      );
-    } else if (
-      ingName !== '' &&
-      ingAmt1 === 0 &&
-      ingAmt2 > 0 &&
-      ingAmt3 > 0 &&
-      ingAmt2 < ingAmt3
-    ) {
-      const fraction = ingAmt2 + '/' + ingAmt3;
-      this.ingredientsList.push(
-        new Ingredient(ingName, fraction, this.ingredientsList.length + 1)
-      );
-    } else if (ingName !== '' && ingAmt1 > 0 && ingAmt2 === 0 && ingAmt3 === 0)
-      this.ingredientsList.push(
-        new Ingredient(ingName, `${ingAmt1}`, this.ingredientsList.length + 1)
-      );
-  }
-
-  onItemDelete(event: any) {
-    const arrayIndex = event.target.parentElement.children[0].id;
-    this.ingredientsList.splice(arrayIndex, 1);
-  }
-  onStepAdd() {
-    console.log('step added');
+  onSubmit(formRef: FormGroup) {
+    console.log(formRef.value);
+    formRef.reset();
   }
 
   onFileSelected(event: any) {
@@ -76,5 +34,26 @@ export class NewRecipeComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form = new FormGroup({
+      //recipe name
+      recipeName: new FormControl(null, Validators.required),
+      //img file
+      imgFile: new FormControl(null, Validators.required),
+      // brief description
+      briefDesc: new FormControl(null, Validators.required),
+      // instructions
+      cookTime: new FormControl(null),
+      unitOfTime: new FormControl(null),
+      ingStepDesc: new FormControl(null),
+      // conclusion
+      conclusion: new FormControl(null, Validators.required),
+      //ingredients
+      ingName: new FormControl(null, Validators.required),
+      numInput1: new FormControl(null),
+      numInput2: new FormControl(null),
+      numInput3: new FormControl(null),
+      measurement: new FormControl(null, Validators.required),
+    });
+  }
 }

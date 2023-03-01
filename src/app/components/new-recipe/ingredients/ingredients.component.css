@@ -1,13 +1,3 @@
-.recipe-form--container {
-  width: 100%;
-}
-.ingredients,
-.instructions {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
 .section {
   display: flex;
   flex-direction: column;
@@ -18,19 +8,6 @@
   margin: 10px;
   padding: 10px;
   border-bottom: solid black 1px;
-}
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.form {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 
 .button {
@@ -44,7 +21,6 @@
 .button:hover {
   width: 103px;
 }
-
 .measurement {
   display: flex;
 }
@@ -60,12 +36,7 @@
   height: 25px;
   border: solid black 1px;
 }
-.form-textarea {
-  width: 60%;
-  height: 100px;
-  resize: none;
-  margin: 10px;
-}
+
 .li-delete--button {
   color: white;
   margin-left: 10px;
@@ -91,16 +62,7 @@
   justify-content: space-between;
   align-items: center;
 }
-
-.recipe-picture {
-  width: 100%;
-  border-radius: 10px;
-  margin: 10px;
-}
-.file-input {
-  display: none;
-}
-
-textarea.ng-touched.ng-invalid {
+input.ng-touched.ng-invalid,
+select.ng-touched.ng-invalid {
   border-color: red;
 }
