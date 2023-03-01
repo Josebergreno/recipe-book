@@ -1,5 +1,4 @@
 .recipe-form--container {
-  background-color: blue;
   width: 100%;
 }
 
@@ -8,6 +7,14 @@
   flex-direction: column;
   width: 80%;
   max-width: 450px;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: solid black 1px;
+}
+.header {
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -19,11 +26,9 @@
   align-items: center;
   flex-direction: column;
 }
-.section {
-  border: solid green 1px;
-}
 
 .button {
+  margin: 10px;
   width: 100px;
   height: 25px;
   border-radius: 4px;
@@ -41,4 +46,50 @@
 .num-input {
   width: 50px;
   text-align: center;
+}
+
+.form-input {
+  width: 60%;
+  margin: 10px;
+  height: 25px;
+}
+.form-textarea {
+  width: 60%;
+  height: 100px;
+  resize: none;
+  margin: 10px;
+}
+.li-delete--button {
+  color: white;
+  margin-left: 10px;
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  transition: 0.2s;
+}
+.li-delete--button:hover {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+.li-delete--button:active {
+  background-color: red;
+}
+.list-item {
+  margin: 5px;
+}
+.li-container {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recipe-picture {
+  width: 100%;
+  border-radius: 10px;
+  margin: 10px;
+}
+.file-input {
+  display: none;
 }
