@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-recipe-name',
@@ -11,7 +12,8 @@ export class RecipeNameComponent {
   onBack() {
     this.router.navigate(['new-recipe']);
   }
-  onNext() {
+  onNext(formRef: NgForm) {
+    console.log(formRef.controls['recipeName']);
     this.router.navigate(['new-recipe', 'recipe-picture']);
   }
 }

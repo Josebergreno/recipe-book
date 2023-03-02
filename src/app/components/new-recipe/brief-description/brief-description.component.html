@@ -1,12 +1,16 @@
-<div class="section">
-  <label for="description"> Brief description </label>
-  <textarea
-    id="description"
-    type="text"
-    class="form-textarea"
-    ngModel
-    name="briefDesc"
-  ></textarea>
-  <button (click)="onBack()" class="button">Back</button>
-  <button (click)="onNext()" class="button">Next</button>
-</div>
+<form (ngSubmit)="onNext(formRef)" #formRef="ngForm" class="form">
+  <div class="section">
+    <label for="description"> Brief description </label>
+    <textarea
+      id="description"
+      type="text"
+      class="form-textarea"
+      ngModel
+      #briefDesc="ngModel"
+      name="briefDesc"
+      required
+    ></textarea>
+    <button (click)="onBack()" class="button">Back</button>
+    <button class="button" [disabled]="!briefDesc.valid">Next</button>
+  </div>
+</form>

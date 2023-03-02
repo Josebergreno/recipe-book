@@ -1,12 +1,16 @@
-<div class="section">
-  <label for="recipe-name"> Recipe Name </label>
-  <input
-    class="form-input"
-    id="recipe-name"
-    ngModel
-    name="recipeName"
-    type="text"
-  />
-  <button (click)="onBack()" class="button">Back</button>
-  <button (click)="onNext()" class="button">Next</button>
-</div>
+<form (ngSubmit)="onNext(formRef)" #formRef="ngForm" class="form">
+  <div class="section">
+    <label for="recipe-name"> Recipe Name </label>
+    <input
+      class="form-input"
+      id="recipe-name"
+      ngModel
+      name="recipeName"
+      type="text"
+      #recipeName="ngModel"
+      required
+    />
+    <button (click)="onBack()" class="button">Back</button>
+    <button class="button" [disabled]="!recipeName.valid">Next</button>
+  </div>
+</form>

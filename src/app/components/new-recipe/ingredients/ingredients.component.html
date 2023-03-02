@@ -1,91 +1,92 @@
-<form (ngSubmit)="onSubmit(formRef)" #formRef="ngForm"></form>
-<div class="section">
-  <h3>Ingredients</h3>
-  <p *ngIf="">Please enter Valid Name</p>
-  <p *ngIf="">Please enter a Measurement</p>
-  <p *ngIf="">Please enter a valid amount</p>
-  <label for="name">Name</label>
-  <input
-    ngModel
-    name="ingName"
-    #ingName
-    class="form-input"
-    id="name"
-    type="text"
-  />
-  <label for="amount">Amount</label>
-  <div class="measurement">
+<form (ngSubmit)="onNext(formRef)" #formRef="ngForm" class="form">
+  <div class="section">
+    <h3>Ingredients</h3>
+    <p *ngIf="">Please enter Valid Name</p>
+    <p *ngIf="">Please enter a Measurement</p>
+    <p *ngIf="">Please enter a valid amount</p>
+    <label for="name">Name</label>
     <input
       ngModel
-      name="numInput1"
-      class="num-input"
-      type="number"
-      min="0"
-      #numInput1
-    />-
-    <input
-      id="amount"
-      type="number"
-      ngModel
-      name="numInput2"
-      min="0"
-      class="num-input"
-      #numInput2
+      name="ingName"
+      #ingName
+      class="form-input"
+      id="name"
+      type="text"
     />
-    /
-    <input
-      class="num-input"
-      type="number"
-      min="0"
-      ngModel
-      name="numInput3"
-      #numInput3
-    />
+    <label for="amount">Amount</label>
+    <div class="measurement">
+      <input
+        ngModel
+        name="numInput1"
+        class="num-input"
+        type="number"
+        min="0"
+        #numInput1
+      />-
+      <input
+        id="amount"
+        type="number"
+        ngModel
+        name="numInput2"
+        min="0"
+        class="num-input"
+        #numInput2
+      />
+      /
+      <input
+        class="num-input"
+        type="number"
+        min="0"
+        ngModel
+        name="numInput3"
+        #numInput3
+      />
+    </div>
+    <label for="measurement">Measurement</label>
+    <select class="form-input" ngModel name="measurement">
+      <option disabled>Please Select a measurement</option>
+      <option value="none">No Measurement</option>
+      <option value="pinch">pinch</option>
+      <option value="teaspoon">Teaspoon (Tsp)</option>
+      <option value="tablespoon">Tablespoon (Tbsp)</option>
+      <option value="cup">Cup</option>
+      <option value="pint">Pint</option>
+      <option value="quart">Quart</option>
+      <option value="gallon">Gallon</option>
+      <option value="ounce">Ounce</option>
+      <option value="pound">Pound</option>
+    </select>
+    <button
+      [disabled]=""
+      class="button"
+      type="button"
+      (click)="
+        onAddIngredient(
+          ingName.value,
+          +numInput1.value,
+          +numInput2.value,
+          +numInput3.value
+        )
+      "
+    >
+      Add Ingredient
+    </button>
+    <ul
+      class="li-container"
+      *ngFor="let ingredient of ingredientsList; let i = index"
+    >
+      <li class="list-item" [id]="i">
+        <button
+          (click)="onIngredientDelete($event)"
+          class="li-delete--button"
+          type="button"
+        >
+          x
+        </button>
+        {{ ingredient.ingAmount }} {{ ingredient.ingName }}
+      </li>
+    </ul>
+    <button (click)="onBack()" class="button">Back</button>
+    <button class="button">Next</button>
   </div>
-  <label for="measurement">Measurement</label>
-  <select class="form-input" ngModel name="measurement">
-    <option disabled>Please Select a measurement</option>
-    <option value="none">No Measurement</option>
-    <option value="pinch">pinch</option>
-    <option value="teaspoon">Teaspoon (Tsp)</option>
-    <option value="tablespoon">Tablespoon (Tbsp)</option>
-    <option value="cup">Cup</option>
-    <option value="pint">Pint</option>
-    <option value="quart">Quart</option>
-    <option value="gallon">Gallon</option>
-    <option value="ounce">Ounce</option>
-    <option value="pound">Pound</option>
-  </select>
-  <button
-    [disabled]=""
-    class="button"
-    type="button"
-    (click)="
-      onAddIngredient(
-        ingName.value,
-        +numInput1.value,
-        +numInput2.value,
-        +numInput3.value
-      )
-    "
-  >
-    Add Ingredient
-  </button>
-  <ul
-    class="li-container"
-    *ngFor="let ingredient of ingredientsList; let i = index"
-  >
-    <li class="list-item" [id]="i">
-      <button
-        (click)="onIngredientDelete($event)"
-        class="li-delete--button"
-        type="button"
-      >
-        x
-      </button>
-      {{ ingredient.ingAmount }} {{ ingredient.ingName }}
-    </li>
-  </ul>
-  <button (click)="onBack()" class="button">Back</button>
-  <button (click)="onNext()" class="button">Next</button>
-</div>
+</form>

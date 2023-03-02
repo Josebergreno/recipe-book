@@ -20,9 +20,7 @@ export class IngredientsComponent implements OnInit {
     formRefVal['numInput2'].reset();
     formRefVal['numInput3'].reset();
   }
-  onSubmit(formRef: NgForm) {
-    console.log('submitted');
-  }
+
   onAddIngredient(
     ingName: string,
     ingAmt1: number,
@@ -44,7 +42,7 @@ export class IngredientsComponent implements OnInit {
   onBack() {
     this.router.navigate(['new-recipe', 'brief-description']);
   }
-  onNext() {
+  onNext(formRef: NgForm) {
     this.router.navigate(['new-recipe', 'instructions']);
   }
 }

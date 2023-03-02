@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-brief-description',
@@ -10,7 +11,8 @@ export class BriefDescriptionComponent {
   onBack() {
     this.router.navigate(['new-recipe', 'recipe-picture']);
   }
-  onNext() {
+  onNext(formRef: NgForm) {
+    console.log('submitted');
     this.router.navigate(['new-recipe', 'ingredients']);
   }
 }

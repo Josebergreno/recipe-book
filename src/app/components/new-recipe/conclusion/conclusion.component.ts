@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-conclusion',
@@ -7,10 +8,13 @@ import { Router } from '@angular/router';
 })
 export class ConclusionComponent {
   constructor(private router: Router) {}
+  submitted = false;
   onBack() {
     this.router.navigate(['new-recipe', 'instructions']);
   }
-  onPublish() {
-    this.router.navigate(['new-recipe', 'conclusion']);
+  onPublish(formRef: NgForm) {
+    console.log('published');
+    console.log(formRef.submitted);
+    this.submitted = true;
   }
 }

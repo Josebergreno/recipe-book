@@ -1,20 +1,35 @@
-.form-textarea {
-  width: 60%;
-  height: 100px;
-  resize: none;
-  margin: 10px;
+:host {
+  width: 100%;
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
 }
 .section {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   max-width: 450px;
   justify-content: center;
   align-items: center;
   margin: 10px;
   padding: 10px;
-  border-bottom: solid black 1px;
 }
+.form-textarea {
+  width: 80%;
+  max-width: 500px;
+  height: 100px;
+  resize: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .button {
   margin: 10px;
   width: 100px;

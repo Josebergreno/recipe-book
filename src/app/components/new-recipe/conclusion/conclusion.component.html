@@ -1,6 +1,26 @@
-<div class="section">
-  <h3>Conclusion</h3>
-  <textarea class="form-textarea" ngModel name="conclusion"></textarea>
-  <button (click)="onBack()" class="button">Back</button>
-  <button (click)="onPublish()" class="button">Publish</button>
+<form
+  (ngSubmit)="onPublish(formRef)"
+  #formRef="ngForm"
+  class="form"
+  *ngIf="!submitted"
+>
+  <div class="section">
+    <h3>Conclusion</h3>
+    <textarea
+      class="form-textarea"
+      ngModel
+      name="conclusion"
+      #conclusion="ngModel"
+      required
+    ></textarea>
+    <button (click)="onBack()" class="button">Back</button>
+    <button class="button" [disabled]="!conclusion.valid">Publish</button>
+  </div>
+</form>
+
+<div *ngIf="submitted">
+  <p>
+    You have submitted your recipe! you can view it here by following
+    <a routerLink="/browse-recipes">this link</a>
+  </p>
 </div>
