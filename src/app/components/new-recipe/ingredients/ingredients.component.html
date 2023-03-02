@@ -1,69 +1,49 @@
-<div class="section" [formGroup]="parentForm">
+<form (ngSubmit)="onSubmit(formRef)" #formRef="ngForm"></form>
+<div class="section">
   <h3>Ingredients</h3>
-  <p
-    *ngIf="
-      !parentForm.controls['ingName'].valid &&
-      parentForm.controls['ingName'].touched
-    "
-  >
-    Please enter Valid Name
-  </p>
-  <p
-    *ngIf="
-      !parentForm.controls['measurement'].valid &&
-      parentForm.controls['measurement'].touched
-    "
-  >
-    Please enter a Measurement
-  </p>
-  <p
-    *ngIf="
-      parentForm.controls['numInput1'].value === null &&
-      parentForm.controls['numInput1'].touched &&
-      parentForm.controls['numInput2'].value === null &&
-      parentForm.controls['numInput2'].touched &&
-      parentForm.controls['numInput3'].value === null &&
-      parentForm.controls['numInput3'].touched
-    "
-  >
-    Please enter a valid amount
-  </p>
+  <p *ngIf="">Please enter Valid Name</p>
+  <p *ngIf="">Please enter a Measurement</p>
+  <p *ngIf="">Please enter a valid amount</p>
   <label for="name">Name</label>
   <input
-    formControlName="ingName"
+    ngModel
+    name="ingName"
+    #ingName
     class="form-input"
     id="name"
     type="text"
-    #nameRef
   />
   <label for="amount">Amount</label>
   <div class="measurement">
     <input
-      formControlName="numInput1"
+      ngModel
+      name="numInput1"
       class="num-input"
       type="number"
       min="0"
-      #numRef1
+      #numInput1
     />-
     <input
       id="amount"
       type="number"
-      formControlName="numInput2"
+      ngModel
+      name="numInput2"
       min="0"
       class="num-input"
-      #numRef2
+      #numInput2
     />
     /
     <input
       class="num-input"
       type="number"
       min="0"
-      #numRef3
-      formControlName="numInput3"
+      ngModel
+      name="numInput3"
+      #numInput3
     />
   </div>
   <label for="measurement">Measurement</label>
-  <select class="form-input" formControlName="measurement" #selectRef>
+  <select class="form-input" ngModel name="measurement">
     <option disabled>Please Select a measurement</option>
     <option value="none">No Measurement</option>
     <option value="pinch">pinch</option>
@@ -77,15 +57,15 @@
     <option value="pound">Pound</option>
   </select>
   <button
-    [disabled]="!parentForm.controls['ingName'].valid"
+    [disabled]=""
     class="button"
     type="button"
     (click)="
       onAddIngredient(
-        nameRef.value,
-        +numRef1.value,
-        +numRef2.value,
-        +numRef3.value
+        ingName.value,
+        +numInput1.value,
+        +numInput2.value,
+        +numInput3.value
       )
     "
   >
@@ -96,14 +76,16 @@
     *ngFor="let ingredient of ingredientsList; let i = index"
   >
     <li class="list-item" [id]="i">
+      <button
+        (click)="onIngredientDelete($event)"
+        class="li-delete--button"
+        type="button"
+      >
+        x
+      </button>
       {{ ingredient.ingAmount }} {{ ingredient.ingName }}
     </li>
-    <button
-      (click)="onItemDelete($event)"
-      class="li-delete--button"
-      type="button"
-    >
-      x
-    </button>
   </ul>
+  <button (click)="onBack()" class="button">Back</button>
+  <button (click)="onNext()" class="button">Next</button>
 </div>

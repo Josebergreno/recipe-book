@@ -11,9 +11,13 @@ import { NewRecipeComponent } from './components/new-recipe/new-recipe.component
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
-import { InstructionsComponent } from './components/new-recipe/instructions/instructions.component';
-import { IngredientsComponent } from './components/new-recipe/ingredients/ingredients.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RecipeNameComponent } from './components/new-recipe/recipe-name/recipe-name.component';
+import { RecipePictureComponent } from './components/new-recipe/recipe-picture/recipe-picture.component';
+import { BriefDescriptionComponent } from './components/new-recipe/brief-description/brief-description.component';
+import { IngredientsComponent } from './components/new-recipe/ingredients/ingredients.component';
+import { InstructionsComponent } from './components/new-recipe/instructions/instructions.component';
+import { ConclusionComponent } from './components/new-recipe/conclusion/conclusion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,8 +28,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     NewRecipeComponent,
     PageNotFoundComponent,
     SignupComponent,
-    InstructionsComponent,
+    RecipeNameComponent,
+    RecipePictureComponent,
+    BriefDescriptionComponent,
     IngredientsComponent,
+    InstructionsComponent,
+    ConclusionComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,34 +1,60 @@
-<div class="section" [formGroup]="parentForm">
+<form (ngSubmit)="onSubmit(formRef)" #formRef="ngForm"></form>
+<div class="section">
   <h3>Instructions</h3>
   <label for="time">Time</label>
-  <input class="num-input" id="time" type="number" formControlName="cookTime" />
+  <input
+    class="num-input"
+    id="time"
+    type="number"
+    ngModel
+    name="stepCookTime"
+    #stepCookTime
+  />
   <label for="dropdown">Unit Of Time</label>
-  <select class="form-input" formControlName="unitOfTime" id="dropdown">
+  <select
+    class="form-input"
+    ngModel
+    name="unitOfTime"
+    id="dropdown"
+    #unitOfTime
+  >
     <option value="" disabled>Please Select a Unit</option>
-    <option value="second">Second(s)</option>
-    <option value="minute">Minute(s)</option>
-    <option value="hours">Hour(s)</option>
+    <option value="Second(s)">Second(s)</option>
+    <option value="Minute(s)">Minute(s)</option>
+    <option value="Hour(s)">Hour(s)</option>
   </select>
 
   <label for="description">Step Description</label>
   <textarea
     id="description"
-    formControlName="ingStepDesc"
+    ngModel
+    name="stepDesc"
     type="text"
     class="form-textarea"
+    #stepDesc
   ></textarea>
   <ul
     class="li-container"
     *ngFor="let instruction of instructionsList; let i = index"
   >
-    <li class="list-item" [id]="i">{{ instruction }} {{ instruction }}</li>
-    <button
-      (click)="onItemDelete($event)"
-      class="li-delete--button"
-      type="button"
-    >
-      x
-    </button>
+    <li class="list-item" [id]="i">
+      <button
+        (click)="onInstructionDelete($event)"
+        type="button"
+        class="li-delete--button"
+      >
+        x</button
+      >{{ "Step " }}{{ i + 1 }}{{ ". " + instruction.description
+      }}{{ " " + instruction.time + " " + instruction.unit }}
+    </li>
   </ul>
-  <button class="button" type="button" (click)="onStepAdd()">Add Step</button>
+  <button
+    class="button"
+    type="button"
+    (click)="onStepAdd(+stepCookTime.value, unitOfTime.value, stepDesc.value)"
+  >
+    Add Step
+  </button>
+  <button (click)="onBack()" class="button">Back</button>
+  <button (click)="onNext()" class="button">Next</button>
 </div>

@@ -1,57 +1,7 @@
 <div class="recipe-form--container">
   <div class="header">
-    <h1>Add a New Recipe</h1>
+    <h1>New Recipe</h1>
+    <button *ngIf="newRecipeButton" (click)="addRecipe()">New Recipe</button>
   </div>
-  <form class="form" [formGroup]="form" (ngSubmit)="onSubmit(form)">
-    <div class="section">
-      <label for="recipe-name"> Recipe Name </label>
-      <input
-        class="form-input"
-        id="recipe-name"
-        formControlName="recipeName"
-        type="text"
-        forn
-      />
-    </div>
-    <div class="section">
-      <label for="recipe-picture"> Recipe Picture </label>
-      <img
-        *ngIf="fileName !== ''"
-        class="recipe-picture"
-        [src]="fileName"
-        alt="recipe-picture"
-      />
-      <input
-        class="file-input"
-        type="file"
-        formControlName="imgFile"
-        #imgRef
-        (change)="onFileSelected($event)"
-      />
-      <button class="button" type="button" (click)="imgRef.click()">
-        Choose File
-      </button>
-    </div>
-
-    <div class="section">
-      <label for="description"> Brief description </label>
-      <textarea
-        id="description"
-        type="text"
-        class="form-textarea"
-        formControlName="briefDesc"
-      ></textarea>
-    </div>
-
-    <app-ingredients class="ingredients" [parentForm]="form"></app-ingredients>
-    <app-instructions
-      class="instructions"
-      [parentForm]="form"
-    ></app-instructions>
-    <div class="section">
-      <h3>Conclusion</h3>
-      <textarea class="form-textarea" formControlName="conclusion"></textarea>
-    </div>
-    <button class="button" type="submit">Publish Recipe</button>
-  </form>
+  <router-outlet></router-outlet>
 </div>

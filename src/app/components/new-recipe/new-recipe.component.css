@@ -1,11 +1,17 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .recipe-form--container {
   width: 100%;
 }
-.ingredients,
-.instructions {
+.form {
+  margin-top: 10px;
   display: flex;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  flex-direction: column;
 }
 
 .section {
@@ -19,18 +25,28 @@
   padding: 10px;
   border-bottom: solid black 1px;
 }
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.form-input {
+  width: 60%;
+  margin: 10px;
+  height: 25px;
+  border: solid black 1px;
+}
+.form-textarea {
+  width: 60%;
+  height: 100px;
+  resize: none;
+  margin: 10px;
+}
+.num-input {
+  width: 50px;
+  text-align: center;
 }
 
-.form {
-  margin-top: 10px;
+.ingredients,
+.instructions {
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  width: 100%;
 }
 
 .button {
@@ -45,62 +61,39 @@
   width: 103px;
 }
 
+textarea.ng-touched.ng-invalid,
+input.ng-touched.ng-invalid {
+  border-color: red;
+}
+
 .measurement {
   display: flex;
 }
 
-.num-input {
-  width: 50px;
-  text-align: center;
-}
-
-.form-input {
+.li-container {
   width: 60%;
-  margin: 10px;
-  height: 25px;
-  border: solid black 1px;
-}
-.form-textarea {
-  width: 60%;
-  height: 100px;
-  resize: none;
-  margin: 10px;
-}
-.li-delete--button {
-  color: white;
-  margin-left: 10px;
-  background-color: red;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: none;
-  transition: 0.2s;
-}
-.li-delete--button:hover {
-  background-color: rgba(255, 0, 0, 0.5);
-}
-.li-delete--button:active {
-  background-color: red;
+  list-style-type: none;
 }
 .list-item {
   margin: 5px;
 }
-.li-container {
-  width: 60%;
+.li-delete--button {
+  color: white;
+  background-color: rgba(255, 0, 0, 0.5);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+  margin-right: 5px;
+  border: none;
+  transition: 0.2s;
+  display: inline;
 }
-
-.recipe-picture {
-  width: 100%;
-  border-radius: 10px;
-  margin: 10px;
+.li-delete--button:hover {
+  background-color: red;
 }
-.file-input {
-  display: none;
-}
-
-textarea.ng-touched.ng-invalid {
-  border-color: red;
+.li-delete--button:active {
+  background-color: rgba(255, 0, 0, 0.5);
 }

@@ -1,3 +1,11 @@
+.form {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .section {
   display: flex;
   flex-direction: column;
@@ -9,7 +17,16 @@
   padding: 10px;
   border-bottom: solid black 1px;
 }
-
+.form-input {
+  width: 60%;
+  margin: 10px;
+  height: 25px;
+  border: solid black 1px;
+}
+.num-input {
+  width: 50px;
+  text-align: center;
+}
 .button {
   margin: 10px;
   width: 100px;
@@ -21,48 +38,30 @@
 .button:hover {
   width: 103px;
 }
-.measurement {
-  display: flex;
-}
-
-.num-input {
-  width: 50px;
-  text-align: center;
-}
-
-.form-input {
+.li-container {
   width: 60%;
-  margin: 10px;
-  height: 25px;
-  border: solid black 1px;
-}
-
-.li-delete--button {
-  color: white;
-  margin-left: 10px;
-  background-color: red;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: none;
-  transition: 0.2s;
-}
-.li-delete--button:hover {
-  background-color: rgba(255, 0, 0, 0.5);
-}
-.li-delete--button:active {
-  background-color: red;
+  list-style-type: none;
 }
 .list-item {
   margin: 5px;
 }
-.li-container {
-  width: 60%;
+.li-delete--button {
+  color: white;
+  background-color: rgba(255, 0, 0, 0.5);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+  margin-right: 5px;
+  border: none;
+  transition: 0.2s;
+  display: inline;
 }
-input.ng-touched.ng-invalid,
-select.ng-touched.ng-invalid {
-  border-color: red;
+.li-delete--button:hover {
+  background-color: red;
+}
+.li-delete--button:active {
+  background-color: rgba(255, 0, 0, 0.5);
 }

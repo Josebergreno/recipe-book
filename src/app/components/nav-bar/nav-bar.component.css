@@ -1,6 +1,6 @@
 .nav-bar--container {
   height: 20vmin;
-  background-color: aqua;
+  background-color: green;
   display: flex;
   justify-content: space-around;
   align-items: center;
