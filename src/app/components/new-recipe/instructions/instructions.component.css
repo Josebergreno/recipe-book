@@ -77,3 +77,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+.slide-out {
+  transition: 1s;
+  transform: translate(-150%);
+}

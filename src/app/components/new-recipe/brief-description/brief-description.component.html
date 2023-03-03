@@ -1,4 +1,9 @@
-<form (ngSubmit)="onNext(formRef)" #formRef="ngForm" class="form">
+<form
+  (ngSubmit)="onNext(formRef)"
+  #formRef="ngForm"
+  class="form"
+  [ngClass]="{ 'slide-out': onSlideOut }"
+>
   <div class="section">
     <label for="description"> Brief description </label>
     <textarea

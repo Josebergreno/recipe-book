@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ingredient } from 'src/app/models/ingredient.model';
@@ -8,9 +8,10 @@ import { RecipeService } from 'src/app/services/recipe.service';
   templateUrl: './ingredients.component.html',
   styleUrls: ['./ingredients.component.css'],
 })
-export class IngredientsComponent implements OnInit {
+export class IngredientsComponent implements OnInit, OnDestroy {
   constructor(private recipeService: RecipeService, private router: Router) {}
   ingredientsList: Ingredient[] = [];
+  onSlideOut!: boolean;
   @ViewChild('formRef') formRef!: NgForm;
 
   resetIngredientInputs() {
@@ -35,14 +36,22 @@ export class IngredientsComponent implements OnInit {
     this.recipeService.deleteIngredient(event);
     this.ingredientsList = this.recipeService.getIngredients();
   }
-  ngOnInit() {
-    this.ingredientsList = this.recipeService.getIngredients();
-  }
 
   onBack() {
     this.router.navigate(['new-recipe', 'brief-description']);
   }
   onNext(formRef: NgForm) {
-    this.router.navigate(['new-recipe', 'instructions']);
+    this.onSlideOut = true;
+    setTimeout(
+      () => this.router.navigate(['new-recipe', 'instructions']),
+      1000
+    );
+  }
+  ngOnInit() {
+    this.ingredientsList = this.recipeService.getIngredients();
+    this.onSlideOut = false;
+  }
+  ngOnDestroy(): void {
+    this.onSlideOut = false;
   }
 }

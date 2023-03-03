@@ -1,4 +1,9 @@
-<form (ngSubmit)="onSubmit(formRef)" #formRef="ngForm" class="form">
+<form
+  (ngSubmit)="onSubmit(formRef)"
+  #formRef="ngForm"
+  class="form"
+  [ngClass]="{ 'slide-out': onSlideOut }"
+>
   <div class="section">
     <h3>Instructions</h3>
     <label for="time">Time</label>

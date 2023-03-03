@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { Instruction } from 'src/app/models/instruction.model';
@@ -9,13 +9,12 @@ import { NgForm } from '@angular/forms';
   templateUrl: './instructions.component.html',
   styleUrls: ['./instructions.component.css'],
 })
-export class InstructionsComponent implements OnInit {
+export class InstructionsComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private recipeService: RecipeService) {}
   instructionsList: Instruction[] = [];
+  onSlideOut!: boolean;
   @ViewChild('formRef') formRef!: NgForm;
-  ngOnInit(): void {
-    this.instructionsList = this.recipeService.getInstructions();
-  }
+
   onSubmit(formRef: NgForm) {
     console.log();
   }
@@ -42,6 +41,14 @@ export class InstructionsComponent implements OnInit {
     this.router.navigate(['new-recipe', 'ingredients']);
   }
   onNext() {
-    this.router.navigate(['new-recipe', 'conclusion']);
+    this.onSlideOut = true;
+    setTimeout(() => this.router.navigate(['new-recipe', 'conclusion']), 1000);
+  }
+  ngOnInit(): void {
+    this.instructionsList = this.recipeService.getInstructions();
+    this.onSlideOut = false;
+  }
+  ngOnDestroy(): void {
+    this.onSlideOut = false;
   }
 }

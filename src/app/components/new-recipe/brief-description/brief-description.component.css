@@ -41,3 +41,7 @@
 .button:hover {
   width: 103px;
 }
+.slide-out {
+  transition: 1s;
+  transform: translate(-150%);
+}

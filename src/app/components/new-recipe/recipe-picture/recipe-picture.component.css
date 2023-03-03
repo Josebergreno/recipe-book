@@ -10,6 +10,7 @@
   justify-content: center;
   align-items: center;
   width: 80%;
+  transform: translate(100%);
 }
 .section {
   display: flex;
@@ -41,4 +42,13 @@
 }
 .button:hover {
   width: 103px;
+}
+
+.slide-out {
+  transition: 0.5s;
+  transform: translate(-150%);
+}
+.slide-in {
+  transition: 0.8s;
+  transform: translate(0%);
 }

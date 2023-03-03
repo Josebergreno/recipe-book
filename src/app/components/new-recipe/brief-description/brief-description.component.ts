@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
@@ -6,13 +6,21 @@ import { Router } from '@angular/router';
   templateUrl: './brief-description.component.html',
   styleUrls: ['./brief-description.component.css'],
 })
-export class BriefDescriptionComponent {
+export class BriefDescriptionComponent implements OnInit, OnDestroy {
+  onSlideOut!: boolean;
   constructor(private router: Router) {}
   onBack() {
     this.router.navigate(['new-recipe', 'recipe-picture']);
   }
   onNext(formRef: NgForm) {
-    console.log('submitted');
-    this.router.navigate(['new-recipe', 'ingredients']);
+    this.onSlideOut = true;
+    setTimeout(() => this.router.navigate(['new-recipe', 'ingredients']), 1000);
+  }
+
+  ngOnInit(): void {
+    this.onSlideOut = false;
+  }
+  ngOnDestroy(): void {
+    this.onSlideOut = false;
   }
 }

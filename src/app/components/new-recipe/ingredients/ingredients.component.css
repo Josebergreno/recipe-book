@@ -69,3 +69,7 @@
 .li-delete--button:active {
   background-color: rgba(255, 0, 0, 0.5);
 }
+.slide-out {
+  transition: 1s;
+  transform: translate(-150%);
+}

@@ -1,4 +1,9 @@
-<form (ngSubmit)="onNext(formRef)" #formRef="ngForm" class="form">
+<form
+  (ngSubmit)="onNext(formRef)"
+  #formRef="ngForm"
+  class="form"
+  [ngClass]="{ 'slide-out': onSlideOut, 'slide-in': onSlideIn }"
+>
   <div class="section">
     <label for="recipe-picture">
       {{ !fileName ? "Please select a recipe picture" : "Recipe Picture" }}

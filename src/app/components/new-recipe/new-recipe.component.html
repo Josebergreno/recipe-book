@@ -1,7 +1,11 @@
 <div class="recipe-form--container">
   <div class="header">
     <h1>New Recipe</h1>
-    <button *ngIf="newRecipeButton" (click)="addRecipe()">New Recipe</button>
+  </div>
+  <div class="slide-out--left">
+    <button *ngIf="newRecipeButton" (click)="addRecipe()" class="button">
+      New Recipe
+    </button>
   </div>
   <router-outlet></router-outlet>
 </div>
