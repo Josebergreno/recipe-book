@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowseRecipesComponent } from './components/browse-recipes/browse-recipes.component';
+import { RecipeComponent } from './components/browse-recipes/recipe/recipe.component';
 import { LoginComponent } from './components/login/login.component';
 import { BriefDescriptionComponent } from './components/new-recipe/brief-description/brief-description.component';
 import { ConclusionComponent } from './components/new-recipe/conclusion/conclusion.component';
@@ -15,7 +16,11 @@ import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
   { path: 'home', component: BrowseRecipesComponent },
-  { path: 'browse-recipes', component: BrowseRecipesComponent },
+  {
+    path: 'browse-recipes',
+    component: BrowseRecipesComponent,
+  },
+  { path: 'browse-recipes/:id/:recipe-name', component: RecipeComponent },
   {
     path: 'new-recipe',
     component: NewRecipeComponent,

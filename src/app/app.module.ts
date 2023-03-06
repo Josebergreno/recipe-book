@@ -18,6 +18,7 @@ import { BriefDescriptionComponent } from './components/new-recipe/brief-descrip
 import { IngredientsComponent } from './components/new-recipe/ingredients/ingredients.component';
 import { InstructionsComponent } from './components/new-recipe/instructions/instructions.component';
 import { ConclusionComponent } from './components/new-recipe/conclusion/conclusion.component';
+import { RecipeComponent } from './components/browse-recipes/recipe/recipe.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { ConclusionComponent } from './components/new-recipe/conclusion/conclusi
     IngredientsComponent,
     InstructionsComponent,
     ConclusionComponent,
+    RecipeComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+<div class="recipe-container">
+  <div class="back-button--container">
+    <button class="button" (click)="onBackClick()">back to recipes</button>
+  </div>
+  <h1 class="header">{{ recipe.recipeName }}</h1>
+
+  <img
+    class="recipe-img"
+    [src]="recipe.imgName"
+    alt="{{ recipe.recipeName }}"
+  />
+</div>

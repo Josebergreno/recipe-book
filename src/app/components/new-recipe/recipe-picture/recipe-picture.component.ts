@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgForm, NgModel } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
   selector: 'app-recipe-picture',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./recipe-picture.component.css'],
 })
 export class RecipePictureComponent implements OnInit, OnDestroy {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private recipeService: RecipeService) {}
   fileName = '';
   changeImg = false;
   onSlideOut!: boolean;
@@ -25,8 +26,9 @@ export class RecipePictureComponent implements OnInit, OnDestroy {
     }
   }
 
-  onBack() {
+  onBack(formRef: NgForm) {
     this.router.navigate(['new-recipe', 'recipe-name']);
+    console.log(formRef.controls);
   }
   onNext(formRef: NgForm) {
     this.onSlideOut = true;
@@ -35,6 +37,7 @@ export class RecipePictureComponent implements OnInit, OnDestroy {
       () => this.router.navigate(['new-recipe', 'brief-description']),
       1000
     );
+    this.recipeService.addRecipePic(formRef.value.imgFile);
   }
 
   ngOnInit(): void {
