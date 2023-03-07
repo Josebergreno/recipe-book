@@ -5,9 +5,10 @@
   </div>
 
   <div class="link-container">
-    <a routerLink="/new-recipe">Create New Recipe</a>
+    <a *ngIf="isAuthenticated" routerLink="/new-recipe">Create New Recipe</a>
     <a routerLink="/browse-recipes">Browse Recipes</a>
-    <a routerLink="/personalize">Personalize Account</a>
-    <a routerLink="/login">Log In</a>
+    <a *ngIf="isAuthenticated" routerLink="/personalize">Personalize Account</a>
+    <a *ngIf="isAuthenticated" routerLink="/login">Logout</a>
+    <a *ngIf="!isAuthenticated" routerLink="/login">Login</a>
   </div>
 </div>

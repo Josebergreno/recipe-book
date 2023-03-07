@@ -2,7 +2,30 @@
 
 <div class="form-container" *ngIf="!accountCreated">
   <p *ngIf="passwordsAreSame === false">passwords must be the same</p>
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
   <form class="form" (ngSubmit)="onSignup(formRef)" #formRef="ngForm">
+    <div class="label-input--container">
+      <label for="firstName">First Name</label>
+      <input
+        class="input"
+        id="firstName"
+        type="text"
+        ngModel
+        name="firstName"
+        required
+      />
+    </div>
+    <div class="label-input--container">
+      <label for="lastName">Last Name</label>
+      <input
+        class="input"
+        id="lastName"
+        type="text"
+        ngModel
+        name="lastName"
+        required
+      />
+    </div>
     <div class="label-input--container">
       <label for="email">E-mail</label>
       <input
@@ -40,7 +63,7 @@
     </div>
     <div class="label-input--container">
       <label for="email">Security Question</label>
-      <select class="input" ngModel name="Question">
+      <select class="input" ngModel name="securityQuestion">
         <option value="">--please select a question--</option>
         <option value="mother-maiden-name">Mother's Maiden Name</option>
         <option value="first-car">First Car</option>
@@ -49,7 +72,7 @@
         <option value="city-of-birth">City of Birth</option>
       </select>
       <br />
-      <input class="input" type="text" ngModel name="security-answer" />
+      <input class="input" type="text" ngModel name="securityAnswer" />
     </div>
 
     <button [disabled]="!formRef.valid" role="button" class="button">
@@ -62,8 +85,5 @@
 <!-- account created confirmation -->
 
 <div class="form-container" *ngIf="accountCreated">
-  <p class="confirm-text">
-    Account Created! We've sent an email to: {{ email }}. Please check your
-    email for confirmation
-  </p>
+  <p class="confirm-text">Account Created!</p>
 </div>

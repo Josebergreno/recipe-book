@@ -2,18 +2,21 @@ import { Injectable } from '@angular/core';
 import { Instruction } from '../models/instruction.model';
 import { Ingredient } from '../models/ingredient.model';
 import { Recipe } from '../models/recipe.model';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
   instructionsList: Instruction[] = [];
   ingredientList: Ingredient[] = [];
   recipeName!: string;
   recipeUrl!: string;
   briefDesc!: string;
   conclusion!: string;
+
   recipeArray: Recipe[] = [
     new Recipe(
       'Chicken Soup',
@@ -115,6 +118,7 @@ export class RecipeService {
       this.conclusion
     );
     this.recipeArray.push(newRecipe);
+    this.storeRecipes();
   }
   recipeSearch(inputVal: string) {
     const filteredArr = this.recipeArray.filter(
@@ -123,9 +127,38 @@ export class RecipeService {
     console.log(filteredArr);
   }
   getRecipes() {
-    return this.recipeArray.slice();
+    return this.fetchRecipes();
   }
   getIndivRecipe(id: number, recipeName: string) {
     return this.recipeArray[id];
+  }
+
+  storeRecipes() {
+    this.http
+      .post(
+        'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/recipes.json',
+        this.recipeArray
+      )
+      .subscribe((resData) => console.log(resData));
+    console.log('recipe stored');
+  }
+  private fetchRecipes() {
+    this.http
+      .get(
+        'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/recipes.json'
+      )
+      .pipe(
+        map((resData) => {
+          const postsArray = [];
+          for (const key in resData) {
+            if (resData.hasOwnProperty(key)) {
+              postsArray.push({ ...resData[key], id: key });
+            }
+          }
+        })
+      )
+      .subscribe((loadedPosts) => {
+        console.log(loadedPosts);
+      });
   }
 }
