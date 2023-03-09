@@ -1,4 +1,5 @@
 <div class="browse-recipes--container">
+  <div *ngIf="firstName" class="welcome">{{ "Welcome" + " " + firstName }}</div>
   <h1 class="header">Browse Recipes</h1>
   <div class="label-input--container">
     <label class="label" for="recipe-search">Search by recipe Name</label>
@@ -7,7 +8,6 @@
   </div>
 
   <div
-    (click)="goToRecipe()"
     [id]="i"
     [routerLink]="[i, recipe.recipeName]"
     class="indiv-recipe"

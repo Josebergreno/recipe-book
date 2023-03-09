@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ingredient } from 'src/app/models/ingredient.model';
+import { IngredientService } from 'src/app/services/ingredient.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 @Component({
   selector: 'app-ingredients',
@@ -9,7 +10,11 @@ import { RecipeService } from 'src/app/services/recipe.service';
   styleUrls: ['./ingredients.component.css'],
 })
 export class IngredientsComponent implements OnInit, OnDestroy {
-  constructor(private recipeService: RecipeService, private router: Router) {}
+  constructor(
+    private recipeService: RecipeService,
+    private router: Router,
+    private ingredientService: IngredientService
+  ) {}
   ingredientsList: Ingredient[] = [];
   onSlideOut!: boolean;
   @ViewChild('formRef') formRef!: NgForm;
@@ -28,13 +33,13 @@ export class IngredientsComponent implements OnInit, OnDestroy {
     ingAmt2: number,
     ingAmt3: number
   ) {
-    this.recipeService.addIngredient(ingName, ingAmt1, ingAmt2, ingAmt3);
-    this.ingredientsList = this.recipeService.getIngredients();
+    this.ingredientService.addIngredient(ingName, ingAmt1, ingAmt2, ingAmt3);
+    this.ingredientsList = this.ingredientService.getIngredients();
     this.resetIngredientInputs();
   }
   onIngredientDelete(event: any) {
-    this.recipeService.deleteIngredient(event);
-    this.ingredientsList = this.recipeService.getIngredients();
+    this.ingredientService.deleteIngredient(event);
+    this.ingredientsList = this.ingredientService.getIngredients();
   }
 
   onBack() {
@@ -48,7 +53,7 @@ export class IngredientsComponent implements OnInit, OnDestroy {
     );
   }
   ngOnInit() {
-    this.ingredientsList = this.recipeService.getIngredients();
+    this.ingredientsList = this.ingredientService.getIngredients();
     this.onSlideOut = false;
   }
   ngOnDestroy(): void {

@@ -14,8 +14,10 @@ export class LoginComponent {
     private router: Router
   ) {}
   loggedIn = false;
+  errorMessage!: string;
 
   onLogin(formRef: NgForm) {
+    this.authService.getUser();
     this.authService
       .loginUser(formRef.value.email, formRef.value.password)
       .subscribe({
@@ -24,7 +26,10 @@ export class LoginComponent {
           this.loggedIn = true;
           this.router.navigate(['browse-recipes']);
         },
-        error: (errorData) => console.error(errorData),
+        error: (errorData) => {
+          console.error(errorData);
+          this.errorMessage = errorData.error.error.message;
+        },
       });
   }
 }

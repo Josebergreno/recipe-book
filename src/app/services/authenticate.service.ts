@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, tap } from 'rxjs';
+import { filter, find, map, Subject, tap } from 'rxjs';
 import { UserAuth } from '../models/userAuth.model';
 import { UserData } from '../models/userData.model';
 interface AuthResponseData {
@@ -17,10 +17,18 @@ interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthenticateService {
-  currentUser = new Subject<UserAuth>();
+  currentUserAuth = new Subject<UserAuth>();
+  currentUserData = new Subject<UserData>();
   constructor(private http: HttpClient) {}
 
   signupUser(user: UserData) {
+    this.http
+      .post<UserData>(
+        'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/userData.json',
+        user
+      )
+      .subscribe((resData) => console.log(resData));
+
     return this.http.post<AuthResponseData>(
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBsJY4UpFQN5ym9TsvoepJaCT_KTrYoG4M',
       { email: user.email, password: user.password, returnSecureToken: true }
@@ -37,13 +45,37 @@ export class AuthenticateService {
           const expirationDate = new Date(
             new Date().getTime() + +resData.expiresIn * 1000
           );
-          const user = new UserAuth(
+          const userAuthData = new UserAuth(
             resData.email,
             resData.localId,
             resData.idToken,
             expirationDate
           );
-          this.currentUser.next(user);
+
+          this.currentUserAuth.next(userAuthData);
+        })
+      );
+  }
+  getUser() {
+    return this.fetchUserData();
+  }
+  private fetchUserData() {
+    return this.http
+      .get<UserData>(
+        'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/userData.json'
+      ) //filter the user data that ends up being returned
+      .pipe(
+        tap((resData) => {
+          const userData = new UserData(
+            resData.email,
+            resData.firstName,
+            resData.lastName,
+            resData.password,
+            resData.securityQuestion,
+            resData.securityAnswer,
+            resData.imgPath
+          );
+          this.currentUserData.next(userData);
         })
       );
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Recipe } from 'src/app/models/recipe.model';
+import { UserData } from 'src/app/models/userData.model';
+import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
@@ -10,12 +12,25 @@ import { RecipeService } from 'src/app/services/recipe.service';
 })
 export class BrowseRecipesComponent implements OnInit {
   recipes!: Recipe[];
-  constructor(private recipeService: RecipeService, private router: Router) {}
+  firstName!: string;
+  constructor(
+    private recipeService: RecipeService,
+    private authService: AuthenticateService
+  ) {}
   onSearch(inputRef: string) {
     this.recipeService.recipeSearch(inputRef);
   }
-  goToRecipe() {}
+
   ngOnInit(): void {
-    this.recipes = this.recipeService.getRecipes();
+    this.recipeService.getRecipes().subscribe((loadedPosts: Recipe[]) => {
+      this.recipes = loadedPosts;
+    });
+    this.authService.currentUserAuth.subscribe((user) => console.log(user));
+    this.authService.getUser().subscribe((resData: UserData) => {
+      const resObj = Object.values(resData);
+      this.firstName = resData.firstName;
+
+      console.log(resObj);
+    });
   }
 }

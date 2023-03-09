@@ -1,5 +1,8 @@
 <div class="form-container">
   <form class="form" (ngSubmit)="onLogin(formRef)" #formRef="ngForm">
+    <div class="error" *ngIf="errorMessage">
+      <p>Please enter a valid email and password</p>
+    </div>
     <div class="label-input--container">
       <label for="email">E-mail</label>
       <input class="input" id="email" type="email" ngModel name="email" email />

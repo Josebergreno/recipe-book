@@ -4,19 +4,24 @@ import { Ingredient } from '../models/ingredient.model';
 import { Recipe } from '../models/recipe.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
+import { IngredientService } from './ingredient.service';
+import { InstructionsService } from './instructions.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  constructor(private http: HttpClient) {}
-  instructionsList: Instruction[] = [];
-  ingredientList: Ingredient[] = [];
+  constructor(
+    private http: HttpClient,
+    private ingredientService: IngredientService,
+    private instructionService: InstructionsService
+  ) {}
+
   recipeName!: string;
   recipeUrl!: string;
   briefDesc!: string;
   conclusion!: string;
-
+  loadedRecipes: Recipe[] = [];
   recipeArray: Recipe[] = [
     new Recipe(
       'Chicken Soup',
@@ -37,64 +42,6 @@ export class RecipeService {
     ),
   ];
 
-  deleteIngredient(event: any) {
-    const arrayIndex = event.target.parentElement.children[0].id;
-    this.ingredientList.splice(arrayIndex, 1);
-  }
-  deleteInstruction(event: any) {
-    const arrayIndex = event.target.parentElement.children[0].id;
-    this.instructionsList.splice(arrayIndex, 1);
-  }
-  addInstruction(step: Instruction) {
-    this.instructionsList.push(step);
-  }
-  addIngredient(
-    ingName: string,
-    ingAmt1: number,
-    ingAmt2: number,
-    ingAmt3: number
-  ) {
-    if (
-      ingName !== '' &&
-      ingAmt1 > 0 &&
-      ingAmt2 > 0 &&
-      ingAmt3 > 0 &&
-      ingAmt2 < ingAmt3
-    ) {
-      const fraction = ingAmt1 + ' ' + ingAmt2 + '/' + ingAmt3;
-      this.ingredientList.push(
-        new Ingredient(ingName, fraction, this.ingredientList.length + 1)
-      );
-    } else if (
-      ingName !== '' &&
-      ingAmt1 === 0 &&
-      ingAmt2 > 0 &&
-      ingAmt3 > 0 &&
-      ingAmt2 < ingAmt3
-    ) {
-      const fraction = ingAmt2 + '/' + ingAmt3;
-      this.ingredientList.push(
-        new Ingredient(ingName, fraction, this.ingredientList.length + 1)
-      );
-    } else if (
-      ingName !== '' &&
-      ingAmt1 > 0 &&
-      ingAmt2 === 0 &&
-      ingAmt3 === 0
-    ) {
-      this.ingredientList.push(
-        new Ingredient(ingName, `${ingAmt1}`, this.ingredientList.length + 1)
-      );
-    }
-  }
-
-  getIngredients() {
-    return this.ingredientList.slice();
-  }
-  getInstructions() {
-    return this.instructionsList.slice();
-  }
-
   addRecipeName(recipeName: string) {
     this.recipeName = recipeName;
   }
@@ -113,8 +60,8 @@ export class RecipeService {
       this.recipeName,
       this.recipeUrl,
       this.briefDesc,
-      this.ingredientList,
-      this.instructionsList,
+      this.ingredientService.getIngredients(),
+      this.instructionService.getInstructions(),
       this.conclusion
     );
     this.recipeArray.push(newRecipe);
@@ -129,7 +76,7 @@ export class RecipeService {
   getRecipes() {
     return this.fetchRecipes();
   }
-  getIndivRecipe(id: number, recipeName: string) {
+  getIndivRecipe(id: number) {
     return this.recipeArray[id];
   }
 
@@ -143,22 +90,17 @@ export class RecipeService {
     console.log('recipe stored');
   }
   private fetchRecipes() {
-    this.http
-      .get(
+    return this.http
+      .get<Recipe[]>(
         'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/recipes.json'
       )
       .pipe(
         map((resData) => {
-          const postsArray = [];
-          for (const key in resData) {
-            if (resData.hasOwnProperty(key)) {
-              postsArray.push({ ...resData[key], id: key });
-            }
-          }
+          const postsArray: Recipe[] = [];
+          const values = Object.values(resData);
+          values.forEach((recipe: Recipe) => postsArray.push(recipe));
+          return postsArray.flat();
         })
-      )
-      .subscribe((loadedPosts) => {
-        console.log(loadedPosts);
-      });
+      );
   }
 }
