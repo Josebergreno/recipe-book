@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserData } from 'src/app/models/userData.model';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 
 @Component({
@@ -15,14 +16,13 @@ export class LoginComponent {
   ) {}
   loggedIn = false;
   errorMessage!: string;
+  currentUserData!: UserData;
 
   onLogin(formRef: NgForm) {
-    this.authService.getUser();
     this.authService
       .loginUser(formRef.value.email, formRef.value.password)
       .subscribe({
         next: (resData) => {
-          console.log(resData);
           this.loggedIn = true;
           this.router.navigate(['browse-recipes']);
         },

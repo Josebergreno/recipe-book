@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { filter, find, map, Subject, tap } from 'rxjs';
+import { filter, find, map, pipe, Subject, tap } from 'rxjs';
 import { UserAuth } from '../models/userAuth.model';
 import { UserData } from '../models/userData.model';
 interface AuthResponseData {
@@ -24,7 +24,7 @@ export class AuthenticateService {
   signupUser(user: UserData) {
     this.http
       .post<UserData>(
-        'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/userData.json',
+        `https://ng-recipe-book-17639-default-rtdb.firebaseio.com/userData.json`,
         user
       )
       .subscribe((resData) => console.log(resData));
@@ -56,27 +56,40 @@ export class AuthenticateService {
         })
       );
   }
-  getUser() {
-    return this.fetchUserData();
+  getUser(email: string) {
+    return this.fetchUserData(email);
   }
-  private fetchUserData() {
+
+  private fetchUserData(email: string) {
     return this.http
       .get<UserData>(
         'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/userData.json'
-      ) //filter the user data that ends up being returned
+      )
       .pipe(
-        tap((resData) => {
-          const userData = new UserData(
-            resData.email,
-            resData.firstName,
-            resData.lastName,
-            resData.password,
-            resData.securityQuestion,
-            resData.securityAnswer,
-            resData.imgPath
+        map((val: any) => {
+          const resObj = Object.values(val);
+          const filteredObj = resObj.filter(
+            (user: any) => user.email === email
           );
-          this.currentUserData.next(userData);
+          return filteredObj;
         })
-      );
+      )
+      .subscribe({
+        next: (resData) => {
+          const resObj: any = resData[0];
+          const currentUser = new UserData(
+            resObj.email,
+            resObj.firstName,
+            resObj.lastName,
+            resObj.password,
+            resObj.securityQuestion,
+            resObj.securityAnswer
+          );
+          this.currentUserData.next(currentUser);
+        },
+        error: (errorData) => {
+          console.log(errorData);
+        },
+      });
   }
 }

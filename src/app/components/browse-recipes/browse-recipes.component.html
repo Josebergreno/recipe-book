@@ -1,5 +1,9 @@
 <div class="browse-recipes--container">
-  <div *ngIf="firstName" class="welcome">{{ "Welcome" + " " + firstName }}</div>
+  <div *ngIf="firstName" class="welcome-container">
+    <div class="welcome-inner--container">
+      <p>{{ "Welcome" + " " + firstName + "!" }}</p>
+    </div>
+  </div>
   <h1 class="header">Browse Recipes</h1>
   <div class="label-input--container">
     <label class="label" for="recipe-search">Search by recipe Name</label>

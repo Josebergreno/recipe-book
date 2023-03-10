@@ -65,8 +65,18 @@ export class RecipeService {
       this.conclusion
     );
     this.recipeArray.push(newRecipe);
-    this.storeRecipes();
+    this.storeRecipes(newRecipe);
   }
+  storeRecipes(newRecipe: Recipe) {
+    this.http
+      .post(
+        'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/recipes.json',
+        newRecipe
+      )
+      .subscribe((resData) => console.log(resData));
+    console.log('recipe stored');
+  }
+
   recipeSearch(inputVal: string) {
     const filteredArr = this.recipeArray.filter(
       (recipe) => recipe.recipeName.toLowerCase() === inputVal.toLowerCase()
@@ -80,15 +90,6 @@ export class RecipeService {
     return this.recipeArray[id];
   }
 
-  storeRecipes() {
-    this.http
-      .post(
-        'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/recipes.json',
-        this.recipeArray
-      )
-      .subscribe((resData) => console.log(resData));
-    console.log('recipe stored');
-  }
   private fetchRecipes() {
     return this.http
       .get<Recipe[]>(

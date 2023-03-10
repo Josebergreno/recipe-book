@@ -7,6 +7,19 @@
 .header {
   margin-top: 10px;
 }
+.welcome-container {
+  width: 100%;
+}
+
+.welcome-inner--container {
+  width: 40%;
+  height: 100%;
+  margin-top: 20px;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+}
+
 .label-input--container {
   width: 80%;
   background-color: antiquewhite;

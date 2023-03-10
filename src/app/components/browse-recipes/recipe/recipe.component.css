@@ -25,3 +25,35 @@
 .button:hover {
   width: 103px;
 }
+.conclusion-container {
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.instructions-section,
+.ingredients-section {
+  background-color: aquamarine;
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.instructions-container,
+.ingredients-container {
+  width: 60%;
+  max-width: 600px;
+}
+
+.list {
+  background-color: purple;
+}
+.section-header {
+  margin: 10px;
+  background-color: azure;
+  display: flex;
+  justify-content: center;
+}

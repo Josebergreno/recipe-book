@@ -7,21 +7,38 @@
         [disabled]="!changeName"
         ngModel
         name="name"
+        class="form-input"
       />
-      <button (click)="onNameChange()" type="button">Change Name</button>
+      <button (click)="onNameChange()" type="button" class="button">
+        Change Name
+      </button>
     </div>
-    <img class="profile-picture" [src]="fileName" alt="profile-picture" />
-    <input
-      class="file-input"
-      type="file"
-      ngModel
-      name="imgFile"
-      #imgRef
-      (change)="onFileSelected($event)"
-    />
-    <button type="button" (click)="imgRef.click()">Attach file</button>
+    <div class="img-form--container">
+      <div class="image-container">
+        <img
+          *ngIf="fileName"
+          class="profile-picture"
+          [src]="fileName"
+          alt="profile-picture"
+        />
+        <p *ngIf="!fileName">
+          Click the "attach file" button to upload an image!
+        </p>
+      </div>
+      <input
+        class="file-input"
+        type="file"
+        ngModel
+        name="imgFile"
+        #imgRef
+        (change)="onFileSelected($event)"
+      />
+      <button type="button" (click)="imgRef.click()" class="button">
+        Attach file
+      </button>
+    </div>
     <div class="label-input--container">
-      <label>Describe yourself</label>
+      <label style="margin-bottom: 5px">Describe yourself</label>
       <textarea
         class="textarea"
         ngModel

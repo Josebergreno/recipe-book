@@ -11,26 +11,38 @@
   />
   <h3>Description</h3>
   <p>{{ recipe.desc }}</p>
-  <div class="ingredients" *ngFor="let ing of recipe.ingredients">
-    <h3>Ingredients</h3>
-    <ul>
-      <li>{{ ing.ingAmount + " " + ing.ingName }}</li>
-    </ul>
+  <div class="ingredients-section">
+    <div class="section-header">
+      <h3>Ingredients</h3>
+    </div>
+    <div class="ingredients-container">
+      <ul *ngFor="let ing of recipe.ingredients">
+        <li>{{ ing.ingAmount + " " + ing.ingName }}</li>
+      </ul>
+    </div>
   </div>
-  <div class="instructions" *ngFor="let instruction of recipe.instructions">
-    <h3>Instructions</h3>
-    <ul>
-      <li>
-        {{
-          instruction.description +
-            " (" +
-            instruction.time +
-            " " +
-            instruction.unit +
-            ".)"
-        }}
-      </li>
-    </ul>
+  <div class="instructions-section">
+    <div class="section-header">
+      <h3>Instructions</h3>
+    </div>
+    <div class="instructions-container">
+      <ul *ngFor="let instruction of recipe.instructions">
+        <li>
+          {{
+            instruction.description +
+              " (" +
+              instruction.time +
+              " " +
+              instruction.unit +
+              ".)"
+          }}
+        </li>
+      </ul>
+    </div>
   </div>
-  <div>{{ recipe.conclusion }}</div>
+
+  <div class="conclusion-container">
+    <h3>Conclusion</h3>
+    <p>{{ recipe.conclusion }}</p>
+  </div>
 </div>
