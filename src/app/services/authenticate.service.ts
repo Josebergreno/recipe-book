@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { filter, find, map, pipe, Subject, tap } from 'rxjs';
+import { map, Subject, tap } from 'rxjs';
 import { UserAuth } from '../models/userAuth.model';
 import { UserData } from '../models/userData.model';
+import { environment } from 'src/environments/environment.development';
+
 interface AuthResponseData {
   kind: string;
   idToken: string;
@@ -23,23 +25,22 @@ export class AuthenticateService {
 
   signupUser(user: UserData) {
     this.http
-      .post<UserData>(
-        `https://ng-recipe-book-17639-default-rtdb.firebaseio.com/userData.json`,
-        user
-      )
+      .post<UserData>(`${environment.apiUrlUserData}`, user)
       .subscribe((resData) => console.log(resData));
 
-    return this.http.post<AuthResponseData>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBsJY4UpFQN5ym9TsvoepJaCT_KTrYoG4M',
-      { email: user.email, password: user.password, returnSecureToken: true }
-    );
+    return this.http.post<AuthResponseData>(`${environment.apiUrlSignup}`, {
+      email: user.email,
+      password: user.password,
+      returnSecureToken: true,
+    });
   }
   loginUser(email: string, password: string) {
     return this.http
-      .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBsJY4UpFQN5ym9TsvoepJaCT_KTrYoG4M',
-        { email: email, password: password, returnSecureToken: true }
-      )
+      .post<AuthResponseData>(`${environment.apiUrlSignIn}`, {
+        email: email,
+        password: password,
+        returnSecureToken: true,
+      })
       .pipe(
         tap((resData) => {
           const expirationDate = new Date(
@@ -62,9 +63,7 @@ export class AuthenticateService {
 
   private fetchUserData(email: string) {
     return this.http
-      .get<UserData>(
-        'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/userData.json'
-      )
+      .get<UserData>(`${environment.apiUrlUserData}`)
       .pipe(
         map((val: any) => {
           const resObj = Object.values(val);

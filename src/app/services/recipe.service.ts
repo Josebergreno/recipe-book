@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { IngredientService } from './ingredient.service';
 import { InstructionsService } from './instructions.service';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -69,10 +70,7 @@ export class RecipeService {
   }
   storeRecipes(newRecipe: Recipe) {
     this.http
-      .post(
-        'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/recipes.json',
-        newRecipe
-      )
+      .post(`${environment.apiUrlRecipe}`, newRecipe)
       .subscribe((resData) => console.log(resData));
     console.log('recipe stored');
   }
@@ -91,17 +89,13 @@ export class RecipeService {
   }
 
   private fetchRecipes() {
-    return this.http
-      .get<Recipe[]>(
-        'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/recipes.json'
-      )
-      .pipe(
-        map((resData) => {
-          const postsArray: Recipe[] = [];
-          const values = Object.values(resData);
-          values.forEach((recipe: Recipe) => postsArray.push(recipe));
-          return postsArray.flat();
-        })
-      );
+    return this.http.get<Recipe[]>(`${environment.apiUrlRecipe}`).pipe(
+      map((resData) => {
+        const postsArray: Recipe[] = [];
+        const values = Object.values(resData);
+        values.forEach((recipe: Recipe) => postsArray.push(recipe));
+        return postsArray.flat();
+      })
+    );
   }
 }

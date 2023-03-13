@@ -19,6 +19,10 @@ import { IngredientsComponent } from './components/new-recipe/ingredients/ingred
 import { InstructionsComponent } from './components/new-recipe/instructions/instructions.component';
 import { ConclusionComponent } from './components/new-recipe/conclusion/conclusion.component';
 import { RecipeComponent } from './components/browse-recipes/recipe/recipe.component';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from 'src/environments/environment.development';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +47,9 @@ import { RecipeComponent } from './components/browse-recipes/recipe/recipe.compo
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
