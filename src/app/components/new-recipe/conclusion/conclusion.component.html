@@ -6,6 +6,9 @@
 >
   <div class="section">
     <h3>Conclusion</h3>
+    <p *ngIf="!conclusion.valid && conclusion.touched" class="warning">
+      Please enter a valid conclusion
+    </p>
     <textarea
       class="form-textarea"
       ngModel

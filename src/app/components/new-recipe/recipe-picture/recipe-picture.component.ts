@@ -36,7 +36,6 @@ export class RecipePictureComponent implements OnInit, OnDestroy {
 
   onBack(formRef: NgForm) {
     this.router.navigate(['new-recipe', 'recipe-name']);
-    console.log(formRef.controls);
   }
   onNext(formRef: NgForm) {
     if (formRef.valid) {
@@ -69,7 +68,7 @@ export class RecipePictureComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     setTimeout(() => {
       this.onSlideIn = true;
-    }, 1);
+    });
   }
   ngOnDestroy(): void {
     this.onSlideOut = false;

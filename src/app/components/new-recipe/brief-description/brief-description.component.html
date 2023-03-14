@@ -6,6 +6,9 @@
 >
   <div class="section">
     <label for="description"> Brief description </label>
+    <p class="warning" *ngIf="!briefDesc.valid && briefDesc.touched">
+      Please enter a brief description for your recipe
+    </p>
     <textarea
       id="description"
       type="text"
@@ -14,6 +17,7 @@
       #briefDesc="ngModel"
       name="briefDesc"
       required
+      [ngClass]="onShake(briefDesc)"
     ></textarea>
     <button (click)="onBack()" class="button">Back</button>
     <button class="button" [disabled]="!briefDesc.valid">Next</button>

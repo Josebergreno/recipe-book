@@ -6,17 +6,19 @@
 >
   <div class="section">
     <h3>Ingredients</h3>
-    <p *ngIf="">Please enter Valid Name</p>
-    <p *ngIf="">Please enter a Measurement</p>
-    <p *ngIf="">Please enter a valid amount</p>
+
     <label for="name">Name</label>
+    <p class="warning" *ngIf="!ingName.valid && ingName.touched">
+      Please enter Valid Name
+    </p>
     <input
       ngModel
       name="ingName"
-      #ingName
+      #ingName="ngModel"
       class="form-input"
       id="name"
       type="text"
+      required
     />
     <label for="amount">Amount</label>
     <div class="measurement">
@@ -48,7 +50,16 @@
       />
     </div>
     <label for="measurement">Measurement</label>
-    <select class="form-input" ngModel name="measurement">
+    <p class="warning" *ngIf="!measurement.valid && measurement.touched">
+      Please enter a Measurement
+    </p>
+    <select
+      class="form-input"
+      ngModel
+      name="measurement"
+      #measurement="ngModel"
+      required
+    >
       <option disabled>Please Select a measurement</option>
       <option value="none">No Measurement</option>
       <option value="pinch">pinch</option>
@@ -92,6 +103,8 @@
       </li>
     </ul>
     <button (click)="onBack()" class="button">Back</button>
-    <button class="button">Next</button>
+    <button class="button" [disabled]="ingredientsList.length === 0">
+      Next
+    </button>
   </div>
 </form>

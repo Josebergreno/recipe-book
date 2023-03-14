@@ -52,7 +52,6 @@ export class RecipeService {
   }
   addRecipePic(recipeUrl: string) {
     this.recipeUrl = recipeUrl;
-    console.log(this.recipeUrl);
   }
   addBriefDesc(briefDesc: string) {
     this.briefDesc = briefDesc;

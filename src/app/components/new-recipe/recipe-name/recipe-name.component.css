@@ -27,6 +27,10 @@
   margin: 10px;
   height: 25px;
   border: solid black 1px;
+  border-radius: 3px;
+}
+input.ng-touched.ng-invalid {
+  border-color: red;
 }
 .button {
   background-color: #e1ecf4;
@@ -66,8 +70,41 @@
   box-shadow: none;
   color: #2c5777;
 }
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 50%;
+}
+.warning {
+  color: red;
+  margin-top: 10px;
+}
 
 .slide-out {
   transition: 0.8s;
   transform: translate(-150%);
+}
+
+.shake {
+  animation-name: shake;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+}
+@keyframes shake {
+  0% {
+    transform: translate(-5%);
+  }
+  25% {
+    transform: translate(5%);
+  }
+  50% {
+    transform: translate(-5%);
+  }
+  75% {
+    transform: translate(5%);
+  }
+  100% {
+    transform: translate(0%);
+  }
 }

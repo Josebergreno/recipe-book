@@ -26,21 +26,62 @@
   margin: 10px;
   height: 25px;
   border: solid black 1px;
+  border-radius: 3px;
+}
+input.ng-invalid.ng-touched {
+  border-color: red;
 }
 .num-input {
   width: 50px;
   text-align: center;
+  border-radius: 3px;
+  border: solid black 1px;
 }
 .button {
+  background-color: #e1ecf4;
+  border-radius: 3px;
+  border: 1px solid #7aa7c7;
+  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #39739d;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
+    sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  outline: none;
+  padding: 8px 0.8em;
   margin: 10px;
-  width: 100px;
-  height: 25px;
-  border-radius: 4px;
-  border: solid black 1px;
-  transition: 0.2s;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
 }
-.button:hover {
-  width: 103px;
+
+.button:hover,
+.button:focus {
+  background-color: #b3d3ea;
+  color: #2c5777;
+}
+
+.button:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 50%;
+}
+.warning {
+  color: red;
+  margin-top: 10px;
 }
 .li-container {
   width: 60%;

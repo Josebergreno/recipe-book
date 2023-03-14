@@ -5,10 +5,14 @@
   </div>
 
   <div class="link-container">
-    <a *ngIf="isAuthenticated" routerLink="/new-recipe">New Recipe</a>
-    <a routerLink="/browse-recipes">Browse Recipes</a>
-    <a *ngIf="isAuthenticated" routerLink="/personalize">My Account</a>
-    <a *ngIf="isAuthenticated" routerLink="/login">Logout</a>
-    <a *ngIf="!isAuthenticated" routerLink="/login">Login</a>
+    <a *ngIf="isAuthenticated" routerLink="/new-recipe" class="nav-link"
+      >New Recipe</a
+    >
+    <a routerLink="/browse-recipes" class="nav-link">Browse Recipes</a>
+    <a *ngIf="isAuthenticated" routerLink="/personalize" class="nav-link"
+      >My Account</a
+    >
+    <a *ngIf="isAuthenticated" routerLink="/login" class="nav-link">Logout</a>
+    <a *ngIf="!isAuthenticated" routerLink="/login" class="nav-link">Login</a>
   </div>
 </div>

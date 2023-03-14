@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
   selector: 'app-new-recipe',
@@ -9,7 +7,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
   styleUrls: ['./new-recipe.component.css'],
 })
 export class NewRecipeComponent implements OnInit, OnDestroy {
-  constructor(private router: Router, private recipeService: RecipeService) {}
+  constructor(private router: Router) {}
   newRecipe: any = null;
 
   addRecipe() {
@@ -24,5 +22,6 @@ export class NewRecipeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     localStorage.removeItem('new-recipe');
+    localStorage.clear();
   }
 }

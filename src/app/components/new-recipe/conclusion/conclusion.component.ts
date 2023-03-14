@@ -14,7 +14,6 @@ export class ConclusionComponent {
     this.router.navigate(['new-recipe', 'instructions']);
   }
   onPublish(formRef: NgForm) {
-    console.log('published');
     this.recipeService.addConclusion(formRef.value.conclusion);
     this.recipeService.publishRecipe();
     this.submitted = true;

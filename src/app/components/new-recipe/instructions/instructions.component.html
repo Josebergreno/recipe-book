@@ -7,22 +7,30 @@
   <div class="section">
     <h3>Instructions</h3>
     <label for="time">Time</label>
+    <p *ngIf="!stepCookTime.valid && stepCookTime.touched" class="warning">
+      Please enter a valid amount of time
+    </p>
     <input
       class="num-input"
       id="time"
       type="number"
       ngModel
       name="stepCookTime"
-      #stepCookTime
+      #stepCookTime="ngModel"
       min="0"
+      required
     />
     <label for="dropdown">Unit Of Time</label>
+    <p *ngIf="!unitOfTime.valid && unitOfTime.touched" class="warning">
+      Please enter a valid unit of time
+    </p>
     <select
       class="form-input"
       ngModel
       name="unitOfTime"
       id="dropdown"
-      #unitOfTime
+      #unitOfTime="ngModel"
+      required
     >
       <option value="" disabled>Please Select a Unit</option>
       <option value="Second(s)">Second(s)</option>
@@ -31,13 +39,17 @@
     </select>
 
     <label for="description">Step Description</label>
+    <p *ngIf="!stepDesc.valid && stepDesc.touched" class="warning">
+      Please enter a valid description
+    </p>
     <textarea
       id="description"
       ngModel
       name="stepDesc"
       type="text"
       class="form-textarea"
-      #stepDesc
+      #stepDesc="ngModel"
+      required
     ></textarea>
     <ul
       class="li-container"
@@ -62,6 +74,12 @@
       Add Step
     </button>
     <button (click)="onBack()" class="button">Back</button>
-    <button (click)="onNext()" class="button">Next</button>
+    <button
+      (click)="onNext()"
+      class="button"
+      [disabled]="instructionsList.length === 0"
+    >
+      Next
+    </button>
   </div>
 </form>
