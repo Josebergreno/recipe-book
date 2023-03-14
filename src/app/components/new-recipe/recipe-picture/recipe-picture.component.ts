@@ -17,9 +17,8 @@ export class RecipePictureComponent implements OnInit, OnDestroy {
     private storage: AngularFireStorage
   ) {}
   imgSrc = '/assets/placeHolderImg.webp';
-  imgUrl: string = '';
   selectedImg: any = null;
-  onSlideOut!: boolean;
+  onSlideOut = false;
   onSlideIn!: boolean;
   @ViewChild('formRef', { static: false }) formRef!: NgForm;
 
@@ -51,15 +50,15 @@ export class RecipePictureComponent implements OnInit, OnDestroy {
         .pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
-              console.log(url);
-              this.imgUrl = url;
+              formRef.value.imgFile = url;
+              this.recipeService.addRecipePic(formRef.value.imgFile);
             });
           })
         )
         .subscribe();
       this.onSlideOut = true;
       this.onSlideIn = false;
-      this.recipeService.addRecipePic(formRef.value.imgFile);
+
       setTimeout(
         () => this.router.navigate(['new-recipe', 'brief-description']),
         1000
@@ -68,7 +67,6 @@ export class RecipePictureComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.onSlideOut = false;
     setTimeout(() => {
       this.onSlideIn = true;
     }, 1);

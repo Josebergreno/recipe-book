@@ -1,11 +1,14 @@
 <div class="recipe-form--container">
   <div class="header">
     <h1>New Recipe</h1>
-  </div>
-  <div class="slide-out--left">
-    <button *ngIf="newRecipeButton" (click)="addRecipe()" class="button">
-      New Recipe
-    </button>
+    <div *ngIf="!newRecipe">
+      <p style="margin-top: 20px; margin-bottom: 20px">
+        click the button below to begin creating your own recipe!
+      </p>
+      <div class="button-container">
+        <button (click)="addRecipe()" class="button">New Recipe</button>
+      </div>
+    </div>
   </div>
   <router-outlet></router-outlet>
 </div>

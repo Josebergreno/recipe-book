@@ -1,5 +1,5 @@
 <div class="main-container">
-  <form class="form" (ngSubmit)="onPersonalize(formRef)" #formRef="ngForm">
+  <form class="form" (ngSubmit)="onSubmit(formRef)" #formRef="ngForm">
     <div class="name-container">
       <input
         type="text"
@@ -9,31 +9,38 @@
         name="name"
         class="form-input"
       />
-      <button (click)="onNameChange()" type="button" class="button">
+      <button
+        (click)="onNameChange()"
+        type="button"
+        class="button"
+        style="margin-bottom: 20px"
+      >
         Change Name
       </button>
     </div>
     <div class="img-form--container">
-      <div class="image-container">
-        <img
-          *ngIf="fileName"
-          class="profile-picture"
-          [src]="fileName"
-          alt="profile-picture"
-        />
-        <p *ngIf="!fileName">
-          Click the "attach file" button to upload an image!
-        </p>
-      </div>
+      <img
+        *ngIf="imgSrc"
+        class="profile-picture"
+        [src]="imgSrc"
+        alt="profile-picture"
+        (click)="imgRef.click()"
+      />
+
       <input
         class="file-input"
         type="file"
         ngModel
-        name="imgFile"
+        name="imgSrc"
         #imgRef
-        (change)="onFileSelected($event)"
+        (change)="showPreview($event)"
       />
-      <button type="button" (click)="imgRef.click()" class="button">
+      <button
+        type="button"
+        (click)="imgRef.click()"
+        class="button"
+        style="margin-top: 20px"
+      >
         Attach file
       </button>
     </div>
@@ -48,6 +55,6 @@
         rows="10"
       ></textarea>
     </div>
-    <button class="button" type="submit">Save</button>
+    <button class="button" style="margin-top: 20px">Save</button>
   </form>
 </div>

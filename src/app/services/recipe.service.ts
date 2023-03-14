@@ -7,6 +7,7 @@ import { map } from 'rxjs';
 import { IngredientService } from './ingredient.service';
 import { InstructionsService } from './instructions.service';
 import { environment } from 'src/environments/environment.development';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,7 @@ export class RecipeService {
   recipeUrl!: string;
   briefDesc!: string;
   conclusion!: string;
+  newRecipeSubj = new Subject();
   loadedRecipes: Recipe[] = [];
   recipeArray: Recipe[] = [
     new Recipe(
@@ -42,12 +44,15 @@ export class RecipeService {
       'all done.'
     ),
   ];
-
+  newRecipe() {
+    this.newRecipeSubj.next(true);
+  }
   addRecipeName(recipeName: string) {
     this.recipeName = recipeName;
   }
   addRecipePic(recipeUrl: string) {
     this.recipeUrl = recipeUrl;
+    console.log(this.recipeUrl);
   }
   addBriefDesc(briefDesc: string) {
     this.briefDesc = briefDesc;

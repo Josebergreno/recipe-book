@@ -9,27 +9,27 @@ import { HttpClient } from '@angular/common/http';
 export class PersonalizeComponent {
   changeName = false;
   changeImg = false;
-  fileName = '';
+  imgSrc = '/assets/placeHolderImg.webp';
+  selectedImg: any = null;
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   onNameChange() {
     this.changeName = true;
   }
-  onFileSelected(event: any) {
-    if (event.target.files[0]) {
-      let reader = new FileReader();
+  showPreview(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (event: any) => (this.imgSrc = event.target.result);
       reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event: any) => {
-        this.fileName = event.target.result;
-      };
-
-      this.changeImg = true;
+      this.selectedImg = event.target.files[0];
+    } else {
+      this.imgSrc = '/assets/placeHolderImg.webp';
+      this.selectedImg = null;
     }
   }
 
-  onPersonalize(formRef: NgForm) {
-    console.log(formRef.value);
-    this.fileName = formRef.value.imgFile;
+  onSubmit(formRef: NgForm) {
+    console.log(formRef.controls);
   }
 }
