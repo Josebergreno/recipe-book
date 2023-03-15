@@ -9,5 +9,4 @@ export class UserData {
     public imgPath?: string,
     public desc?: string
   ) {}
-
 }

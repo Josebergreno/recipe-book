@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Subject, tap } from 'rxjs';
+import { first, map, Subject, tap } from 'rxjs';
 import { UserAuth } from '../models/userAuth.model';
 import { UserData } from '../models/userData.model';
 import { environment } from 'src/environments/environment.development';
@@ -21,6 +21,7 @@ interface AuthResponseData {
 export class AuthenticateService {
   currentUserAuth = new Subject<UserAuth>();
   currentUserData = new Subject<UserData>();
+  curUser!: UserData;
   constructor(private http: HttpClient) {}
 
   signupUser(user: UserData) {
@@ -85,6 +86,7 @@ export class AuthenticateService {
             resObj.securityAnswer
           );
           this.currentUserData.next(currentUser);
+          this.curUser = currentUser;
         },
         error: (errorData) => {
           console.log(errorData);

@@ -51,6 +51,9 @@
   border: solid black 1px;
 }
 
+.form-input:disabled {
+  background-color: #e1ecf4;
+}
 .file-input {
   display: none;
 }

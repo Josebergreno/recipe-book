@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe } from 'src/app/models/recipe.model';
 import { UserData } from 'src/app/models/userData.model';
