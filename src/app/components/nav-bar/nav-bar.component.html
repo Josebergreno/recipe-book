@@ -12,7 +12,13 @@
     <a *ngIf="isAuthenticated" routerLink="/personalize" class="nav-link"
       >My Account</a
     >
-    <a *ngIf="isAuthenticated" routerLink="/login" class="nav-link">Logout</a>
+    <a
+      *ngIf="isAuthenticated"
+      routerLink="/login"
+      class="nav-link"
+      (click)="onLogout()"
+      >Logout</a
+    >
     <a *ngIf="!isAuthenticated" routerLink="/login" class="nav-link">Login</a>
   </div>
 </div>

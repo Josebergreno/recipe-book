@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first, map, Subject, tap } from 'rxjs';
+import { find, map, Subject, tap, mergeMap } from 'rxjs';
 import { UserAuth } from '../models/userAuth.model';
 import { UserData } from '../models/userData.model';
 import { environment } from 'src/environments/environment.development';
@@ -21,6 +21,7 @@ interface AuthResponseData {
 export class AuthenticateService {
   currentUserAuth = new Subject<UserAuth>();
   currentUserData = new Subject<UserData>();
+  profileUpdate = new Subject<string>();
   curUser!: UserData;
   constructor(private http: HttpClient) {}
 
@@ -58,6 +59,13 @@ export class AuthenticateService {
         })
       );
   }
+
+  logOut() {
+    this.curUser = new UserData('', '', '', '', '', '', '', '');
+  }
+  addProfilePic(imgPath: any) {
+    this.curUser.imgPath = imgPath;
+  }
   getUser(email: string) {
     return this.fetchUserData(email);
   }
@@ -83,13 +91,54 @@ export class AuthenticateService {
             resObj.lastName,
             resObj.password,
             resObj.securityQuestion,
-            resObj.securityAnswer
+            resObj.securityAnswer,
+            resObj.imgPath,
+            resObj.desc
           );
           this.currentUserData.next(currentUser);
           this.curUser = currentUser;
         },
         error: (errorData) => {
           console.log(errorData);
+        },
+      });
+  }
+  updateUserInfo(patchData: any) {
+    const updatedUser = new UserData(
+      this.curUser.email,
+      patchData.firstName,
+      patchData.lastName,
+      this.curUser.password,
+      this.curUser.securityQuestion,
+      this.curUser.securityAnswer,
+      patchData.imgPath,
+      patchData.desc
+    );
+    this.http
+      .get(`${environment.apiUrlUserData}`)
+      .pipe(
+        mergeMap((resData: any) => {
+          const resObj = Object.entries(resData);
+          return resObj;
+        }),
+        find((user: any) => {
+          return user[1].email === this.curUser.email;
+        }),
+        mergeMap((user) => {
+          return this.http.patch(
+            `${environment.apiUrlPatchUserData + user[0] + '.json'}`,
+            updatedUser
+          );
+        })
+      )
+      .subscribe({
+        next: (resData) => {
+          this.profileUpdate.next('Your Profile has been updated!');
+        },
+        error: (err) => {
+          this.profileUpdate.next(
+            'There has been an error updating your profile'
+          );
         },
       });
   }

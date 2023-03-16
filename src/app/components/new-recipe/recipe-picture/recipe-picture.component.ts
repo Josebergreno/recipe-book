@@ -39,7 +39,7 @@ export class RecipePictureComponent implements OnInit, OnDestroy {
   }
   onNext(formRef: NgForm) {
     if (formRef.valid) {
-      const filePath = `images/${
+      const filePath = `recipePictures/${
         this.selectedImg.name
       }_${new Date().getTime()}`;
       const fileRef = this.storage.ref(filePath);
