@@ -13,14 +13,14 @@ import { finalize } from 'rxjs';
   styleUrls: ['./personalize.component.css'],
 })
 export class PersonalizeComponent implements OnInit {
-  imgSrc = '/assets/placeHolderImg.webp';
+  imgSrc: any = '/assets/placeHolderImg.webp';
   selectedImg: any = null;
   patchData: any = {};
   updateRes = '';
+  curUser: any;
   personalizeForm = new FormGroup({
     firstName: new FormControl({ value: '', disabled: true }),
     lastName: new FormControl({ value: '', disabled: true }),
-    imgPath: new FormControl(this.imgSrc),
     desc: new FormControl(''),
   });
 
@@ -51,43 +51,42 @@ export class PersonalizeComponent implements OnInit {
       this.selectedImg = null;
     }
   }
-  postPicture() {
+  onSubmit() {
+    const curUser = this.authService.curUser;
     const filePath = `profilePictures/${
       this.selectedImg.name
     }_${new Date().getTime()}`;
     const fileRef = this.storage.ref(filePath);
+
     this.storage
       .upload(filePath, this.selectedImg)
       .snapshotChanges()
       .pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
-            this.authService.addProfilePic(url);
+            this.imgSrc = url;
+            if (curUser) {
+              Object.entries(this.personalizeForm.controls).forEach((data) => {
+                const key = data[0];
+                const val = data[1].value;
+                this.patchData[key] = val;
+              });
+              this.patchData['imgPath'] = this.imgSrc;
+              this.authService.updateUserInfo(this.patchData);
+            }
           });
         })
       )
-      .subscribe();
-  }
-
-  onSubmit() {
-    const curUser = this.authService.curUser;
-    if (curUser) {
-      Object.entries(this.personalizeForm.controls).forEach((data) => {
-        const key = data[0];
-        const val = data[1].value;
-        this.patchData[key] = val;
-      });
-      this.authService.updateUserInfo(this.patchData);
-      if (this.selectedImg) {
-        this.postPicture();
-      }
-    }
+      .subscribe((val) => {});
   }
 
   formInit() {
     const curUser = this.authService.curUser;
     if (curUser) {
       for (const key in this.personalizeForm.controls) {
+        if (key === 'imgPath') {
+          this.imgSrc = curUser[key as keyof UserData];
+        }
         this.personalizeForm.get(key)?.setValue(curUser[key as keyof UserData]);
       }
     }
@@ -96,12 +95,15 @@ export class PersonalizeComponent implements OnInit {
   ngOnInit(): void {
     //get user with user auth
     this.authService.currentUserAuth.subscribe((userAuth) => {
-      this.authService.getUser(userAuth.email);
+      this.authService.getUserData(userAuth.email);
     });
+
     //when on personalize page, populate input fields with user data
     this.route.url.subscribe((url) => {
+      this.curUser = this.authService.curUser;
       this.formInit();
     });
+
     this.authService.profileUpdate.subscribe((res) => {
       this.updateRes = res;
     });

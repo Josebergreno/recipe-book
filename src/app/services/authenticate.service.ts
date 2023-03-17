@@ -63,10 +63,8 @@ export class AuthenticateService {
   logOut() {
     this.curUser = new UserData('', '', '', '', '', '', '', '');
   }
-  addProfilePic(imgPath: any) {
-    this.curUser.imgPath = imgPath;
-  }
-  getUser(email: string) {
+
+  getUserData(email: string) {
     return this.fetchUserData(email);
   }
 
@@ -96,6 +94,8 @@ export class AuthenticateService {
             resObj.desc
           );
           this.currentUserData.next(currentUser);
+          localStorage.setItem('email', resObj.email);
+
           this.curUser = currentUser;
         },
         error: (errorData) => {
@@ -103,7 +103,9 @@ export class AuthenticateService {
         },
       });
   }
+
   updateUserInfo(patchData: any) {
+    console.log(patchData);
     const updatedUser = new UserData(
       this.curUser.email,
       patchData.firstName,
@@ -114,6 +116,7 @@ export class AuthenticateService {
       patchData.imgPath,
       patchData.desc
     );
+
     this.http
       .get(`${environment.apiUrlUserData}`)
       .pipe(

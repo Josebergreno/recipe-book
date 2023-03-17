@@ -37,9 +37,8 @@
     </div>
     <div class="img-form--container">
       <img
-        *ngIf="imgSrc"
         class="profile-picture"
-        [src]="imgSrc"
+        [src]="curUser['imgPath'] ? curUser['imgPath'] : imgSrc"
         alt="profile-picture"
         (click)="imgRef.click()"
       />

@@ -31,7 +31,7 @@ export class BrowseRecipesComponent implements OnInit, OnDestroy {
     });
 
     this.authService.currentUserAuth.subscribe((resData) => {
-      this.authService.getUser(resData.email);
+      this.authService.getUserData(resData.email);
     });
     this.authService.currentUserData.subscribe((user) => {
       this.firstName = user.firstName;

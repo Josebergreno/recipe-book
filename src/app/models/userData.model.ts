@@ -1,6 +1,6 @@
 export class UserData {
   constructor(
-    public email: string,
+    public email: string | null,
     public firstName: string,
     public lastName: string,
     public password: string,
