@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 import { BrowseRecipesComponent } from './components/browse-recipes/browse-recipes.component';
 import { RecipeComponent } from './components/browse-recipes/recipe/recipe.component';
 import { LoginComponent } from './components/login/login.component';
@@ -15,15 +16,19 @@ import { PersonalizeComponent } from './components/personalize/personalize.compo
 import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
-  { path: 'home', component: BrowseRecipesComponent },
   {
     path: 'browse-recipes',
     component: BrowseRecipesComponent,
   },
-  { path: 'browse-recipes/:id/:recipe-name', component: RecipeComponent },
+  {
+    path: 'browse-recipes/:id/:recipe-name',
+    component: RecipeComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'new-recipe',
     component: NewRecipeComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'recipe-name',
@@ -36,7 +41,11 @@ const routes: Routes = [
       { path: 'conclusion', component: ConclusionComponent },
     ],
   },
-  { path: 'personalize', component: PersonalizeComponent },
+  {
+    path: 'personalize',
+    component: PersonalizeComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: '**', component: PageNotFoundComponent },
