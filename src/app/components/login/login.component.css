@@ -2,12 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60vh;
+  height: 90vh;
+  font-family: "Playfair Display", serif;
+  background-color: #ffb8662d;
+  color: black;
+  padding-bottom: 100px;
 }
 
 .form {
   width: 50%;
-  height: 100%;
+  /* height: 100%; */
   max-width: 450px;
   display: flex;
   justify-content: center;
@@ -24,6 +28,8 @@
 .input {
   height: 25px;
   border-radius: 3px;
+  margin-top: 5px;
+  margin-bottom: 10px;
   border: solid black 1px;
 }
 

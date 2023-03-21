@@ -1,9 +1,19 @@
 .form-container {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   height: 60vh;
-  flex-direction: column;
+  flex-direction: column; */
+  position: relative;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Playfair Display", serif;
+  background-color: #ffb8662d;
+  color: black;
+  padding-bottom: 100px;
 }
 
 .form {
@@ -25,6 +35,8 @@
 .input {
   height: 25px;
   border-radius: 3px;
+  margin-top: 5px;
+  margin-bottom: 10px;
   border: solid black 1px;
 }
 
