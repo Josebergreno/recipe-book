@@ -5,7 +5,7 @@
     </div>
   </div>
   <h1 class="header">Browse Recipes</h1>
-  <div class="label-input--container">
+  <div class="search-container">
     <label class="label" for="recipe-search">Search by recipe Name</label>
     <input class="input" id="recipe-search" type="text" #inputRef />
     <button class="button" (click)="onSearch(inputRef.value)">search</button>
@@ -21,10 +21,12 @@
       <h2>{{ recipe.recipeName }}</h2>
       <p>{{ recipe.desc }}</p>
     </div>
-    <img
-      [src]="recipe.imgName"
-      alt="{{ recipe.recipeName }}"
-      class="recipe-image"
-    />
+    <div class="img-container">
+      <img
+        [src]="recipe.imgName"
+        alt="{{ recipe.recipeName }}"
+        class="recipe-image"
+      />
+    </div>
   </div>
 </div>
