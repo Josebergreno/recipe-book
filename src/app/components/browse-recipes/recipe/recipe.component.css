@@ -58,18 +58,18 @@ Live Green: #68d388 */
   touch-action: manipulation;
   vertical-align: baseline;
   white-space: nowrap;
+  transition: 0.1s;
 }
 
-.button:hover,
-.button:focus {
-  background-color: #b3d3ea;
-  color: #2c5777;
+.button:hover {
+  background-color: #68d3886e;
+  color: #225e34;
 }
 
 .button:active {
-  background-color: #a0c7e4;
+  background-color: #68d388b9;
   box-shadow: none;
-  color: #2c5777;
+  color: white;
 }
 
 .section {

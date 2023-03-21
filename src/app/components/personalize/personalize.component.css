@@ -46,17 +46,41 @@
   width: 80%;
   max-width: 450px;
 }
+
 .form-input {
-  text-align: center;
-  border-radius: 3px;
+  width: 50%;
   margin: 10px;
   height: 25px;
-  border: solid black 1px;
+  outline: none;
+  text-align: center;
+  background-color: #68d3880e;
+  border: solid #f43c095d 1px;
+  border-radius: 2px;
+  padding: 5px;
+  transition: 0.1s;
+  width: 51%;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
+/* .form-input:on {
+  background-color: transparent;
+  width: 51%;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+} */
 
 .form-input:disabled {
-  background-color: #e1ecf4;
+  box-shadow: none;
+  width: 50%;
+  margin: 10px;
+  height: 25px;
+  outline: none;
+  text-align: center;
+  background-color: #68d3880e;
+  border: solid #f43c095d 1px;
+  border-radius: 2px;
+  padding: 5px;
+  /* transition: 0.1s; */
 }
+
 .file-input {
   display: none;
 }
@@ -64,18 +88,30 @@
 .textarea {
   resize: none;
   border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  outline: none;
+  background-color: #68d3880e;
+  border: solid #f43c095d 1px;
+  border-radius: 2px;
+  padding: 5px;
+  transition: 0.1s;
+}
+.textarea:focus {
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .button {
-  background-color: #e1ecf4;
+  background-color: #68d388b9;
   border-radius: 3px;
-  border: 1px solid #7aa7c7;
+  margin: 10px;
+  border: 1px solid #68d388;
   box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
   box-sizing: border-box;
-  color: #39739d;
+  color: white;
   cursor: pointer;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "Playfair Display", serif;
   font-size: 13px;
   font-weight: 400;
@@ -90,23 +126,20 @@
   touch-action: manipulation;
   vertical-align: baseline;
   white-space: nowrap;
+  transition: 0.1s;
 }
 
-.button:hover,
-.button:focus {
-  background-color: #b3d3ea;
-  color: #2c5777;
-}
-
-.button:focus {
-  box-shadow: 0 0 0 4px rgba(0, 149, 255, 0.15);
+.button:hover {
+  background-color: #68d3886e;
+  color: #225e34;
 }
 
 .button:active {
-  background-color: #a0c7e4;
+  background-color: #68d388b9;
   box-shadow: none;
-  color: #2c5777;
+  color: white;
 }
+
 .update {
   margin: 10px;
   padding: 10px;

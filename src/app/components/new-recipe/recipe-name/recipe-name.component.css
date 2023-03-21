@@ -33,22 +33,24 @@ input.ng-touched.ng-invalid {
   border-color: red;
 }
 .button {
-  background-color: #e1ecf4;
+  background-color: #68d388b9;
   border-radius: 3px;
-  border: 1px solid #7aa7c7;
+  margin: 20px;
+  border: 1px solid #68d388;
   box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
   box-sizing: border-box;
-  color: #39739d;
+  color: white;
   cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
-    sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Playfair Display", serif;
   font-size: 13px;
+  max-width: 100px;
   font-weight: 400;
   line-height: 1.15385;
   outline: none;
   padding: 8px 0.8em;
-  margin: 10px;
   position: relative;
   text-align: center;
   text-decoration: none;
@@ -57,22 +59,23 @@ input.ng-touched.ng-invalid {
   touch-action: manipulation;
   vertical-align: baseline;
   white-space: nowrap;
+  transition: 0.1s;
 }
 
-.button:hover,
-.button:focus {
-  background-color: #b3d3ea;
-  color: #2c5777;
+.button:hover {
+  background-color: #68d3886e;
+  color: #225e34;
 }
 
 .button:active {
-  background-color: #a0c7e4;
+  background-color: #68d388b9;
   box-shadow: none;
-  color: #2c5777;
+  color: white;
 }
 .button:disabled {
+  background-color: #68d3886e;
+  color: #225e34;
   cursor: not-allowed;
-  opacity: 50%;
 }
 .warning {
   color: red;

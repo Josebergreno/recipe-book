@@ -11,6 +11,8 @@
         type="text"
         formControlName="firstName"
         class="form-input"
+        id="firstName"
+        (blur)="onNameChange($event)"
         style="margin-top: 30px"
       />
       <button
@@ -24,7 +26,13 @@
       </button>
     </div>
     <div class="name-container">
-      <input type="text" formControlName="lastName" class="form-input" />
+      <input
+        type="text"
+        formControlName="lastName"
+        class="form-input"
+        id="lastName"
+        (blur)="onNameChange($event)"
+      />
       <button
         (click)="onNameChange($event)"
         type="button"

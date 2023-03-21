@@ -55,8 +55,8 @@ export class DataStorageService {
   }
 
   updateUserData(patchData: any) {
+    console.log(patchData);
     const currentUser = this.curUser?.value;
-    let updatedUser: UserData;
     if (currentUser) {
       const updatedUserData = new UserData(
         currentUser.email,
@@ -84,7 +84,7 @@ export class DataStorageService {
         mergeMap((user) => {
           return this.http.patch(
             `${environment.apiUrlPatchUserData + user[0] + '.json'}`,
-            updatedUser
+            this.curUser.value
           );
         })
       )

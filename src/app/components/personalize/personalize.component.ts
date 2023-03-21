@@ -37,7 +37,7 @@ export class PersonalizeComponent implements OnInit {
 
   onNameChange(e: Event) {
     let target;
-    (e.target as HTMLButtonElement).id === 'firstName'
+    ((e.target as HTMLButtonElement) || HTMLInputElement).id === 'firstName'
       ? (target = 'firstName')
       : (target = 'lastName');
     this.personalizeForm.get(target)?.enabled
