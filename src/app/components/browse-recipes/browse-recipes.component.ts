@@ -37,5 +37,7 @@ export class BrowseRecipesComponent implements OnInit, OnDestroy {
       this.firstName = name;
     });
   }
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.dataService.firstName.next(null);
+  }
 }

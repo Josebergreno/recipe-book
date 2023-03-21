@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UserData } from 'src/app/models/userData.model';
-import { AuthenticateService } from 'src/app/services/authenticate.service';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
@@ -27,16 +26,13 @@ export class PersonalizeComponent implements OnInit {
   });
 
   constructor(
-    private authService: AuthenticateService,
     private route: ActivatedRoute,
     private storage: AngularFireStorage,
     private dataService: DataStorageService
   ) {}
 
   loadPicture() {
-    return this.dataService.curUser?.['imgPath']
-      ? this.dataService.curUser?.['imgPath']
-      : this.imgSrc;
+    return this.imgSrc;
   }
 
   onNameChange(e: Event) {
@@ -55,6 +51,7 @@ export class PersonalizeComponent implements OnInit {
       reader.onload = (event: any) => (this.imgSrc = event.target.result);
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImg = event.target.files[0];
+      this.imgSrc = event.target.files[0];
     } else {
       this.imgSrc = '/assets/placeHolderImg.webp';
       this.selectedImg = null;
@@ -73,6 +70,13 @@ export class PersonalizeComponent implements OnInit {
       .pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
+            if (curUser.value?.imgPath && curUser.value?.imgPath !== url) {
+              console.log('delete');
+              this.storage
+                .refFromURL(curUser.value?.imgPath)
+                .delete()
+                .subscribe();
+            }
             this.imgSrc = url;
             if (curUser) {
               Object.entries(this.personalizeForm.controls).forEach((data) => {
@@ -81,7 +85,7 @@ export class PersonalizeComponent implements OnInit {
                 this.patchData[key] = val;
               });
               this.patchData['imgPath'] = this.imgSrc;
-              this.dataService.updateUserInfo(this.patchData);
+              this.dataService.updateUserData(this.patchData);
             }
           });
         })
@@ -90,14 +94,14 @@ export class PersonalizeComponent implements OnInit {
   }
 
   formInit() {
-    const curUser = this.dataService.curUser;
+    const curUser = this.dataService.curUser.value;
     if (curUser) {
       for (const key in this.personalizeForm.controls) {
-        if (key === 'imgPath') {
-          this.imgSrc = curUser[key as keyof UserData];
-        }
         this.personalizeForm.get(key)?.setValue(curUser[key as keyof UserData]);
       }
+      if (curUser.imgPath) {
+        this.imgSrc = curUser.imgPath;
+      } else this.imgSrc = '/assets/placeHolderImg.webp';
     }
   }
 

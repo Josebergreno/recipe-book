@@ -4,15 +4,17 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 import { map, Subject, mergeMap, find } from 'rxjs';
 import { UserData } from '../models/userData.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataStorageService {
-  firstName = new Subject<string>();
-  curUser!: UserData;
+  firstName = new BehaviorSubject<any>(null);
+  curUser = new BehaviorSubject<UserData | null>(null);
   profileUpdate = new Subject<string>();
   constructor(private http: HttpClient) {}
+
   getUserData(email: string) {
     return this.fetchUserData(email);
   }
@@ -43,7 +45,8 @@ export class DataStorageService {
             resObj.desc
           );
           localStorage.setItem('firstName', resObj.firstName);
-          this.curUser = currentUser;
+          this.curUser.next(currentUser);
+          this.firstName.next(resObj.firstName);
         },
         error: (errorData) => {
           console.log(errorData);
@@ -51,17 +54,22 @@ export class DataStorageService {
       });
   }
 
-  updateUserInfo(patchData: any) {
-    const updatedUser = new UserData(
-      this.curUser.email,
-      patchData.firstName,
-      patchData.lastName,
-      this.curUser.password,
-      this.curUser.securityQuestion,
-      this.curUser.securityAnswer,
-      patchData.imgPath,
-      patchData.desc
-    );
+  updateUserData(patchData: any) {
+    const currentUser = this.curUser?.value;
+    let updatedUser: UserData;
+    if (currentUser) {
+      const updatedUserData = new UserData(
+        currentUser.email,
+        patchData.firstName,
+        patchData.lastName,
+        currentUser.password,
+        currentUser.securityQuestion,
+        currentUser.securityAnswer,
+        patchData.imgPath,
+        patchData.desc
+      );
+      updatedUser = updatedUserData;
+    }
 
     this.http
       .get(`${environment.apiUrlUserData}`)
@@ -71,7 +79,7 @@ export class DataStorageService {
           return resObj;
         }),
         find((user: any) => {
-          return user[1].email === this.curUser.email;
+          return user[1].email === currentUser?.email;
         }),
         mergeMap((user) => {
           return this.http.patch(
