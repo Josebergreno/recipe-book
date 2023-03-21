@@ -58,39 +58,31 @@ export class PersonalizeComponent implements OnInit {
     }
   }
   onSubmit() {
-    const curUser = this.dataService.curUser;
-    const filePath = `profilePictures/${
-      this.selectedImg.name
-    }_${new Date().getTime()}`;
-    const fileRef = this.storage.ref(filePath);
-
-    this.storage
-      .upload(filePath, this.selectedImg)
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            if (curUser.value?.imgPath && curUser.value?.imgPath !== url) {
-              console.log('delete');
-              this.storage
-                .refFromURL(curUser.value?.imgPath)
-                .delete()
-                .subscribe();
-            }
-            this.imgSrc = url;
-            if (curUser) {
-              Object.entries(this.personalizeForm.controls).forEach((data) => {
-                const key = data[0];
-                const val = data[1].value;
-                this.patchData[key] = val;
-              });
+    Object.entries(this.personalizeForm.controls).forEach((data) => {
+      const key = data[0];
+      const val = data[1].value;
+      this.patchData[key] = val;
+    });
+    if (this.selectedImg) {
+      const curUser = this.dataService.curUser;
+      const filePath = `profilePictures/${
+        this.selectedImg.name
+      }_${new Date().getTime()}`;
+      const fileRef = this.storage.ref(filePath);
+      this.storage
+        .upload(filePath, this.selectedImg)
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              this.imgSrc = url;
               this.patchData['imgPath'] = this.imgSrc;
               this.dataService.updateUserData(this.patchData);
-            }
-          });
-        })
-      )
-      .subscribe((val) => {});
+            });
+          })
+        )
+        .subscribe((val) => {});
+    } else this.dataService.updateUserData(this.patchData);
   }
 
   formInit() {
