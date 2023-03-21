@@ -11,6 +11,8 @@ export class IngredientService {
     const arrayIndex = event.target.parentElement.children[0].id;
     this.ingredientList.splice(arrayIndex, 1);
   }
+
+  changes() {}
   addIngredient(
     ingName: string,
     ingAmt1: number,

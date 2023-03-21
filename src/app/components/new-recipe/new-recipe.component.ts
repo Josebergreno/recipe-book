@@ -22,5 +22,6 @@ export class NewRecipeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     localStorage.removeItem('new-recipe');
+    localStorage.clear();
   }
 }

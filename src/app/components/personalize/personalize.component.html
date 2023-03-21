@@ -38,7 +38,7 @@
     <div class="img-form--container">
       <img
         class="profile-picture"
-        [src]="loadPicture()"
+        [src]="curUser['imgPath'] ? curUser['imgPath'] : imgSrc"
         alt="profile-picture"
         (click)="imgRef.click()"
       />
