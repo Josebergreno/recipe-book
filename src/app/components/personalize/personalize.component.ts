@@ -6,6 +6,7 @@ import { AuthenticateService } from 'src/app/services/authenticate.service';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
+import { DataStorageService } from 'src/app/services/data-storage.service';
 
 @Component({
   selector: 'app-personalize',
@@ -17,7 +18,8 @@ export class PersonalizeComponent implements OnInit {
   selectedImg: any = null;
   patchData: any = {};
   updateRes = '';
-  curUser: any;
+  // curUser: any;
+
   personalizeForm = new FormGroup({
     firstName: new FormControl({ value: '', disabled: true }),
     lastName: new FormControl({ value: '', disabled: true }),
@@ -27,8 +29,15 @@ export class PersonalizeComponent implements OnInit {
   constructor(
     private authService: AuthenticateService,
     private route: ActivatedRoute,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private dataService: DataStorageService
   ) {}
+
+  loadPicture() {
+    return this.dataService.curUser?.['imgPath']
+      ? this.dataService.curUser?.['imgPath']
+      : this.imgSrc;
+  }
 
   onNameChange(e: Event) {
     let target;
@@ -52,9 +61,9 @@ export class PersonalizeComponent implements OnInit {
     }
   }
   onSubmit() {
-    const curUser = this.authService.curUser;
+    const curUser = this.dataService.curUser;
     const filePath = `profilePictures/${
-      this.selectedImg?.name ? this.selectedImg?.name : 'image'
+      this.selectedImg.name
     }_${new Date().getTime()}`;
     const fileRef = this.storage.ref(filePath);
 
@@ -72,7 +81,7 @@ export class PersonalizeComponent implements OnInit {
                 this.patchData[key] = val;
               });
               this.patchData['imgPath'] = this.imgSrc;
-              this.authService.updateUserInfo(this.patchData);
+              this.dataService.updateUserInfo(this.patchData);
             }
           });
         })
@@ -81,7 +90,7 @@ export class PersonalizeComponent implements OnInit {
   }
 
   formInit() {
-    const curUser = this.authService.curUser;
+    const curUser = this.dataService.curUser;
     if (curUser) {
       for (const key in this.personalizeForm.controls) {
         if (key === 'imgPath') {
@@ -93,18 +102,10 @@ export class PersonalizeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //get user with user auth
-    this.authService.currentUserAuth.subscribe((userAuth) => {
-      this.authService.getUserData(userAuth.email);
-    });
-
-    //when on personalize page, populate input fields with user data
     this.route.url.subscribe((url) => {
-      this.curUser = this.authService.curUser;
       this.formInit();
     });
-
-    this.authService.profileUpdate.subscribe((res) => {
+    this.dataService.profileUpdate.subscribe((res) => {
       this.updateRes = res;
     });
   }

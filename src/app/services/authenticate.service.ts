@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { find, map, Subject, tap, mergeMap } from 'rxjs';
+import { Subject, tap, BehaviorSubject } from 'rxjs';
 import { UserAuth } from '../models/userAuth.model';
 import { UserData } from '../models/userData.model';
 import { environment } from 'src/environments/environment.development';
+import { Router } from '@angular/router';
+import { DataStorageService } from './data-storage.service';
 
 interface AuthResponseData {
   kind: string;
@@ -21,9 +23,14 @@ interface AuthResponseData {
 export class AuthenticateService {
   currentUserAuth = new Subject<UserAuth>();
   currentUserData = new Subject<UserData>();
-  profileUpdate = new Subject<string>();
-  curUser!: UserData;
-  constructor(private http: HttpClient) {}
+  isLoggedIn = new BehaviorSubject<boolean>(false);
+  tokenExpTimer: any;
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private dataStorage: DataStorageService
+  ) {}
 
   signupUser(user: UserData) {
     this.http
@@ -54,8 +61,12 @@ export class AuthenticateService {
             resData.idToken,
             expirationDate
           );
-
+          this.dataStorage.getUserData(resData.email);
           this.currentUserAuth.next(userAuthData);
+          this.isLoggedIn.next(true);
+          this.autoLogout(+resData.expiresIn * 1000);
+
+          localStorage.setItem('userAuthData', JSON.stringify(userAuthData));
         })
       );
   }
@@ -88,88 +99,25 @@ export class AuthenticateService {
   }
 
   logOut() {
-    this.curUser = new UserData('', '', '', '', '', '', '', '');
+    this.router.navigate(['login']);
+    localStorage.clear();
+    this.isLoggedIn.next(false);
+    if (this.tokenExpTimer) {
+      clearTimeout(this.tokenExpTimer);
+    }
+    this.tokenExpTimer = null;
+  }
+  autoLogout(expDur: number) {
+    this.tokenExpTimer = setTimeout(() => {
+      this.logOut();
+    }, expDur);
   }
 
-  getUserData(email: string) {
-    return this.fetchUserData(email);
-  }
-
-  private fetchUserData(email: string) {
-    return this.http
-      .get<UserData>(`${environment.apiUrlUserData}`)
-      .pipe(
-        map((val: any) => {
-          const resObj = Object.values(val);
-          const filteredObj = resObj.filter(
-            (user: any) => user.email === email
-          );
-          return filteredObj;
-        })
-      )
-      .subscribe({
-        next: (resData) => {
-          const resObj: any = resData[0];
-          const currentUser = new UserData(
-            resObj.email,
-            resObj.firstName,
-            resObj.lastName,
-            resObj.password,
-            resObj.securityQuestion,
-            resObj.securityAnswer,
-            resObj.imgPath,
-            resObj.desc
-          );
-          this.currentUserData.next(currentUser);
-          localStorage.setItem('email', resObj.email);
-
-          this.curUser = currentUser;
-        },
-        error: (errorData) => {
-          console.log(errorData);
-        },
-      });
-  }
-
-  updateUserInfo(patchData: any) {
-    console.log(patchData);
-    const updatedUser = new UserData(
-      this.curUser.email,
-      patchData.firstName,
-      patchData.lastName,
-      this.curUser.password,
-      this.curUser.securityQuestion,
-      this.curUser.securityAnswer,
-      patchData.imgPath,
-      patchData.desc
-    );
-
-    this.http
-      .get(`${environment.apiUrlUserData}`)
-      .pipe(
-        mergeMap((resData: any) => {
-          const resObj = Object.entries(resData);
-          return resObj;
-        }),
-        find((user: any) => {
-          return user[1].email === this.curUser.email;
-        }),
-        mergeMap((user) => {
-          return this.http.patch(
-            `${environment.apiUrlPatchUserData + user[0] + '.json'}`,
-            updatedUser
-          );
-        })
-      )
-      .subscribe({
-        next: (resData) => {
-          this.profileUpdate.next('Your Profile has been updated!');
-        },
-        error: (err) => {
-          this.profileUpdate.next(
-            'There has been an error updating your profile'
-          );
-        },
-      });
+  routeGuard() {
+    if (this.isLoggedIn.value === true) {
+      return true;
+    }
+    this.router.navigate(['login']);
+    return false;
   }
 }
