@@ -8,6 +8,7 @@ import { IngredientService } from './ingredient.service';
 import { InstructionsService } from './instructions.service';
 import { environment } from 'src/environments/environment.development';
 import { Subject } from 'rxjs';
+import { DataStorageService } from './data-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,8 @@ export class RecipeService {
   constructor(
     private http: HttpClient,
     private ingredientService: IngredientService,
-    private instructionService: InstructionsService
+    private instructionService: InstructionsService,
+    private dataService: DataStorageService
   ) {}
 
   recipeName!: string;
@@ -58,16 +60,21 @@ export class RecipeService {
   }
   addConclusion(conclusion: string) {
     this.conclusion = conclusion;
-    console.log(this.conclusion);
   }
   publishRecipe() {
+    const fullName =
+      this.dataService.curUser.value?.firstName +
+      ' ' +
+      this.dataService.curUser.value?.lastName;
+
     const newRecipe = new Recipe(
       this.recipeName,
       this.recipeUrl,
       this.briefDesc,
       this.ingredientService.getIngredients(),
       this.instructionService.getInstructions(),
-      this.conclusion
+      this.conclusion,
+      fullName
     );
     this.recipeArray.push(newRecipe);
     this.storeRecipes(newRecipe);
@@ -76,7 +83,6 @@ export class RecipeService {
     this.http
       .post(`${environment.apiUrlRecipe}`, newRecipe)
       .subscribe((resData) => console.log(resData));
-    console.log('recipe stored');
   }
 
   recipeSearch(inputVal: string) {

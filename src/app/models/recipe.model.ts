@@ -7,6 +7,7 @@ export class Recipe {
     public desc: string,
     public ingredients: Ingredient[],
     public instructions: Instruction[],
-    public conclusion: string // public author?: string
+    public conclusion: string,
+    public author?: string
   ) {}
 }

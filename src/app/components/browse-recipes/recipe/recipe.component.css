@@ -1,59 +1,102 @@
+/* Brightly Orange Number 2: #f43a09
+
+Grandpa Orange: #ffb766
+
+Grey Blue Green: #c2edda
+
+Live Green: #68d388 */
+
 .recipe-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #ffb8662d;
+  color: black;
+  font-family: "Playfair Display", serif;
+}
+.header {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .recipe-img {
   width: 80vw;
+  max-width: 600px;
   border-radius: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .back-button--container {
   display: flex;
-  background-color: antiquewhite;
   width: 100%;
 }
 .button {
-  margin: 10px;
-  width: 100px;
-  height: 25px;
-  border-radius: 4px;
-  border: solid black 1px;
-  transition: 0.2s;
-}
-.button:hover {
-  width: 103px;
-}
-.conclusion-container {
-  background-color: aqua;
+  background-color: #68d388b9;
+  border-radius: 3px;
+  margin: 20px;
+  border: 1px solid #68d388;
+  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  font-family: "Playfair Display", serif;
+  font-size: 13px;
+  max-width: 100px;
+  font-weight: 400;
+  line-height: 1.15385;
+  outline: none;
+  padding: 8px 0.8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
 }
 
-.instructions-section,
-.ingredients-section {
-  background-color: aquamarine;
-  margin-top: 20px;
-  width: 100%;
+.button:hover,
+.button:focus {
+  background-color: #b3d3ea;
+  color: #2c5777;
+}
+
+.button:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
+
+.section {
+  border-bottom: solid #ffb766 1px;
+  background-color: whitesmoke;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  border-radius: 3px;
+  margin: 20px;
+  padding: 20px;
+  width: 80vw;
+  max-width: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 .instructions-container,
-.ingredients-container {
-  width: 60%;
-  max-width: 600px;
-}
-
-.list {
-  background-color: purple;
+.ingredients-container,
+.conclusion-container {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
 }
 .section-header {
   margin: 10px;
-  background-color: azure;
-  display: flex;
-  justify-content: center;
+}
+.list-item {
+  list-style: none;
+  margin: 5px;
 }

@@ -3,6 +3,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Playfair Display", serif;
+  background-color: #ffb8662d;
+  color: black;
 }
 .header {
   margin-top: 10px;
@@ -40,8 +43,8 @@
 
 .recipe-image {
   height: 20vmin;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .button {
   background-color: #e1ecf4;
@@ -53,8 +56,7 @@
   color: #39739d;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans",
-    sans-serif;
+  font-family: "Playfair Display", serif;
   font-size: 13px;
   max-width: 100px;
   font-weight: 400;
@@ -85,17 +87,18 @@
 
 .indiv-recipe {
   width: 80%;
-  background-color: azure;
+  border-bottom: solid #ffb766 1px;
+  background-color: whitesmoke;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   margin: 20px;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 3px;
   transition: 0.2s;
   display: flex;
   justify-content: space-between;
 }
 .indiv-recipe:hover {
   opacity: 0.9;
-  transform: scale(1.01);
+  width: 81%;
 }
 .recipe-name--desc {
   width: 50%;

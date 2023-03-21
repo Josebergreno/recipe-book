@@ -68,7 +68,7 @@ export class DataStorageService {
         patchData.imgPath,
         patchData.desc
       );
-      updatedUser = updatedUserData;
+      this.curUser.next(updatedUserData);
     }
 
     this.http

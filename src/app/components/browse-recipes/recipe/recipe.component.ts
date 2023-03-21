@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, Subscription, tap } from 'rxjs';
 import { Recipe } from 'src/app/models/recipe.model';
+import { DataStorageService } from 'src/app/services/data-storage.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class RecipeComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
-    private router: Router
+    private router: Router,
+    private dataDervice: DataStorageService
   ) {}
 
   onBackClick() {
@@ -42,11 +44,3 @@ export class RecipeComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 }
-
-// this.subscription = this.route.params.subscribe((params) => {
-//   this.id = params['id'];
-//   this.recipeName = params['recipe-name'];
-//   return this.recipeService
-//     .getRecipes()
-//     .subscribe((res) => (this.recipe = res[this.id]));
-// });

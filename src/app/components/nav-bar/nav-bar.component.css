@@ -1,11 +1,23 @@
+/* Brightly Orange Number 2: #f43a09
+
+Grandpa Orange: #ffb766
+
+Grey Blue Green: #c2edda
+
+Live Green: #68d388 */
+
 .nav-bar--container {
   height: 20vmin;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   display: flex;
+  background-color: whitesmoke;
   justify-content: space-around;
   align-items: center;
+  font-family: "Playfair Display", serif;
 }
-
+.under-title {
+  color: #f43a09;
+}
 .link-container {
   width: 50%;
   display: flex;
@@ -21,7 +33,13 @@
   transition: 0.2s;
   color: black;
 }
-.nav-link:hover {
+.nav-link--main {
+  color: #68d388;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.nav-link:hover,
+.nav-link--main:hover {
   color: blue;
   text-decoration: underline;
 }
