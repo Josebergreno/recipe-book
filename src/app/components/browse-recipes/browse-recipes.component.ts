@@ -14,9 +14,6 @@ import { RecipeService } from 'src/app/services/recipe.service';
 export class BrowseRecipesComponent implements OnInit, OnDestroy {
   recipes!: Recipe[];
   firstName!: string | null;
-  currentUserData!: UserData;
-  currentUserEmail!: string;
-  userSub!: Subscription;
 
   constructor(
     private recipeService: RecipeService,
