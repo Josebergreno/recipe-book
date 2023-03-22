@@ -1,5 +1,10 @@
 <div class="form-container">
-  <form class="form" (ngSubmit)="onLogin(formRef)" #formRef="ngForm">
+  <form
+    class="form"
+    (ngSubmit)="onLogin(formRef)"
+    #formRef="ngForm"
+    autocomplete="off"
+  >
     <div class="error" *ngIf="errorMessage">
       <p>Please enter a valid email and password</p>
     </div>
@@ -14,6 +19,8 @@
     </div>
 
     <button role="button" class="button">Log in</button>
-    <p>not a member? <a routerLink="/signup" class="nav-link">Sign up here!</a></p>
+    <p>
+      not a member? <a routerLink="/signup" class="nav-link">Sign up here!</a>
+    </p>
   </form>
 </div>

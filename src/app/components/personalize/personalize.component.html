@@ -4,6 +4,7 @@
     (ngSubmit)="onSubmit()"
     #formRef
     [formGroup]="personalizeForm"
+    autocomplete="off"
   >
     <div class="name-container">
       <p *ngIf="updateRes" class="update">{{ updateRes }}</p>
@@ -77,6 +78,8 @@
         rows="10"
       ></textarea>
     </div>
-    <button class="button" style="margin-top: 20px">Save</button>
+    <button class="button" style="margin-top: 20px; margin-bottom: 50px">
+      Save
+    </button>
   </form>
 </div>

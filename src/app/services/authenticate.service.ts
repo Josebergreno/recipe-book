@@ -64,7 +64,6 @@ export class AuthenticateService {
           this.currentUserAuth.next(userAuthData);
           this.isLoggedIn.next(true);
           this.autoLogout(+resData.expiresIn * 1000);
-
           localStorage.setItem('userAuthData', JSON.stringify(userAuthData));
         })
       );

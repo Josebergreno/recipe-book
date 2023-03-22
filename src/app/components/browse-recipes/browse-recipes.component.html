@@ -7,7 +7,13 @@
   <h1 class="header">Browse Recipes</h1>
   <div class="search-container">
     <label class="label" for="recipe-search">Search by recipe Name</label>
-    <input class="input" id="recipe-search" type="text" #inputRef />
+    <input
+      class="input"
+      id="recipe-search"
+      type="text"
+      #inputRef
+      autocomplete="off"
+    />
     <button class="button" (click)="onSearch(inputRef.value)">search</button>
   </div>
 

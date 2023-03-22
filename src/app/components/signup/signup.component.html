@@ -3,7 +3,12 @@
 <div class="form-container" *ngIf="!accountCreated">
   <p *ngIf="passwordsAreSame === false">passwords must be the same</p>
   <p *ngIf="errorMessage">{{ errorMessage }}</p>
-  <form class="form" (ngSubmit)="onSignup(formRef)" #formRef="ngForm">
+  <form
+    class="form"
+    (ngSubmit)="onSignup(formRef)"
+    #formRef="ngForm"
+    autocomplete="off"
+  >
     <div class="label-input--container">
       <label for="firstName">First Name</label>
       <input
@@ -71,8 +76,16 @@
         <option value="first-childhood-animal">First Childhood animal</option>
         <option value="city-of-birth">City of Birth</option>
       </select>
-      <br />
-      <input class="input" type="text" ngModel name="securityAnswer" />
+    </div>
+    <div class="label-input--container">
+      <label for="securityAnswer">Security Answer</label>
+      <input
+        class="input"
+        type="text"
+        ngModel
+        name="securityAnswer"
+        id="securityAnswer"
+      />
     </div>
 
     <button [disabled]="!formRef.valid" role="button" class="button">

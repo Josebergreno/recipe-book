@@ -39,7 +39,9 @@
   margin-left: 10px;
   margin-top: 15px;
   margin-bottom: 20px;
-  height: 25px;
+  letter-spacing: 1px;
+  font-family: "Playfair Display", serif;
+  height: 30px;
   outline: none;
   background-color: #68d3880e;
   border: solid #f43c095d 1px;
