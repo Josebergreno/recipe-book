@@ -30,9 +30,12 @@
   align-items: center;
   flex-direction: column;
 }
-.nav-bar {
+.nav-bar--container {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   display: flex;
+  background-color: whitesmoke;
   justify-content: space-around;
+  align-items: center;
   width: 100%;
 }
 .nav-link {
@@ -43,11 +46,6 @@
   color: blue;
   text-decoration: underline;
 }
-.nav-btn--container {
-  width: 100%;
-  display: flex;
-}
-
 .name-container {
   width: 100%;
   display: flex;

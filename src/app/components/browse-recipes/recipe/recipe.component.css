@@ -32,11 +32,20 @@ Live Green: #68d388 */
   margin-top: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.back-button--container {
+.button-container {
+  background-color: #ffb8662d;
   display: flex;
+  justify-content: center;
   width: 100%;
 }
-.button {
+.button-inner--container {
+  max-width: 600px;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.button,
+.button-danger {
   background-color: #68d388b9;
   border-radius: 3px;
   margin: 20px;
@@ -64,6 +73,18 @@ Live Green: #68d388 */
   vertical-align: baseline;
   white-space: nowrap;
   transition: 0.1s;
+}
+.button-danger {
+  background-color: rgba(255, 0, 0, 0.477);
+  border: 1px solid rgba(255, 0, 0, 0.633);
+}
+.button-danger:hover {
+  background-color: rgba(255, 0, 0, 0.227);
+  color: red;
+}
+.button-danger:active {
+  background-color: rgba(255, 0, 0, 0.477);
+  color: white;
 }
 
 .button:hover {
@@ -104,4 +125,10 @@ Live Green: #68d388 */
 .list-item {
   list-style: none;
   margin: 5px;
+}
+@media (max-width: 350px) {
+  .button,
+  .button-danger {
+    font-size: 60%;
+  }
 }

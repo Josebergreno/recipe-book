@@ -1,11 +1,10 @@
 <div class="main-container">
   <div [ngClass]="routeActive ? 'routeActive' : 'outlet-container'">
-    <div class="nav-btn--container">
+    <div class="nav-bar--container">
       <button (click)="onBack()" class="button" *ngIf="routeActive">
         Back
       </button>
-    </div>
-    <div class="nav-bar">
+
       <a routerLink="my-recipes" class="nav-link" (click)="routeActive = true"
         >my recipes</a
       >

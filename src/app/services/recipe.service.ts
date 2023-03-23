@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { IngredientService } from './ingredient.service';
 import { InstructionsService } from './instructions.service';
 import { environment } from 'src/environments/environment.development';
-import { Subject } from 'rxjs';
+
 import { DataStorageService } from './data-storage.service';
 
 @Injectable({
@@ -24,6 +24,7 @@ export class RecipeService {
   briefDesc!: string;
   conclusion!: string;
   loadedRecipes: Recipe[] = [];
+  myRecipes = new BehaviorSubject<Recipe[] | null>(null);
 
   addRecipeName(recipeName: string) {
     this.recipeName = recipeName;
@@ -67,6 +68,21 @@ export class RecipeService {
     console.log(this.loadedRecipes);
     console.log(filteredArr);
   }
+  fetchMyRecipes(recipes: Recipe[]) {
+    const userAuthJSON = localStorage.getItem('userAuthData');
+    const userData = userAuthJSON ? JSON.parse(userAuthJSON) : null;
+    const myRecipes = recipes.filter((recipe) => {
+      const fullName =
+        this.dataService.curUser?.value?.firstName +
+        ' ' +
+        this.dataService.curUser?.value?.lastName;
+      return (
+        recipe.author === fullName &&
+        userData.email === this.dataService.curUser.value?.email
+      );
+    });
+    this.myRecipes.next(myRecipes);
+  }
 
   getRecipes() {
     return this.fetchRecipes();
@@ -76,11 +92,10 @@ export class RecipeService {
     return this.http.get<Recipe[]>(`${environment.apiUrlRecipe}`).pipe(
       map((resData) => {
         const postsArray: Recipe[] = [];
-
         const values = Object.values(resData);
         values.forEach((recipe: Recipe) => postsArray.push(recipe));
-
         this.loadedRecipes = postsArray.flat();
+        this.fetchMyRecipes(this.loadedRecipes);
         return postsArray.flat();
       })
     );

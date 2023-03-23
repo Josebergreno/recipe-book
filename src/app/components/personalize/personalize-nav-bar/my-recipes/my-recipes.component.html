@@ -1,3 +1,23 @@
 <div class="main-container">
-  <p>my-recipes works!</p>
+  <h1 class="header">My Recipes</h1>
+  <div
+    [id]="i"
+    (click)="onNavigate(i, recipe.recipeName)"
+    class="indiv-recipe"
+    *ngFor="let recipe of myRecipes; let i = index"
+  >
+    <div class="recipe-name--desc">
+      <h2>{{ recipe.recipeName }}</h2>
+      <p (window:resize)="onWindowChange($event)">
+        {{ recipe.desc | truncate : onWindowChange() }}
+      </p>
+    </div>
+    <div class="img-container">
+      <img
+        [src]="recipe.imgName"
+        alt="{{ recipe.recipeName }}"
+        class="recipe-image"
+      />
+    </div>
+  </div>
 </div>

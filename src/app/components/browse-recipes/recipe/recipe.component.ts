@@ -14,6 +14,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
   id!: number;
   recipeName!: string;
   recipe!: Recipe;
+  modalTriggered: any = null;
   private subscription!: Subscription;
 
   constructor(
@@ -22,6 +23,16 @@ export class RecipeComponent implements OnInit, OnDestroy {
     private router: Router,
     private dataDervice: DataStorageService
   ) {}
+  triggerDeleteModal() {
+    this.modalTriggered = true;
+  }
+  onRecipeDelete() {}
+
+  // canEdit(){
+  // this.recipeService.myRecipes.value?.find(recipe=>{
+  //   recipe.author===
+  // })
+  // }
 
   onBackClick() {
     this.router.navigate(['browse-recipes']);

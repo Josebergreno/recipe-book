@@ -1,7 +1,11 @@
-<div *ngIf="recipe" class="recipe-container">
-  <div class="back-button--container">
+<div class="button-container">
+  <div class="button-inner--container">
     <button class="button" (click)="onBackClick()">back to recipes</button>
+    <!-- <button class="button" *ngIf="canEdit()">Edit Recipe</button> -->
+    <button class="button-danger" (click)="triggerDeleteModal()">Delete</button>
   </div>
+</div>
+<div *ngIf="recipe" class="recipe-container">
   <h1 class="header">{{ recipe.recipeName }}</h1>
   <p>Recipe by {{ recipe.author }}</p>
   <img
