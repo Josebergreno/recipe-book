@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment.development';
 import { map, Subject, mergeMap, find } from 'rxjs';
 import { UserData } from '../models/userData.model';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class DataStorageService {
   firstName = new BehaviorSubject<any>(null);
   curUser = new BehaviorSubject<UserData | null>(null);
   profileUpdate = new Subject<string>();
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getUserData(email: string) {
     return this.fetchUserData(email);
@@ -55,8 +56,10 @@ export class DataStorageService {
   }
 
   updateUserData(patchData: any) {
-    console.log(patchData);
     const currentUser = this.curUser?.value;
+    const img = patchData?.['imgPath']
+      ? patchData?.['imgPath']
+      : currentUser?.['imgPath'];
     if (currentUser) {
       const updatedUserData = new UserData(
         currentUser.email,
@@ -65,7 +68,7 @@ export class DataStorageService {
         currentUser.password,
         currentUser.securityQuestion,
         currentUser.securityAnswer,
-        patchData.imgPath,
+        img,
         patchData.desc
       );
       this.curUser.next(updatedUserData);
@@ -90,9 +93,11 @@ export class DataStorageService {
       )
       .subscribe({
         next: (resData) => {
+          window.scrollTo(0, 0);
           this.profileUpdate.next('Your Profile has been updated!');
         },
         error: (err) => {
+          window.scrollTo(0, 0);
           this.profileUpdate.next(
             'There has been an error updating your profile'
           );

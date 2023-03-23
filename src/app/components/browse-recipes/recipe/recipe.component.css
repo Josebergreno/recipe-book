@@ -18,6 +18,11 @@ Live Green: #68d388 */
   margin-top: 20px;
   margin-bottom: 20px;
 }
+.paragraph {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
 
 .recipe-img {
   width: 80vw;

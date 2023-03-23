@@ -86,14 +86,14 @@ export class PersonalizeComponent implements OnInit {
   }
 
   formInit() {
-    const curUser = this.dataService.curUser.value;
+    let curUser = this.dataService.curUser.value;
     if (curUser) {
       for (const key in this.personalizeForm.controls) {
         this.personalizeForm.get(key)?.setValue(curUser[key as keyof UserData]);
+        if (curUser?.['imgPath']) {
+          this.imgSrc = curUser?.['imgPath'];
+        } else this.imgSrc = '/assets/placeHolderImg.webp';
       }
-      if (curUser.imgPath) {
-        this.imgSrc = curUser.imgPath;
-      } else this.imgSrc = '/assets/placeHolderImg.webp';
     }
   }
 

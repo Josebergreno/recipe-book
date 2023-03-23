@@ -23,6 +23,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment.development';
+import { TruncatePipe } from './truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { environment } from 'src/environments/environment.development';
     InstructionsComponent,
     ConclusionComponent,
     RecipeComponent,
+    TruncatePipe,
   ],
   imports: [
     BrowserModule,

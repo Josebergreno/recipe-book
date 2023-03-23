@@ -25,7 +25,9 @@
   >
     <div class="recipe-name--desc">
       <h2>{{ recipe.recipeName }}</h2>
-      <p>{{ recipe.desc }}</p>
+      <p (window:resize)="onWindowChange($event)">
+        {{ recipe.desc | truncate : onWindowChange() }}
+      </p>
     </div>
     <div class="img-container">
       <img

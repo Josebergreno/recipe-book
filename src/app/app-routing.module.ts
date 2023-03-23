@@ -16,6 +16,7 @@ import { PersonalizeComponent } from './components/personalize/personalize.compo
 import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
+  { path: '', component: BrowseRecipesComponent },
   {
     path: 'browse-recipes',
     component: BrowseRecipesComponent,
@@ -52,7 +53,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

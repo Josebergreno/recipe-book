@@ -23,7 +23,9 @@ export class BrowseRecipesComponent implements OnInit, OnDestroy {
   onSearch(inputRef: string) {
     this.recipeService.recipeSearch(inputRef);
   }
-
+  onWindowChange(e?: any) {
+    return window.innerWidth / 100;
+  }
   ngOnInit(): void {
     this.authService.autoLogin();
     this.recipeService.getRecipes().subscribe((loadedPosts: Recipe[]) => {

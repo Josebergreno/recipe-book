@@ -133,7 +133,7 @@
   padding: 10px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 425px) {
   .recipe-name--desc {
     font-size: 75%;
   }
