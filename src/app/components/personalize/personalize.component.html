@@ -1,10 +1,28 @@
 <div class="main-container">
-  <div>
-    <a href="">my recipes</a> <a href="">notifications</a>
-    <a href="">favorites</a>
-    <a href="">saved</a>
+  <div [ngClass]="routeActive ? 'routeActive' : 'outlet-container'">
+    <div class="nav-btn--container">
+      <button (click)="onBack()" class="button" *ngIf="routeActive">
+        Back
+      </button>
+    </div>
+    <div class="nav-bar">
+      <a routerLink="my-recipes" class="nav-link" (click)="routeActive = true"
+        >my recipes</a
+      >
+      <a
+        routerLink="notifications"
+        class="nav-link"
+        (click)="routeActive = true"
+        >notifications</a
+      >
+      <a routerLink="favorites" class="nav-link" (click)="routeActive = true"
+        >favorites</a
+      >
+    </div>
+    <router-outlet></router-outlet>
   </div>
   <form
+    *ngIf="!routeActive"
     class="form"
     (ngSubmit)="onSubmit()"
     #formRef

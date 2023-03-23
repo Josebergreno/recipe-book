@@ -1,10 +1,5 @@
 <div class="form-container">
-  <form
-    class="form"
-    (ngSubmit)="onLogin(formRef)"
-    #formRef="ngForm"
-    autocomplete="off"
-  >
+  <form class="form" (ngSubmit)="onLogin(formRef)" #formRef="ngForm">
     <div class="error" *ngIf="errorMessage">
       <p>Please enter a valid email and password</p>
     </div>

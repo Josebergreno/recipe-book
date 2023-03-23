@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/models/userData.model';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -17,6 +17,7 @@ export class PersonalizeComponent implements OnInit {
   selectedImg: any = null;
   patchData: any = {};
   updateRes = '';
+  routeActive: any = null;
   // curUser: any;
 
   personalizeForm = new FormGroup({
@@ -27,12 +28,16 @@ export class PersonalizeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private storage: AngularFireStorage,
     private dataService: DataStorageService
   ) {}
 
   loadPicture() {
     return this.imgSrc;
+  }
+  onBack() {
+    this.router.navigate(['personalize']);
   }
 
   onNameChange(e: Event) {
@@ -99,8 +104,10 @@ export class PersonalizeComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.url.subscribe((url) => {
+      this.routeActive = false;
       this.formInit();
     });
+
     this.dataService.profileUpdate.subscribe((res) => {
       this.updateRes = res;
     });

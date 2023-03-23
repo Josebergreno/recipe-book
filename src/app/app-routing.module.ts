@@ -12,8 +12,11 @@ import { NewRecipeComponent } from './components/new-recipe/new-recipe.component
 import { RecipeNameComponent } from './components/new-recipe/recipe-name/recipe-name.component';
 import { RecipePictureComponent } from './components/new-recipe/recipe-picture/recipe-picture.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { MyRecipesComponent } from './components/personalize/personalize-nav-bar/my-recipes/my-recipes.component';
 import { PersonalizeComponent } from './components/personalize/personalize.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { FavoritesComponent } from './components/personalize/personalize-nav-bar/favorites/favorites.component';
+import { NotificationsComponent } from './components/personalize/personalize-nav-bar/notifications/notifications.component';
 
 const routes: Routes = [
   { path: '', component: BrowseRecipesComponent },
@@ -46,6 +49,11 @@ const routes: Routes = [
     path: 'personalize',
     component: PersonalizeComponent,
     canActivate: [AuthGuard],
+    children: [
+      { path: 'my-recipes', component: MyRecipesComponent },
+      { path: 'notifications', component: NotificationsComponent },
+      { path: 'favorites', component: FavoritesComponent },
+    ],
   },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
