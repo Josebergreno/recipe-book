@@ -1,7 +1,7 @@
 <div class="button-container">
   <div class="button-inner--container">
     <button class="button" (click)="onBackClick()">back to recipes</button>
-    <!-- <button class="button" *ngIf="canEdit()">Edit Recipe</button> -->
+    <button class="button" *ngIf="canEdit()">Edit Recipe</button>
     <button class="button-danger" (click)="triggerDeleteModal()">Delete</button>
   </div>
 </div>

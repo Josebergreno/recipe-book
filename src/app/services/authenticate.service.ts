@@ -21,7 +21,7 @@ interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthenticateService {
-  currentUserAuth = new Subject<UserAuth>();
+  currentUserAuth = new BehaviorSubject<UserAuth | null>(null);
   isLoggedIn = new BehaviorSubject<boolean>(false);
   tokenExpTimer: any;
 

@@ -23,8 +23,9 @@ export class RecipeService {
   recipeUrl!: string;
   briefDesc!: string;
   conclusion!: string;
-  loadedRecipes: Recipe[] = [];
-  myRecipes = new BehaviorSubject<Recipe[] | null>(null);
+  loadedRecipes = new BehaviorSubject<Recipe[] | undefined>(undefined);
+  // loadedRecipes: Recipe[] = [];
+  myRecipes = new BehaviorSubject<Recipe[] | undefined>(undefined);
 
   addRecipeName(recipeName: string) {
     this.recipeName = recipeName;
@@ -62,25 +63,30 @@ export class RecipeService {
   }
 
   recipeSearch(inputVal: string) {
-    const filteredArr = this.loadedRecipes.filter((recipe) => {
-      return recipe.recipeName.toLowerCase() == inputVal.toLowerCase();
-    });
-    console.log(this.loadedRecipes);
-    console.log(filteredArr);
+    const filteredArr: Recipe[] | undefined = this.loadedRecipes?.value?.filter(
+      (recipe) => {
+        return recipe.recipeName.toLowerCase().includes(inputVal.toLowerCase());
+      }
+    );
+    this.loadedRecipes.next(filteredArr);
+    console.log(this.loadedRecipes.value);
   }
-  fetchMyRecipes(recipes: Recipe[]) {
+  fetchMyRecipes(recipes: Recipe[] | undefined) {
     const userAuthJSON = localStorage.getItem('userAuthData');
     const userData = userAuthJSON ? JSON.parse(userAuthJSON) : null;
-    const myRecipes = recipes.filter((recipe) => {
-      const fullName =
-        this.dataService.curUser?.value?.firstName +
-        ' ' +
-        this.dataService.curUser?.value?.lastName;
-      return (
-        recipe.author === fullName &&
-        userData.email === this.dataService.curUser.value?.email
-      );
-    });
+    let myRecipes;
+    if (recipes) {
+      myRecipes = recipes.filter((recipe) => {
+        const fullName =
+          this.dataService.curUser?.value?.firstName +
+          ' ' +
+          this.dataService.curUser?.value?.lastName;
+        return (
+          recipe.author === fullName &&
+          userData.email === this.dataService.curUser.value?.email
+        );
+      });
+    }
     this.myRecipes.next(myRecipes);
   }
 
@@ -94,8 +100,9 @@ export class RecipeService {
         const postsArray: Recipe[] = [];
         const values = Object.values(resData);
         values.forEach((recipe: Recipe) => postsArray.push(recipe));
-        this.loadedRecipes = postsArray.flat();
-        this.fetchMyRecipes(this.loadedRecipes);
+        this.loadedRecipes.next(postsArray.flat());
+        // this.loadedRecipes = postsArray.flat();
+        this.fetchMyRecipes(this.loadedRecipes.value);
         return postsArray.flat();
       })
     );
