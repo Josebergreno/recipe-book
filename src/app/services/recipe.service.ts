@@ -75,7 +75,7 @@ export class RecipeService {
     const userAuthJSON = localStorage.getItem('userAuthData');
     const userData = userAuthJSON ? JSON.parse(userAuthJSON) : null;
     let myRecipes;
-    if (recipes) {
+    if (recipes && userData) {
       myRecipes = recipes.filter((recipe) => {
         const fullName =
           this.dataService.curUser?.value?.firstName +
@@ -86,8 +86,8 @@ export class RecipeService {
           userData.email === this.dataService.curUser.value?.email
         );
       });
+      this.myRecipes.next(myRecipes);
     }
-    this.myRecipes.next(myRecipes);
   }
 
   getDBRecipes() {
