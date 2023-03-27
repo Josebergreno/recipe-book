@@ -12,6 +12,7 @@
       id="recipe-search"
       type="text"
       #inputRef
+      (input)="refreshPosts(inputRef.value)"
       autocomplete="off"
     />
     <button class="button" (click)="onSearch(inputRef.value)">search</button>

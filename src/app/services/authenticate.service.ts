@@ -22,7 +22,7 @@ interface AuthResponseData {
 })
 export class AuthenticateService {
   currentUserAuth = new BehaviorSubject<UserAuth | null>(null);
-  isLoggedIn = new BehaviorSubject<boolean>(false);
+  // isLoggedIn = new BehaviorSubject<boolean>(false);
   tokenExpTimer: any;
 
   constructor(
@@ -62,7 +62,6 @@ export class AuthenticateService {
           );
           this.dataStorage.getUserData(resData.email);
           this.currentUserAuth.next(userAuthData);
-          this.isLoggedIn.next(true);
           this.autoLogout(+resData.expiresIn * 1000);
           localStorage.setItem('userAuthData', JSON.stringify(userAuthData));
         })
@@ -92,14 +91,12 @@ export class AuthenticateService {
       const expDur =
         new Date(userAuth._tokenExpDate).getTime() - new Date().getTime();
       this.autoLogout(expDur);
-      this.isLoggedIn.next(true);
     }
   }
 
   logOut() {
     this.router.navigate(['login']);
     localStorage.clear();
-    this.isLoggedIn.next(false);
     if (this.tokenExpTimer) {
       clearTimeout(this.tokenExpTimer);
     }
@@ -112,7 +109,8 @@ export class AuthenticateService {
   }
 
   routeGuard() {
-    if (this.isLoggedIn.value === true) {
+    const userAuthJSON = localStorage.getItem('userAuthData');
+    if (userAuthJSON) {
       return true;
     }
     this.router.navigate(['login']);

@@ -18,7 +18,6 @@ export class PersonalizeComponent implements OnInit {
   patchData: any = {};
   updateRes = '';
   routeActive: any = null;
-  // curUser: any;
 
   personalizeForm = new FormGroup({
     firstName: new FormControl({ value: '', disabled: true }),
@@ -33,9 +32,6 @@ export class PersonalizeComponent implements OnInit {
     private dataService: DataStorageService
   ) {}
 
-  loadPicture() {
-    return this.imgSrc;
-  }
   onBack() {
     this.router.navigate(['personalize']);
   }
@@ -69,7 +65,6 @@ export class PersonalizeComponent implements OnInit {
       this.patchData[key] = val;
     });
     if (this.selectedImg) {
-      const curUser = this.dataService.curUser;
       const filePath = `profilePictures/${
         this.selectedImg.name
       }_${new Date().getTime()}`;
@@ -90,8 +85,8 @@ export class PersonalizeComponent implements OnInit {
     } else this.dataService.updateUserData(this.patchData);
   }
 
-  formInit() {
-    let curUser = this.dataService.curUser.value;
+  formInit(curUser?: any) {
+    // let curUser = this.dataService.curUser.value;
     if (curUser) {
       for (const key in this.personalizeForm.controls) {
         this.personalizeForm.get(key)?.setValue(curUser[key as keyof UserData]);
@@ -99,6 +94,15 @@ export class PersonalizeComponent implements OnInit {
           this.imgSrc = curUser?.['imgPath'];
         } else this.imgSrc = '/assets/placeHolderImg.webp';
       }
+    } else {
+      const userAuthJSON = localStorage.getItem('userAuthData');
+      let userAuthData;
+      let email;
+      if (userAuthJSON) {
+        userAuthData = JSON.parse(userAuthJSON);
+        email = userAuthData.email;
+      }
+      this.dataService.getUserData(email);
     }
   }
 
@@ -106,6 +110,9 @@ export class PersonalizeComponent implements OnInit {
     this.route.url.subscribe((url) => {
       this.routeActive = false;
       this.formInit();
+    });
+    this.dataService.curUser.subscribe((user) => {
+      this.formInit(user);
     });
 
     this.dataService.profileUpdate.subscribe((res) => {

@@ -19,13 +19,13 @@ export class RecipeService {
     private dataService: DataStorageService
   ) {}
 
+  private dBRecipes!: Recipe[] | undefined;
+  loadedRecipes = new BehaviorSubject<Recipe[] | undefined>(undefined);
+  myRecipes = new BehaviorSubject<Recipe[] | undefined>(undefined);
   recipeName!: string;
   recipeUrl!: string;
   briefDesc!: string;
   conclusion!: string;
-  loadedRecipes = new BehaviorSubject<Recipe[] | undefined>(undefined);
-  // loadedRecipes: Recipe[] = [];
-  myRecipes = new BehaviorSubject<Recipe[] | undefined>(undefined);
 
   addRecipeName(recipeName: string) {
     this.recipeName = recipeName;
@@ -69,7 +69,6 @@ export class RecipeService {
       }
     );
     this.loadedRecipes.next(filteredArr);
-    console.log(this.loadedRecipes.value);
   }
   fetchMyRecipes(recipes: Recipe[] | undefined) {
     const userAuthJSON = localStorage.getItem('userAuthData');
@@ -89,6 +88,9 @@ export class RecipeService {
     }
     this.myRecipes.next(myRecipes);
   }
+  getDBRecipes() {
+    return this.dBRecipes?.slice();
+  }
 
   getRecipes() {
     return this.fetchRecipes();
@@ -101,7 +103,7 @@ export class RecipeService {
         const values = Object.values(resData);
         values.forEach((recipe: Recipe) => postsArray.push(recipe));
         this.loadedRecipes.next(postsArray.flat());
-        // this.loadedRecipes = postsArray.flat();
+        this.dBRecipes = postsArray.flat();
         this.fetchMyRecipes(this.loadedRecipes.value);
         return postsArray.flat();
       })

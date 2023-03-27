@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Recipe } from 'src/app/models/recipe.model';
-import { UserData } from 'src/app/models/userData.model';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { RecipeService } from 'src/app/services/recipe.service';
@@ -12,7 +10,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
   styleUrls: ['./browse-recipes.component.css'],
 })
 export class BrowseRecipesComponent implements OnInit, OnDestroy {
-  recipes!: Recipe[];
+  recipes!: Recipe[] | undefined;
   firstName!: string | null;
 
   constructor(
@@ -20,6 +18,14 @@ export class BrowseRecipesComponent implements OnInit, OnDestroy {
     private authService: AuthenticateService,
     private dataService: DataStorageService
   ) {}
+
+  refreshPosts(inputVal: string) {
+    const dBRecipes = this.recipeService.getDBRecipes();
+    if (!inputVal) {
+      this.recipes = dBRecipes;
+      this.recipeService.loadedRecipes.next(dBRecipes);
+    }
+  }
   onSearch(inputRef: string) {
     this.recipeService.recipeSearch(inputRef);
   }
@@ -30,6 +36,11 @@ export class BrowseRecipesComponent implements OnInit, OnDestroy {
     this.authService.autoLogin();
     this.recipeService.getRecipes().subscribe((loadedPosts: Recipe[]) => {
       this.recipes = loadedPosts;
+    });
+    this.recipeService.loadedRecipes.subscribe((searchedRecipes) => {
+      if (this.recipes !== searchedRecipes) {
+        this.recipes = searchedRecipes;
+      }
     });
 
     this.dataService.firstName.subscribe((name) => {

@@ -6,6 +6,7 @@ import { map, Subject, mergeMap, find } from 'rxjs';
 import { UserData } from '../models/userData.model';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { trigger } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root',
@@ -45,7 +46,6 @@ export class DataStorageService {
             resObj.imgPath,
             resObj.desc
           );
-          localStorage.setItem('firstName', resObj.firstName);
           this.curUser.next(currentUser);
           this.firstName.next(resObj.firstName);
         },
