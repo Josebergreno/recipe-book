@@ -1,27 +1,35 @@
 <div class="main-container">
-  <div [ngClass]="routeActive ? 'routeActive' : 'outlet-container'">
+  <div
+    [ngClass]="backButtonVisible === true ? 'routeActive' : 'outlet-container'"
+  >
     <div class="nav-bar--container">
-      <button (click)="onBack()" class="button" *ngIf="routeActive">
+      <button (click)="onBack()" class="button" *ngIf="backButtonVisible">
         Back
       </button>
 
-      <a routerLink="my-recipes" class="nav-link" (click)="routeActive = true"
+      <a
+        routerLink="my-recipes"
+        class="nav-link"
+        (click)="backButtonVisible = true"
         >my recipes</a
       >
       <a
         routerLink="notifications"
         class="nav-link"
-        (click)="routeActive = true"
+        (click)="backButtonVisible = true"
         >notifications</a
       >
-      <a routerLink="favorites" class="nav-link" (click)="routeActive = true"
+      <a
+        routerLink="favorites"
+        class="nav-link"
+        (click)="backButtonVisible = true"
         >favorites</a
       >
     </div>
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="backButtonVisible = true"></router-outlet>
   </div>
   <form
-    *ngIf="!routeActive"
+    *ngIf="backButtonVisible === false"
     class="form"
     (ngSubmit)="onSubmit()"
     #formRef

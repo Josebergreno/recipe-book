@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/models/userData.model';
@@ -17,7 +17,7 @@ export class PersonalizeComponent implements OnInit {
   selectedImg: any = null;
   patchData: any = {};
   updateRes = '';
-  routeActive: any = null;
+  backButtonVisible: boolean = false;
 
   personalizeForm = new FormGroup({
     firstName: new FormControl({ value: '', disabled: true }),
@@ -29,7 +29,8 @@ export class PersonalizeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private storage: AngularFireStorage,
-    private dataService: DataStorageService
+    private dataService: DataStorageService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   onBack() {
@@ -86,7 +87,6 @@ export class PersonalizeComponent implements OnInit {
   }
 
   formInit(curUser?: any) {
-    // let curUser = this.dataService.curUser.value;
     if (curUser) {
       for (const key in this.personalizeForm.controls) {
         this.personalizeForm.get(key)?.setValue(curUser[key as keyof UserData]);
@@ -108,8 +108,9 @@ export class PersonalizeComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.url.subscribe((url) => {
-      this.routeActive = false;
+      this.backButtonVisible = false;
       this.formInit();
+      this.cdr.detectChanges();
     });
     this.dataService.curUser.subscribe((user) => {
       this.formInit(user);

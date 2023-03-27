@@ -19,7 +19,17 @@ export class MyRecipesComponent implements OnInit {
   }
   ngOnInit(): void {
     this.recipeService.myRecipes.subscribe((recipes) => {
-      this.myRecipes = recipes;
+      if (recipes) {
+        this.myRecipes = recipes;
+        localStorage.setItem('myRecipes', JSON.stringify(recipes));
+      } else {
+        const myRecipesJSON = localStorage.getItem('myRecipes');
+        let myRecipesData;
+        if (myRecipesJSON) {
+          myRecipesData = JSON.parse(myRecipesJSON);
+          this.myRecipes = myRecipesData;
+        }
+      }
     });
   }
 }
