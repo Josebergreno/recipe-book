@@ -7,7 +7,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
 @Component({
   selector: 'app-browse-recipes',
   templateUrl: './browse-recipes.component.html',
-  styleUrls: ['./browse-recipes.component.css'],
+  styleUrls: ['./browse-recipes.component.scss'],
 })
 export class BrowseRecipesComponent implements OnInit, OnDestroy {
   recipes!: Recipe[] | undefined;

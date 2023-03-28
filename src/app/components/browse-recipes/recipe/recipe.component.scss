@@ -1,0 +1,71 @@
+@use "/src/scss/components/button";
+@use "/src/scss/components/header";
+
+$c: "container";
+
+.recipe-#{$c} {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffb8662d;
+  color: black;
+  font-family: "Playfair Display", serif;
+  .recipe-img {
+    width: 80vw;
+    max-width: 600px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .section {
+    border-bottom: solid #ffb766 1px;
+    background-color: whitesmoke;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    border-radius: 3px;
+    margin: 20px;
+    padding: 20px;
+    width: 80vw;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    &-header {
+      margin: 10px;
+    }
+    &-#{$c} {
+      display: flex;
+      flex-direction: column;
+      align-items: baseline;
+      .list-item {
+        list-style: none;
+        margin: 5px;
+      }
+    }
+    .paragraph {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}
+
+.button-#{$c} {
+  background-color: #ffb8662d;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  .button-inner--#{$c} {
+    max-width: 600px;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+  @media (max-width: 350px) {
+    .button,
+    .button-danger {
+      font-size: 60%;
+    }
+  }
+}

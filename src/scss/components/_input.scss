@@ -1,0 +1,22 @@
+.input {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  font-family: "Playfair Display", serif;
+  height: 30px;
+  outline: none;
+  background-color: #68d3880e;
+  border: solid #f43c095d 1px;
+  border-radius: 2px;
+  padding: 5px;
+  transition: 0.1s;
+  &:focus {
+    background-color: transparent;
+    width: 99%;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+  &.ng-touched.ng-invalid {
+    border-color: red;
+  }
+}

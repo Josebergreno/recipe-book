@@ -1,0 +1,60 @@
+@use "/src/scss/components/nav-link";
+
+.nav-bar--container {
+  height: 20vmin;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  display: flex;
+  background-color: whitesmoke;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "Playfair Display", serif;
+  .link-container {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    .nav-link {
+      text-decoration: none;
+      @media (max-width: 500px) {
+        font-size: small;
+      }
+    }
+    @media (max-width: 400px) {
+      width: 100%;
+      justify-content: space-around;
+    }
+  }
+  .title-container {
+    width: 30%;
+    max-width: 400px;
+    .nav-link--main {
+      text-decoration: none;
+      transition: 0.2s;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .under-title {
+      color: #f43a09;
+      @media (max-width: 400px) {
+        font-size: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        margin-left: 10px;
+        padding-bottom: 3px;
+      }
+    }
+    @media (max-width: 500px) {
+      font-size: 75%;
+    }
+    @media (max-width: 400px) {
+      font-size: 100%;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
+}

@@ -1,21 +1,30 @@
 <div class="browse-recipes--container">
   <div *ngIf="firstName" class="welcome-container">
-    <div class="welcome-inner--container">
+    <div class="inner-welcome--container">
       <p>{{ "Welcome" + " " + firstName + "!" }}</p>
     </div>
   </div>
   <h1 class="header">Browse Recipes</h1>
   <div class="search-container">
-    <label class="label" for="recipe-search">Search by recipe Name</label>
+    <label style="margin-left: 10px" for="recipe-search"
+      >Search by recipe Name</label
+    >
     <input
       class="input"
+      style="width: 60%; margin-left: 10px"
       id="recipe-search"
       type="text"
       #inputRef
       (input)="refreshPosts(inputRef.value)"
       autocomplete="off"
     />
-    <button class="button" (click)="onSearch(inputRef.value)">search</button>
+    <button
+      class="button"
+      style="max-width: 100px"
+      (click)="onSearch(inputRef.value)"
+    >
+      search
+    </button>
   </div>
 
   <div

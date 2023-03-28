@@ -1,0 +1,31 @@
+@use "../../../scss/components/label-container";
+@use "../../../scss/components/button";
+@use "../../../scss/components/nav-link";
+@use "../../../scss/components/input";
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  font-family: "Playfair Display", serif;
+  background-color: #ffb8662d;
+  color: black;
+  padding-bottom: 100px;
+  .form {
+    width: 50%;
+    max-width: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .error {
+    text-align: center;
+    background-color: rgba(255, 0, 0, 0.5);
+    border: solid red 1px;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+}

@@ -7,7 +7,7 @@ import { UserAuth } from 'src/app/models/userAuth.model';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css'],
+  styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthenticateService) {}

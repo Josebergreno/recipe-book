@@ -6,7 +6,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
 @Component({
   selector: 'app-recipe-name',
   templateUrl: './recipe-name.component.html',
-  styleUrls: ['./recipe-name.component.css'],
+  styleUrls: ['./recipe-name.component.scss'],
 })
 export class RecipeNameComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private recipeService: RecipeService) {}

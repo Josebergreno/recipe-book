@@ -1,7 +1,5 @@
 <div class="main-container">
-  <div
-    [ngClass]="backButtonVisible === true ? 'routeActive' : 'outlet-container'"
-  >
+  <div class="outlet-container">
     <div class="nav-bar--container">
       <button (click)="onBack()" class="button" *ngIf="backButtonVisible">
         Back
@@ -36,12 +34,12 @@
     [formGroup]="personalizeForm"
     autocomplete="off"
   >
-    <div class="name-container">
+    <div class="name-update--container">
       <p *ngIf="updateRes" class="update">{{ updateRes }}</p>
       <input
         type="text"
         formControlName="firstName"
-        class="form-input"
+        class="input"
         id="firstName"
         (blur)="onNameChange($event)"
         style="margin-top: 30px"
@@ -56,11 +54,11 @@
         Change First Name
       </button>
     </div>
-    <div class="name-container">
+    <div class="name-update--container">
       <input
         type="text"
         formControlName="lastName"
-        class="form-input"
+        class="input"
         id="lastName"
         (blur)="onNameChange($event)"
       />
@@ -83,7 +81,7 @@
       />
 
       <input
-        class="file-input"
+        style="display: none"
         type="file"
         #imgRef
         (change)="showPreview($event)"

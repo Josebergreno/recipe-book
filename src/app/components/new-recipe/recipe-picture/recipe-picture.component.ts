@@ -8,7 +8,7 @@ import { finalize } from 'rxjs';
 @Component({
   selector: 'app-recipe-picture',
   templateUrl: './recipe-picture.component.html',
-  styleUrls: ['./recipe-picture.component.css'],
+  styleUrls: ['./recipe-picture.component.scss'],
 })
 export class RecipePictureComponent implements OnInit, OnDestroy {
   constructor(

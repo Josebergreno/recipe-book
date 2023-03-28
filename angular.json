@@ -5,7 +5,11 @@
   "projects": {
     "time-to-cook": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -20,7 +24,7 @@
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets", "src/assets"],
             "styles": [
-              "src/styles.css",
+              "src/scss/styles.scss",
               "node_modules/material-design-icons/iconfont/material-icons.css"
             ],
             "scripts": []
@@ -83,7 +87,7 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.css",
+              "src/scss/styles.scss",
               "node_modules/material-design-icons/iconfont/material-icons.css"
             ],
             "scripts": []

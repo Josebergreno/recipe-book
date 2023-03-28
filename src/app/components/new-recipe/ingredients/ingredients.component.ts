@@ -7,7 +7,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
 @Component({
   selector: 'app-ingredients',
   templateUrl: './ingredients.component.html',
-  styleUrls: ['./ingredients.component.css'],
+  styleUrls: ['./ingredients.component.scss'],
 })
 export class IngredientsComponent implements OnInit, OnDestroy {
   constructor(

@@ -10,7 +10,7 @@ import { DataStorageService } from 'src/app/services/data-storage.service';
 @Component({
   selector: 'app-personalize',
   templateUrl: './personalize.component.html',
-  styleUrls: ['./personalize.component.css'],
+  styleUrls: ['./personalize.component.scss'],
 })
 export class PersonalizeComponent implements OnInit {
   imgSrc: any = '/assets/placeHolderImg.webp';

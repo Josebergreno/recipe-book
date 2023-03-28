@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-new-recipe',
   templateUrl: './new-recipe.component.html',
-  styleUrls: ['./new-recipe.component.css'],
+  styleUrls: ['./new-recipe.component.scss'],
 })
 export class NewRecipeComponent implements OnInit, OnDestroy {
   constructor(private router: Router) {}

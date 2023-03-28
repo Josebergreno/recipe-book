@@ -1,0 +1,27 @@
+@use "../../../scss/components/button";
+@use "../../../scss/components/input";
+@use "../../../scss/components/label-container";
+@use "../../../scss/components/nav-link";
+
+.form-container {
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Playfair Display", serif;
+  background-color: #ffb8662d;
+  color: black;
+  padding-bottom: 100px;
+  .form {
+    width: 50%;
+    height: 100%;
+    max-width: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .confirm-text {
+    width: 80%;
+  }
+}

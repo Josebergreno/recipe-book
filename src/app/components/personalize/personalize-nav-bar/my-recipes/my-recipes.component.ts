@@ -6,7 +6,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
   selector: 'app-my-recipes',
   host: { class: 'main-container' },
   templateUrl: './my-recipes.component.html',
-  styleUrls: ['./my-recipes.component.css'],
+  styleUrls: ['./my-recipes.component.scss'],
 })
 export class MyRecipesComponent implements OnInit {
   myRecipes: any;

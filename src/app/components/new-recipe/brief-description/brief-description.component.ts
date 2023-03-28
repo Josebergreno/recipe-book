@@ -6,7 +6,7 @@ import { NgModel } from '@angular/forms';
 @Component({
   selector: 'app-brief-description',
   templateUrl: './brief-description.component.html',
-  styleUrls: ['./brief-description.component.css'],
+  styleUrls: ['./brief-description.component.scss'],
 })
 export class BriefDescriptionComponent implements OnInit, OnDestroy {
   onSlideOut!: boolean;

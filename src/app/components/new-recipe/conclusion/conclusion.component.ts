@@ -5,7 +5,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
 @Component({
   selector: 'app-conclusion',
   templateUrl: './conclusion.component.html',
-  styleUrls: ['./conclusion.component.css'],
+  styleUrls: ['./conclusion.component.scss'],
 })
 export class ConclusionComponent {
   constructor(private router: Router, private recipeService: RecipeService) {}

@@ -1,0 +1,50 @@
+.button,
+.button-danger {
+  background-color: #68d388b9;
+  border-radius: 3px;
+  margin: 20px;
+  border: 1px solid #68d388;
+  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Playfair Display", serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  outline: none;
+  padding: 8px 0.8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+  transition: 0.1s;
+  &:hover {
+    background-color: #68d3886e;
+    color: #225e34;
+  }
+  &:active {
+    background-color: #68d388b9;
+    box-shadow: none;
+    color: white;
+  }
+}
+.button-danger {
+  background-color: rgba(255, 0, 0, 0.477);
+  border: 1px solid rgba(255, 0, 0, 0.633);
+  &:hover {
+    background-color: rgba(255, 0, 0, 0.227);
+    color: red;
+  }
+  &:active {
+    background-color: rgba(255, 0, 0, 0.477);
+    color: white;
+  }
+}
