@@ -4,10 +4,11 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'parseDate',
 })
 export class ParseDatePipe implements PipeTransform {
-  transform(value: string): unknown {
+  transform(value: Date): unknown {
     let hours = new Date(value).getHours();
     const convertHours = hours > 12 ? (hours -= 12) : hours;
     let minutes = new Date(value).getMinutes();
+
     const AMOrPM = hours > 12 ? 'A.M' : 'P.M';
     const day = new Date(value).getDay();
     const date = new Date(value).getDate();
@@ -35,6 +36,10 @@ export class ParseDatePipe implements PipeTransform {
       'Nov.',
       'Dec.',
     ];
+    let minutesString = minutes.toString();
+    if (minutes < 10) {
+      minutesString = '0' + minutes;
+    }
     const dateFormat =
       weekDays[day] +
       ' ' +
@@ -44,7 +49,7 @@ export class ParseDatePipe implements PipeTransform {
       ' at ' +
       convertHours +
       ':' +
-      minutes +
+      minutesString +
       ' ' +
       AMOrPM;
 

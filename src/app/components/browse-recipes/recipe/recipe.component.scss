@@ -69,3 +69,29 @@
     }
   }
 }
+
+.comment-section--container {
+  width: 100%;
+}
+.indiv-comment {
+  margin-bottom: 20px;
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+}
+
+.author {
+  width: 100%;
+}
+.date {
+  width: 100%;
+  font-size: small;
+}
+.comment-body {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
