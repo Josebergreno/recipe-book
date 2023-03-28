@@ -10,6 +10,7 @@ import { NgModel } from '@angular/forms';
 })
 export class BriefDescriptionComponent implements OnInit, OnDestroy {
   onSlideOut!: boolean;
+  onSlideIn!: boolean;
   constructor(private router: Router, private recipeService: RecipeService) {}
   onBack() {
     this.router.navigate(['new-recipe', 'recipe-picture']);
@@ -22,7 +23,7 @@ export class BriefDescriptionComponent implements OnInit, OnDestroy {
   onShake(formControl: NgModel) {
     if (!formControl.valid && formControl.touched) {
       return 'shake';
-    } else return 'form-textarea';
+    } else return 'section';
   }
 
   ngOnInit(): void {

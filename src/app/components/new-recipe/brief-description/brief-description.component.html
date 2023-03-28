@@ -2,22 +2,21 @@
   (ngSubmit)="onNext(formRef)"
   #formRef="ngForm"
   class="form"
-  [ngClass]="{ 'slide-out': onSlideOut }"
+  [ngClass]="{ 'slide-out': onSlideOut, 'slide-in': onSlideIn }"
 >
-  <div class="section">
+  <p class="form-input--warning" *ngIf="!briefDesc.valid && briefDesc.touched">
+    Please enter a brief description for your recipe
+  </p>
+  <div class="section" [ngClass]="onShake(briefDesc)">
     <label for="description"> Brief description </label>
-    <p class="warning" *ngIf="!briefDesc.valid && briefDesc.touched">
-      Please enter a brief description for your recipe
-    </p>
     <textarea
       id="description"
       type="text"
-      class="form-textarea"
+      class="textarea"
       ngModel
       #briefDesc="ngModel"
       name="briefDesc"
       required
-      [ngClass]="onShake(briefDesc)"
     ></textarea>
     <button (click)="onBack()" class="button">Back</button>
     <button class="button" [disabled]="!briefDesc.valid">Next</button>

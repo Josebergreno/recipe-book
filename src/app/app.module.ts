@@ -24,9 +24,9 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment.development';
 import { TruncatePipe } from './truncate.pipe';
-import { MyRecipesComponent } from './components/personalize/personalize-nav-bar/my-recipes/my-recipes.component';
-import { NotificationsComponent } from './components/personalize/personalize-nav-bar/notifications/notifications.component';
-import { FavoritesComponent } from './components/personalize/personalize-nav-bar/favorites/favorites.component';
+import { MyRecipesComponent } from './components/personalize/sub-nav-bar/my-recipes/my-recipes.component';
+import { NotificationsComponent } from './components/personalize/sub-nav-bar/notifications/notifications.component';
+import { FavoritesComponent } from './components/personalize/sub-nav-bar/favorites/favorites.component';
 
 @NgModule({
   declarations: [

@@ -1,0 +1,10 @@
+@use "/src/scss/components/indiv-recipe";
+@use "/src/scss/components/header";
+@use "/src/scss/components/header-line";
+
+.main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

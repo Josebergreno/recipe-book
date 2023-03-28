@@ -1,15 +1,15 @@
 @use "/src/scss/components/button";
 @use "/src/scss/components/header";
+@use "/src/scss/abstracts/colors" as colors;
+@use "/src/scss/abstracts/fonts" as fonts;
 
-$c: "container";
-
-.recipe-#{$c} {
+.recipe-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ffb8662d;
-  color: black;
-  font-family: "Playfair Display", serif;
+  background-color: colors.$bGMain;
+  color: colors.$primary;
+  font-family: fonts.$font;
   .recipe-img {
     width: 80vw;
     max-width: 600px;
@@ -19,8 +19,8 @@ $c: "container";
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
   .section {
-    border-bottom: solid #ffb766 1px;
-    background-color: whitesmoke;
+    border-bottom: solid colors.$sectionBottomBorder 1px;
+    background-color: colors.$navBG;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     border-radius: 3px;
     margin: 20px;
@@ -34,7 +34,7 @@ $c: "container";
     &-header {
       margin: 10px;
     }
-    &-#{$c} {
+    &-container {
       display: flex;
       flex-direction: column;
       align-items: baseline;
@@ -51,12 +51,12 @@ $c: "container";
   }
 }
 
-.button-#{$c} {
-  background-color: #ffb8662d;
+.button-container {
+  background-color: colors.$bGMain;
   display: flex;
   justify-content: center;
   width: 100%;
-  .button-inner--#{$c} {
+  .button-inner--container {
     max-width: 600px;
     display: flex;
     width: 100%;

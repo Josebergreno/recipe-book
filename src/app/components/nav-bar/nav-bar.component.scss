@@ -1,13 +1,15 @@
 @use "/src/scss/components/nav-link";
+@use "/src/scss/abstracts/colors" as colors;
+@use "/src/scss/abstracts/fonts" as fonts;
 
 .nav-bar--container {
   height: 20vmin;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   display: flex;
-  background-color: whitesmoke;
+  background-color: colors.$navBG;
   justify-content: space-around;
   align-items: center;
-  font-family: "Playfair Display", serif;
+  font-family: fonts.$font;
   .link-container {
     width: 50%;
     display: flex;
@@ -34,7 +36,7 @@
       }
     }
     .under-title {
-      color: #f43a09;
+      color: colors.$tertiary;
       @media (max-width: 400px) {
         font-size: 80%;
         display: flex;

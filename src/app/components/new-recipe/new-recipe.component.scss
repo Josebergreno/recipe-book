@@ -1,63 +1,24 @@
+@use "/src/scss/components/header-line";
+@use "/src/scss/components/header";
+@use "/src/scss/components/button";
+@use "/src/scss/abstracts/colors" as colors;
+@use "/src/scss/abstracts/fonts" as fonts;
+
 .recipe-form--container {
   height: 100vh;
   display: flex;
-  font-family: "Playfair Display", serif;
-  background-color: #ffb8662d;
-  color: black;
+  font-family: fonts.$font;
+  background-color: colors.$bGMain;
+  color: colors.$primary;
   flex-direction: column;
   align-items: center;
-}
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 10px;
-}
-
-.button {
-  background-color: #68d388b9;
-  border-radius: 3px;
-  margin: 20px;
-  border: 1px solid #68d388;
-  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
-  box-sizing: border-box;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Playfair Display", serif;
-  font-size: 13px;
-  max-width: 100px;
-  font-weight: 400;
-  line-height: 1.15385;
-  outline: none;
-  padding: 8px 0.8em;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: baseline;
-  white-space: nowrap;
-  transition: 0.1s;
-}
-
-.button:hover {
-  background-color: #68d3886e;
-  color: #225e34;
-}
-
-.button:active {
-  background-color: #68d388b9;
-  box-shadow: none;
-  color: white;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .header {
+    width: 80%;
+    text-align: center;
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

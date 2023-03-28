@@ -1,0 +1,5 @@
+@use "/src/scss/abstracts/colors" as colors;
+.line {
+  border: 0.5px solid colors.$headerLineColor;
+  width: 100%;
+}

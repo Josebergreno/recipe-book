@@ -2,21 +2,22 @@
 @use "../../../scss/components/button";
 @use "../../../scss/components/indiv-recipe";
 @use "../../../scss/components/header";
+@use "../../../scss/components/header-line";
+@use "/src/scss/abstracts/colors" as colors;
+@use "/src/scss/abstracts/fonts" as fonts;
 
-$c: "container";
-
-.browse-recipes--#{$c} {
+.browse-recipes--container {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Playfair Display", serif;
-  background-color: #ffb8662d;
-  color: black;
+  font-family: fonts.$font;
+  background-color: colors.$bGMain;
+  color: colors.$primary;
 
-  .welcome-#{$c} {
+  .welcome-container {
     width: 100%;
-    .inner-welcome--#{$c} {
+    .inner-welcome--container {
       width: 40%;
       height: 100%;
       margin-top: 20px;
@@ -25,9 +26,9 @@ $c: "container";
       justify-content: center;
     }
   }
-  .search-#{$c} {
+  .search-container {
     width: 80%;
-    background-color: antiquewhite;
+    background-color: colors.$searchBG;
     display: flex;
     max-width: 600px;
     flex-direction: column;

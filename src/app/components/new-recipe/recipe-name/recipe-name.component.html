@@ -6,11 +6,15 @@
 >
   <div class="section">
     <label for="recipe-name"> Recipe Name </label>
-    <p *ngIf="!recipeName.valid && recipeName.touched" class="warning">
+
+    <p
+      *ngIf="!recipeName.valid && recipeName.touched"
+      class="form-input--warning"
+    >
       Please enter valid Recipe Name
     </p>
     <input
-      class="form-input"
+      class="input"
       id="recipe-name"
       ngModel
       name="recipeName"

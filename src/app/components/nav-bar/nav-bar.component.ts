@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
-import { UserData } from 'src/app/models/userData.model';
-import { UserAuth } from 'src/app/models/userAuth.model';
+
 
 @Component({
   selector: 'app-nav-bar',

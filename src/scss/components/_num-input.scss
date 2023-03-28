@@ -1,22 +1,23 @@
 @use "/src/scss/abstracts/fonts" as fonts;
 @use "/src/scss/abstracts/colors" as colors;
 
-.input {
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  letter-spacing: 1px;
-  font-family: fonts.$font;
+.num-input {
+  width: 50px;
   height: 30px;
-  outline: none;
+  text-align: center;
+  margin-top: 10px;
+  padding: 5px;
+  margin-bottom: 20px;
   background-color: colors.$inputBG;
   border: solid colors.$inputBorderColor 1px;
   border-radius: 2px;
-  padding: 5px;
+  outline: none;
+  letter-spacing: 1px;
+  font-family: fonts.$font;
   transition: 0.1s;
   &:focus {
     background-color: transparent;
-    width: 99%;
+    width: 51px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   }
   &.ng-touched.ng-invalid {

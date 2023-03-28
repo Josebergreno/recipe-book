@@ -4,15 +4,17 @@
 @use "/src/scss/components/textarea";
 @use "/src/scss/components/label-container";
 @use "/src/scss/components/update-modal";
+@use "/src/scss/abstracts/colors" as colors;
+@use "/src/scss/abstracts/fonts" as fonts;
 
 .main-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: "Playfair Display", serif;
-  background-color: #ffb8662d;
-  color: black;
+  font-family: fonts.$font;
+  background-color: colors.$bGMain;
+  color: colors.$primary;
   height: 100%;
 
   .outlet-container {
@@ -24,7 +26,7 @@
       box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
         rgba(0, 0, 0, 0.24) 0px 1px 2px;
       display: flex;
-      background-color: whitesmoke;
+      background-color: colors.$navBG;
       justify-content: space-around;
       align-items: center;
       width: 100%;

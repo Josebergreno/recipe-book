@@ -35,6 +35,11 @@
     box-shadow: none;
     color: white;
   }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #68d3886e;
+    color: #225e34;
+  }
 }
 .button-danger {
   background-color: rgba(255, 0, 0, 0.477);

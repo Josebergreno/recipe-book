@@ -1,3 +1,9 @@
+@use "/src/scss/components/input";
+@use "/src/scss/components/button";
+@use "/src/scss/abstracts/animations/shake-animation";
+@use "/src/scss/components/form-input-warning";
+@use "/src/scss/abstracts/animations/slide-out";
+
 :host {
   width: 100%;
   display: flex;
@@ -10,104 +16,20 @@
   justify-content: center;
   align-items: center;
   width: 80%;
-}
-.section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 450px;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  padding: 10px;
-}
-
-.form-input {
-  width: 60%;
-  margin: 10px;
-  height: 25px;
-  border: solid black 1px;
-  border-radius: 3px;
-}
-input.ng-touched.ng-invalid {
-  border-color: red;
-}
-.button {
-  background-color: #68d388b9;
-  border-radius: 3px;
-  margin: 20px;
-  border: 1px solid #68d388;
-  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
-  box-sizing: border-box;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Playfair Display", serif;
-  font-size: 13px;
-  max-width: 100px;
-  font-weight: 400;
-  line-height: 1.15385;
-  outline: none;
-  padding: 8px 0.8em;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: baseline;
-  white-space: nowrap;
-  transition: 0.1s;
-}
-
-.button:hover {
-  background-color: #68d3886e;
-  color: #225e34;
-}
-
-.button:active {
-  background-color: #68d388b9;
-  box-shadow: none;
-  color: white;
-}
-.button:disabled {
-  background-color: #68d3886e;
-  color: #225e34;
-  cursor: not-allowed;
-}
-.warning {
-  color: red;
-  margin-top: 10px;
-}
-
-.slide-out {
-  transition: 0.8s;
-  transform: translate(-150%);
-}
-
-.shake {
-  animation-name: shake;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in-out;
-}
-@keyframes shake {
-  0% {
-    transform: translate(-5%);
-  }
-  25% {
-    transform: translate(5%);
-  }
-  50% {
-    transform: translate(-5%);
-  }
-  75% {
-    transform: translate(5%);
-  }
-  100% {
-    transform: translate(0%);
+  .section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 450px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    .input {
+      width: 60%;
+      &:focus {
+        width: 61%;
+      }
+    }
   }
 }

@@ -8,14 +8,14 @@
     <h3>Ingredients</h3>
 
     <label for="name">Name</label>
-    <p class="warning" *ngIf="!ingName.valid && ingName.touched">
+    <p class="form-input--warning" *ngIf="!ingName.valid && ingName.touched">
       Please enter Valid Name
     </p>
     <input
       ngModel
       name="ingName"
       #ingName="ngModel"
-      class="form-input"
+      class="input"
       id="name"
       type="text"
       required
@@ -50,11 +50,11 @@
       />
     </div>
     <label for="measurement">Measurement</label>
-    <p class="warning" *ngIf="!measurement.valid && measurement.touched">
+    <p class="input--warning" *ngIf="!measurement.valid && measurement.touched">
       Please enter a Measurement
     </p>
     <select
-      class="form-input"
+      class="input"
       ngModel
       name="measurement"
       #measurement="ngModel"

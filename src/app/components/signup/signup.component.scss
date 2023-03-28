@@ -2,15 +2,17 @@
 @use "../../../scss/components/input";
 @use "../../../scss/components/label-container";
 @use "../../../scss/components/nav-link";
+@use "/src/scss/abstracts/colors" as colors;
+@use "/src/scss/abstracts/fonts" as fonts;
 
 .form-container {
   padding-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Playfair Display", serif;
-  background-color: #ffb8662d;
-  color: black;
+  font-family: fonts.$font;
+  background-color: colors.$bGMain;
+  color: colors.$primary;
   padding-bottom: 100px;
   .form {
     width: 50%;
