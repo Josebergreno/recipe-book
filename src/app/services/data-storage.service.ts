@@ -6,7 +6,6 @@ import { map, Subject, mergeMap, find } from 'rxjs';
 import { UserData } from '../models/userData.model';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { trigger } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root',

@@ -23,10 +23,11 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment.development';
-import { TruncatePipe } from './truncate.pipe';
+import { TruncatePipe } from './components/pipes/truncate.pipe';
 import { MyRecipesComponent } from './components/personalize/sub-nav-bar/my-recipes/my-recipes.component';
 import { NotificationsComponent } from './components/personalize/sub-nav-bar/notifications/notifications.component';
 import { FavoritesComponent } from './components/personalize/sub-nav-bar/favorites/favorites.component';
+import { ParseDatePipe } from './components/pipes/parse-date.pipe';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { FavoritesComponent } from './components/personalize/sub-nav-bar/favorit
     MyRecipesComponent,
     NotificationsComponent,
     FavoritesComponent,
+    ParseDatePipe,
   ],
   imports: [
     BrowserModule,

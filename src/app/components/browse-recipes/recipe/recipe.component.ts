@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { mergeMap, Subscription, tap } from 'rxjs';
+import { mergeMap, Subscription } from 'rxjs';
 import { Recipe } from 'src/app/models/recipe.model';
 import { UserData } from 'src/app/models/userData.model';
-
-import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { DataStorageService } from 'src/app/services/data-storage.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 import { RecipeService } from 'src/app/services/recipe.service';
+import { PostComment } from 'src/app/models/comment.model';
 
 @Component({
   selector: 'app-recipe',
@@ -18,6 +18,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
   recipeName!: string;
   recipe!: Recipe;
   curUser!: UserData | null;
+  comments!: PostComment[];
   modalTriggered: any = null;
   private subscription!: Subscription;
 
@@ -26,7 +27,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
     private recipeService: RecipeService,
     private router: Router,
     private dataService: DataStorageService,
-    private authService: AuthenticateService
+    private notifications: NotificationsService
   ) {}
   triggerDeleteModal() {
     this.modalTriggered = true;
@@ -61,6 +62,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         this.recipe = res[this.id];
       });
+    this.comments = this.notifications.fetchComments();
   }
 
   ngOnDestroy(): void {
