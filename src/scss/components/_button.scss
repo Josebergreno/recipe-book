@@ -1,17 +1,20 @@
+@use "/src/scss/abstracts/colors" as colors;
+@use "/src/scss/abstracts/fonts" as fonts;
+
 .button,
 .button-danger {
-  background-color: #68d388b9;
+  background-color: colors.$buttonBG;
   border-radius: 3px;
   margin: 20px;
-  border: 1px solid #68d388;
+  border: 1px solid colors.$buttonBorder;
   box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
   box-sizing: border-box;
-  color: white;
+  color: colors.$buttonFontColor;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Playfair Display", serif;
+  font-family: fonts.$font;
   font-size: 13px;
   font-weight: 400;
   line-height: 1.15385;
@@ -27,29 +30,29 @@
   white-space: nowrap;
   transition: 0.1s;
   &:hover {
-    background-color: #68d3886e;
-    color: #225e34;
+    background-color: colors.$buttonHoverBG;
+    color: colors.$buttonHoverFontColor;
   }
   &:active {
-    background-color: #68d388b9;
+    background-color: colors.$buttonBG;
     box-shadow: none;
-    color: white;
+    color: colors.$buttonFontColor;
   }
   &:disabled {
     cursor: not-allowed;
-    background-color: #68d3886e;
-    color: #225e34;
+    background-color: colors.$buttonHoverBG;
+    color: colors.$buttonHoverFontColor;
   }
 }
 .button-danger {
-  background-color: rgba(255, 0, 0, 0.477);
-  border: 1px solid rgba(255, 0, 0, 0.633);
+  background-color: colors.$buttonDangerBG;
+  border: 1px solid colors.$buttonDangerBorderColor;
   &:hover {
-    background-color: rgba(255, 0, 0, 0.227);
-    color: red;
+    background-color: colors.$buttonDangerBGHover;
+    color: colors.$buttonDangerFontColor;
   }
   &:active {
-    background-color: rgba(255, 0, 0, 0.477);
-    color: white;
+    background-color: colors.$buttonDangerBG;
+    color: colors.$buttonFontColor;
   }
 }

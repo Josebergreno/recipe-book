@@ -1,130 +1,56 @@
+@use "/src/scss/components/button";
+@use "/src/scss/components/form-input-warning";
+@use "/src/scss/components/input";
+@use "/src/scss/components/num-input";
+@use "/src/scss/components/textarea";
+@use "/src/scss/components/list-item-delete-button";
+
 :host {
   width: 100%;
   display: flex;
   margin-top: 20px;
   justify-content: center;
-}
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 80%;
-}
-.section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 450px;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  padding: 10px;
-}
-.form-input {
-  width: 60%;
-  margin: 10px;
-  height: 25px;
-  border: solid black 1px;
-  border-radius: 3px;
-}
-input.ng-invalid.ng-touched,
-textarea.ng-invalid.ng-touched,
-select.ng-invalid.ng-touched {
-  border-color: red;
-}
-.num-input {
-  width: 50px;
-  text-align: center;
-  border-radius: 3px;
-  border: solid black 1px;
-  margin: 10px;
-}
-.button {
-  background-color: #68d388b9;
-  border-radius: 3px;
-  margin: 10px;
-  border: 1px solid #68d388;
-  box-shadow: rgba(255, 255, 255, 0.7) 0 1px 0 0 inset;
-  box-sizing: border-box;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Playfair Display", serif;
-  font-size: 13px;
-  max-width: 100px;
-  font-weight: 400;
-  line-height: 1.15385;
-  outline: none;
-  padding: 8px 0.8em;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: baseline;
-  white-space: nowrap;
-  transition: 0.1s;
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    .section {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 450px;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      padding: 10px;
+      .li-container {
+        width: 60%;
+        list-style-type: none;
+        .list-item {
+          margin: 5px;
+        }
+      }
+      .input {
+        width: 60%;
+        &:focus {
+          width: 61%;
+        }
+      }
+      .textarea {
+        width: 80%;
+        height: 110px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .button {
+    margin: 10px;
+  }
 }
 
-.button:hover {
-  background-color: #68d3886e;
-  color: #225e34;
-}
-
-.button:active {
-  background-color: #68d388b9;
-  box-shadow: none;
-  color: white;
-}
-.button:disabled {
-  background-color: #68d3886e;
-  color: #225e34;
-  cursor: not-allowed;
-}
-.warning {
-  color: red;
-  margin-top: 10px;
-}
-.li-container {
-  width: 60%;
-  list-style-type: none;
-}
-.list-item {
-  margin: 5px;
-}
-.li-delete--button {
-  color: white;
-  background-color: rgba(255, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 15px;
-  height: 15px;
-  border-radius: 5px;
-  margin-right: 5px;
-  border: none;
-  transition: 0.2s;
-  display: inline;
-}
-.li-delete--button:hover {
-  background-color: red;
-}
-.li-delete--button:active {
-  background-color: rgba(255, 0, 0, 0.5);
-}
-.form-textarea {
-  width: 80%;
-  max-width: 500px;
-  height: 100px;
-  resize: none;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 3px;
-}
 .slide-out {
   transition: 1s;
   transform: translate(-150%);

@@ -1,12 +1,13 @@
 @use "/src/scss/abstracts/fonts" as fonts;
+@use "/src/scss/abstracts/colors" as colors;
 
 .textarea {
   resize: none;
   width: 60%;
   border-radius: 3px;
   outline: none;
-  background-color: #68d3880e;
-  border: solid #f43c095d 1px;
+  background-color: colors.$inputBG;
+  border: solid colors.$inputBorderColor 1px;
   border-radius: 2px;
   padding: 5px;
   transition: 0.1s;
@@ -17,8 +18,8 @@
     background-color: transparent;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     &.ng-invalid.ng-touched {
-      border-color: red;
-      outline-color: red;
+      border-color: colors.$inputInvalidBorder;
+      outline-color: colors.$inputInvalidBorder;
     }
   }
 }

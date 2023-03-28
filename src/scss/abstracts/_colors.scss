@@ -1,17 +1,32 @@
 $bGMain: #ffb8662d;
 $searchBG: antiqueWhite;
 $navBG: whitesmoke;
-$inputBG: #68d3880e;
+$errorBG: rgba(255, 0, 0, 0.5);
 
 $primary: black;
 $secondary: #68d388;
 $tertiary: #f43a09;
 
-$errorBG: rgba(255, 0, 0, 0.5);
 $errorBorder: red;
 
 $headerLineColor: rgba(0, 0, 0, 0.222);
 $sectionBottomBorder: #ffb766;
 
+//inputs, textareas, selects
+$inputBG: #68d3880e;
 $inputBorderColor: #f43c095d;
 $inputInvalidBorder: red;
+
+//buttons
+$buttonBG: #68d388b9;
+$buttonBorder: #68d388;
+$buttonFontColor: white;
+// :hover
+$buttonHoverBG: #68d3886e;
+$buttonHoverFontColor: #225e34;
+//danger
+$buttonDangerBG: rgba(255, 0, 0, 0.477);
+$buttonDangerBorderColor: rgba(255, 0, 0, 0.633);
+//danger:hover
+$buttonDangerBGHover: rgba(255, 0, 0, 0.227);
+$buttonDangerFontColor: red;

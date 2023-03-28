@@ -90,7 +90,7 @@
       class="li-container"
       *ngFor="let ingredient of ingredientsList; let i = index"
     >
-      <li class="list-item" [id]="i">
+      <li style="margin: 5px" [id]="i">
         <button
           (click)="onIngredientDelete($event)"
           class="li-delete--button"

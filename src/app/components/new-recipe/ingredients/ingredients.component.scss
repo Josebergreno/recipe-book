@@ -2,6 +2,7 @@
 @use "/src/scss/components/form-input-warning";
 @use "/src/scss/components/input";
 @use "/src/scss/components/num-input";
+@use "/src/scss/components/list-item-delete-button";
 
 :host {
   width: 100%;
@@ -15,55 +16,31 @@
   justify-content: center;
   align-items: center;
   width: 80%;
-}
-.section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 450px;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  padding: 10px;
-}
-.input {
-  width: 60%;
-  &:focus {
-    width: 61%;
+  .section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 450px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    .input {
+      width: 60%;
+      &:focus {
+        width: 61%;
+      }
+    }
+    .li-container {
+      width: 60%;
+      list-style-type: none;
+    }
+  }
+  .button {
+    margin: 10px;
   }
 }
 
-.button {
-  margin: 10px;
-}
-
-.li-container {
-  width: 60%;
-  list-style-type: none;
-}
-.list-item {
-  margin: 5px;
-}
-.li-delete--button {
-  color: white;
-  background-color: rgba(255, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 15px;
-  height: 15px;
-  border-radius: 5px;
-  margin-right: 5px;
-  border: none;
-  transition: 0.2s;
-  display: inline;
-}
-.li-delete--button:hover {
-  background-color: red;
-}
-.li-delete--button:active {
-  background-color: rgba(255, 0, 0, 0.5);
-}
 .slide-out {
   transition: 1s;
   transform: translate(-150%);

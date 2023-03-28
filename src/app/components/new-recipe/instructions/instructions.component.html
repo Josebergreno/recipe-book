@@ -7,7 +7,10 @@
   <div class="section">
     <h3>Instructions</h3>
     <label for="time">Time</label>
-    <p *ngIf="!stepCookTime.valid && stepCookTime.touched" class="warning">
+    <p
+      *ngIf="!stepCookTime.valid && stepCookTime.touched"
+      class="form-input--warning"
+    >
       Please enter a valid amount of time
     </p>
     <input
@@ -21,11 +24,14 @@
       required
     />
     <label for="dropdown">Unit Of Time</label>
-    <p *ngIf="!unitOfTime.valid && unitOfTime.touched" class="warning">
+    <p
+      *ngIf="!unitOfTime.valid && unitOfTime.touched"
+      class="form-input--warning"
+    >
       Please enter a valid unit of time
     </p>
     <select
-      class="form-input"
+      class="input"
       ngModel
       name="unitOfTime"
       id="dropdown"
@@ -39,7 +45,7 @@
     </select>
 
     <label for="description">Step Description</label>
-    <p *ngIf="!stepDesc.valid && stepDesc.touched" class="warning">
+    <p *ngIf="!stepDesc.valid && stepDesc.touched" class="form-input--warning">
       Please enter a valid description
     </p>
     <textarea
@@ -47,7 +53,7 @@
       ngModel
       name="stepDesc"
       type="text"
-      class="form-textarea"
+      class="textarea"
       #stepDesc="ngModel"
       required
     ></textarea>
