@@ -1,9 +1,6 @@
 export const environment = {
   production: false,
-  apiUrlUserData:
-    'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/userData.json',
-  apiUrlPatchUserData:
-    'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/userData/',
+  apiUrlUserData: 'https://localhost:7055/Users',
   apiUrlSignup:
     'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBsJY4UpFQN5ym9TsvoepJaCT_KTrYoG4M',
   apiUrlSignIn:

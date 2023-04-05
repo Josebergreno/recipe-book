@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, tap, BehaviorSubject } from 'rxjs';
+import { tap, BehaviorSubject } from 'rxjs';
 import { UserAuth } from '../models/userAuth.model';
 import { UserData } from '../models/userData.model';
 import { environment } from 'src/environments/environment.development';
@@ -22,7 +22,6 @@ interface AuthResponseData {
 })
 export class AuthenticateService {
   currentUserAuth = new BehaviorSubject<UserAuth | null>(null);
-  // isLoggedIn = new BehaviorSubject<boolean>(false);
   tokenExpTimer: any;
 
   constructor(
@@ -31,11 +30,7 @@ export class AuthenticateService {
     private dataStorage: DataStorageService
   ) {}
 
-  signupUser(user: UserData) {
-    this.http
-      .post<UserData>(`${environment.apiUrlUserData}`, user)
-      .subscribe((resData) => console.log(resData));
-
+  authorizeUser(user: UserData) {
     return this.http.post<AuthResponseData>(`${environment.apiUrlSignup}`, {
       email: user.email,
       password: user.password,

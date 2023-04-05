@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe.model';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
@@ -16,7 +17,8 @@ export class BrowseRecipesComponent implements OnInit, OnDestroy {
   constructor(
     private recipeService: RecipeService,
     private authService: AuthenticateService,
-    private dataService: DataStorageService
+    private dataService: DataStorageService,
+    private http: HttpClient
   ) {}
 
   refreshPosts(inputVal: string) {

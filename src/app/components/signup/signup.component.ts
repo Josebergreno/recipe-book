@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserData } from 'src/app/models/userData.model';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
+import { DataStorageService } from 'src/app/services/data-storage.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +13,8 @@ import { AuthenticateService } from 'src/app/services/authenticate.service';
 export class SignupComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
-    private authService: AuthenticateService
+    private authService: AuthenticateService,
+    private dataService: DataStorageService
   ) {}
   passwordsAreSame!: boolean;
   accountCreated = false;
@@ -23,28 +25,25 @@ export class SignupComponent implements OnInit, OnDestroy {
     const pass2 = formRef.value.password2;
     if (pass1 === pass2 && formRef.valid) {
       this.passwordsAreSame = true;
+      const newUser = new UserData(
+        formRef.value.email,
+        formRef.value.firstName,
+        formRef.value.lastName,
+        formRef.value.password,
+        formRef.value.securityQuestion,
+        formRef.value.securityAnswer
+      );
 
-      this.authService
-        .signupUser(
-          new UserData(
-            formRef.value.email,
-            formRef.value.firstName,
-            formRef.value.lastName,
-            formRef.value.password,
-            formRef.value.securityQuestion,
-            formRef.value.securityAnswer
-          )
-        )
-        .subscribe({
-          next: (resData) => {
-            console.log(resData);
-            this.accountCreated = true;
-          },
-          error: (errorData) => {
-            console.log(errorData);
-            this.errorMessage = errorData.error.error.message;
-          },
-        });
+      this.authService.authorizeUser(newUser).subscribe({
+        next: (resData) => {
+          this.accountCreated = true;
+          this.dataService.postUserData(newUser);
+        },
+        error: (errorData) => {
+          console.log(errorData);
+          this.errorMessage = errorData.error.error.message;
+        },
+      });
 
       formRef.reset();
     } else {

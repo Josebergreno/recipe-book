@@ -18,6 +18,7 @@ export class PersonalizeComponent implements OnInit {
   patchData: any = {};
   updateRes = '';
   backButtonVisible: boolean = false;
+  curUser!: UserData | null;
 
   personalizeForm = new FormGroup({
     firstName: new FormControl({ value: '', disabled: true }),
@@ -86,7 +87,8 @@ export class PersonalizeComponent implements OnInit {
     } else this.dataService.updateUserData(this.patchData);
   }
 
-  formInit(curUser?: any) {
+  formInit(curUser: any) {
+    console.log(curUser);
     if (curUser) {
       for (const key in this.personalizeForm.controls) {
         this.personalizeForm.get(key)?.setValue(curUser[key as keyof UserData]);
@@ -94,26 +96,17 @@ export class PersonalizeComponent implements OnInit {
           this.imgSrc = curUser?.['imgPath'];
         } else this.imgSrc = '/assets/placeHolderImg.webp';
       }
-    } else {
-      const userAuthJSON = localStorage.getItem('userAuthData');
-      let userAuthData;
-      let email;
-      if (userAuthJSON) {
-        userAuthData = JSON.parse(userAuthJSON);
-        email = userAuthData.email;
-      }
-      this.dataService.getUserData(email);
+      this.dataService.getUserData(curUser.email);
     }
   }
 
   ngOnInit(): void {
+    this.dataService.curUser.subscribe((user) => {
+      this.curUser = user;
+    });
     this.route.url.subscribe((url) => {
       this.backButtonVisible = false;
-      this.formInit();
-      this.cdr.detectChanges();
-    });
-    this.dataService.curUser.subscribe((user) => {
-      this.formInit(user);
+      this.formInit(this.curUser);
     });
 
     this.dataService.profileUpdate.subscribe((res) => {
