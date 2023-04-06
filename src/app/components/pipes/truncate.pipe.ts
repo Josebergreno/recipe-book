@@ -6,7 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TruncatePipe implements PipeTransform {
   transform(value: string, windowWidth: number): unknown {
     let multiplier = windowWidth > 6.5 ? 20 : 10;
+    if (!value) return;
     let truncate = value.slice(0, windowWidth * multiplier);
+
     if (windowWidth < 3.5) {
       multiplier = 5;
     }

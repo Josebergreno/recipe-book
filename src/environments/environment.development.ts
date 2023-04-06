@@ -5,8 +5,8 @@ export const environment = {
     'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBsJY4UpFQN5ym9TsvoepJaCT_KTrYoG4M',
   apiUrlSignIn:
     'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBsJY4UpFQN5ym9TsvoepJaCT_KTrYoG4M',
-  apiUrlRecipe:
-    'https://ng-recipe-book-17639-default-rtdb.firebaseio.com/recipes.json',
+  apiUrlRecipePost: 'https://localhost:7055/Users/NewRecipe',
+  apiUrlRecipeGet: 'https://localhost:7055/Recipes',
   firebaseConfig: {
     apiKey: 'AIzaSyBsJY4UpFQN5ym9TsvoepJaCT_KTrYoG4M',
     authDomain: 'ng-recipe-book-17639.firebaseapp.com',

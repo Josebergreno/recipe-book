@@ -25,14 +25,14 @@ export class SignupComponent implements OnInit, OnDestroy {
     const pass2 = formRef.value.password2;
     if (pass1 === pass2 && formRef.valid) {
       this.passwordsAreSame = true;
-      const newUser = new UserData(
-        formRef.value.email,
-        formRef.value.firstName,
-        formRef.value.lastName,
-        formRef.value.password,
-        formRef.value.securityQuestion,
-        formRef.value.securityAnswer
-      );
+      const newUser = {
+        email: formRef.value.email,
+        firstName: formRef.value.firstName,
+        lastName: formRef.value.lastName,
+        password: formRef.value.password,
+        securityQuestion: formRef.value.securityQuestion,
+        securityAnswer: formRef.value.securityAnswer,
+      };
 
       this.authService.authorizeUser(newUser).subscribe({
         next: (resData) => {

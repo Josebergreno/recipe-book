@@ -30,7 +30,7 @@ export class AuthenticateService {
     private dataStorage: DataStorageService
   ) {}
 
-  authorizeUser(user: UserData) {
+  authorizeUser(user: any) {
     return this.http.post<AuthResponseData>(`${environment.apiUrlSignup}`, {
       email: user.email,
       password: user.password,

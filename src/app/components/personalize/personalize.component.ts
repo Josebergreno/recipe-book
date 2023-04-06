@@ -6,6 +6,7 @@ import { UserData } from 'src/app/models/userData.model';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
 import { DataStorageService } from 'src/app/services/data-storage.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-personalize',
@@ -23,15 +24,14 @@ export class PersonalizeComponent implements OnInit {
   personalizeForm = new FormGroup({
     firstName: new FormControl({ value: '', disabled: true }),
     lastName: new FormControl({ value: '', disabled: true }),
-    desc: new FormControl(''),
+    description: new FormControl(''),
   });
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private storage: AngularFireStorage,
-    private dataService: DataStorageService,
-    private cdr: ChangeDetectorRef
+    private dataService: DataStorageService
   ) {}
 
   onBack() {
@@ -77,6 +77,7 @@ export class PersonalizeComponent implements OnInit {
         .pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
+              
               this.imgSrc = url;
               this.patchData['imgPath'] = this.imgSrc;
               this.dataService.updateUserData(this.patchData);
@@ -88,7 +89,6 @@ export class PersonalizeComponent implements OnInit {
   }
 
   formInit(curUser: any) {
-    console.log(curUser);
     if (curUser) {
       for (const key in this.personalizeForm.controls) {
         this.personalizeForm.get(key)?.setValue(curUser[key as keyof UserData]);

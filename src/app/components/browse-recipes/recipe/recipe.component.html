@@ -10,7 +10,7 @@
   <p>Recipe by {{ recipe.author }}</p>
   <img
     class="recipe-img"
-    [src]="recipe.imgName"
+    [src]="recipe.imgPath"
     alt="{{ recipe.recipeName }}"
   />
   <div class="section">
@@ -27,7 +27,7 @@
     <div class="section-container">
       <ul *ngFor="let ing of recipe.ingredients">
         <li class="list-item">
-          {{ "- " + ing.ingAmount + " " + ing.ingName }}
+          <!-- {{ "- " + ing.ingAmount + " " + ing.ingName }} -->
         </li>
       </ul>
     </div>
@@ -40,7 +40,7 @@
     <div class="section-container">
       <ul *ngFor="let instruction of recipe.instructions">
         <li class="list-item">
-          {{
+          <!-- {{
             "- " +
               instruction.description +
               " (" +
@@ -48,7 +48,7 @@
               " " +
               instruction.unit +
               ".)"
-          }}
+          }} -->
         </li>
       </ul>
     </div>

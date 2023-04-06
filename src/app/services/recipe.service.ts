@@ -20,7 +20,7 @@ export class RecipeService {
   ) {}
 
   private dBRecipes!: Recipe[] | undefined;
-
+  newRecipe = new BehaviorSubject<Recipe | null>(null);
   loadedRecipes = new BehaviorSubject<Recipe[] | undefined>(undefined);
   myRecipes = new BehaviorSubject<Recipe[] | undefined>(undefined);
   recipeName!: string;
@@ -40,12 +40,11 @@ export class RecipeService {
   addConclusion(conclusion: string) {
     this.conclusion = conclusion;
   }
+  fullName: any =
+    this.dataService.curUser.value?.firstName +
+    ' ' +
+    this.dataService.curUser.value?.lastName;
   publishRecipe() {
-    const fullName =
-      this.dataService.curUser.value?.firstName +
-      ' ' +
-      this.dataService.curUser.value?.lastName;
-
     const newRecipe = new Recipe(
       this.recipeName,
       this.recipeUrl,
@@ -53,14 +52,22 @@ export class RecipeService {
       this.ingredientService.getIngredients(),
       this.instructionService.getInstructions(),
       this.conclusion,
-      fullName
+      this.fullName
     );
     this.storeRecipes(newRecipe);
+    this.newRecipe.next(newRecipe);
   }
+
   storeRecipes(newRecipe: Recipe) {
     this.http
-      .post(`${environment.apiUrlRecipe}`, newRecipe)
-      .subscribe((resData) => console.log(resData));
+      .post(
+        `${environment.apiUrlRecipePost}`,
+        JSON.stringify(this.newRecipe.value)
+      )
+      .subscribe({
+        next: (res) => console.log(res),
+        error: (err) => console.log(err),
+      });
   }
 
   recipeSearch(inputVal: string) {
@@ -99,8 +106,9 @@ export class RecipeService {
   }
 
   private fetchRecipes() {
-    return this.http.get<Recipe[]>(`${environment.apiUrlRecipe}`).pipe(
+    return this.http.get<Recipe[]>(`${environment.apiUrlRecipeGet}`).pipe(
       map((resData) => {
+        console.log(resData);
         const postsArray: Recipe[] = [];
         const values = Object.values(resData);
         values.forEach((recipe: Recipe) => postsArray.push(recipe));

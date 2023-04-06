@@ -60,6 +60,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe((res) => {
+        console.log(res);
         this.recipe = res[this.id];
       });
     this.comments = this.notifications.fetchComments();

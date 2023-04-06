@@ -17,8 +17,7 @@ export class BrowseRecipesComponent implements OnInit, OnDestroy {
   constructor(
     private recipeService: RecipeService,
     private authService: AuthenticateService,
-    private dataService: DataStorageService,
-    private http: HttpClient
+    private dataService: DataStorageService
   ) {}
 
   refreshPosts(inputVal: string) {
@@ -26,6 +25,7 @@ export class BrowseRecipesComponent implements OnInit, OnDestroy {
     if (!inputVal) {
       this.recipes = dBRecipes;
       this.recipeService.loadedRecipes.next(dBRecipes);
+      console.log(this.recipes);
     }
   }
   onSearch(inputRef: string) {
@@ -37,7 +37,8 @@ export class BrowseRecipesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authService.autoLogin();
     this.recipeService.getRecipes().subscribe((loadedPosts: Recipe[]) => {
-      this.recipes = loadedPosts;
+      console.log(loadedPosts);
+      // this.recipes = loadedPosts;
     });
     this.recipeService.loadedRecipes.subscribe((searchedRecipes) => {
       if (this.recipes !== searchedRecipes) {
